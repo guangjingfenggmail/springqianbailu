@@ -3,6 +3,9 @@ package com.open.springqianbailu.dao;
 import com.open.springqianbailu.model.User;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public interface UserDao {
     int deleteByPrimaryKey(Integer id);
 
@@ -15,4 +18,6 @@ public interface UserDao {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    User selectByUserNamePwd(HashMap map);
 }

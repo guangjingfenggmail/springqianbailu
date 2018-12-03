@@ -18,7 +18,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/qianbailu
     username: root
-    password: root
+    password: cT;sEw#-w49f
     driver-class-name: com.mysql.jdbc.Driver
     # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
