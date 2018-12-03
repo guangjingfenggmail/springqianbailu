@@ -28,8 +28,8 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.open.springqianbailu.model.User" >
-        insert into user (id, userName, password)
-        values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
+        insert into user (userName, password)
+        values (#{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.open.springqianbailu.model.User" >
         insert into user

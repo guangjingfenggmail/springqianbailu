@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService {
         return userDao.selectByUserNamePwd(reqMap);
     }
 
+
     public boolean addUser(User record){
         boolean result = false;
         try {

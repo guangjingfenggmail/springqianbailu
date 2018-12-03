@@ -10,7 +10,7 @@ public interface UserService {
 
     public User getUserByUserNamePwd(String userName, String password);
 
-    boolean addUser(User record);
+    public boolean addUser(User record);
 
 
     public User userByUserNamePwd(HashMap<String,Object> reqMap);
