@@ -11,9 +11,9 @@
         id, title, href,type
     </sql>
     <insert id="insert" parameterType="com.open.springqianbailu.model.Menu">
-    insert into menu (id, title, href, 
+    insert into menu (title, href,
       type)
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{href,jdbcType=VARCHAR}, 
+    values (#{title,jdbcType=VARCHAR}, #{href,jdbcType=VARCHAR},
       #{type,jdbcType=INTEGER})
   </insert>
 
@@ -21,6 +21,20 @@
         select
         <include refid="Base_Column_List" />
         from menu
+    </select>
+
+    <select id="updateById"  parameterType="com.open.springqianbailu.model.Menu" >
+        update menu
+        <set >
+            <if test="title != null" >
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="href != null" >
+                href = #{href,jdbcType=VARCHAR},
+            </if>
+            type = #{type,jdbcType=INTEGER},
+        </set>
+        where id = #{id,jdbcType=INTEGER}
     </select>
 
     <insert id="insertSelective" parameterType="com.open.springqianbailu.model.Menu">

@@ -11,4 +11,6 @@ public interface MenuSevice {
     int insertSelective(Menu menu);
 
     List<Menu> selectAll();
+
+    void updateById(Menu menu);
 }

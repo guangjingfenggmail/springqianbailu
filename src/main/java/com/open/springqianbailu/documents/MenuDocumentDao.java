@@ -36,7 +36,6 @@ public class MenuDocumentDao extends AbsDocumentDao {
                         try {
                             if (aElement != null) {
                                 String title = aElement.text();
-                                title =  new String(title.getBytes(),"UTF-8");
                                 logger.info("i==" + i + ";title==" + title);
                                 menu.setTitle(title);
                                 menu.setType(i);

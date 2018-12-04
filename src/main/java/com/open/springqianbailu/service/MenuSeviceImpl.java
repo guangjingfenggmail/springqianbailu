@@ -30,5 +30,8 @@ public class MenuSeviceImpl implements MenuSevice {
     }
 
 
-
+    @Override
+    public void updateById(Menu menu) {
+        menuMapper.updateById(menu);
+    }
 }

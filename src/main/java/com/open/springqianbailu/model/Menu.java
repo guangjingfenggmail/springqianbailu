@@ -1,6 +1,8 @@
 package com.open.springqianbailu.model;
 
-public class Menu {
+import java.io.Serializable;
+
+public class Menu implements Serializable {
     private Integer id;
 
     private String title;

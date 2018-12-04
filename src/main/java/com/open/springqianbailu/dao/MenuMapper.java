@@ -10,4 +10,6 @@ public interface MenuMapper {
     int insertSelective(Menu menu);
 
     List<Menu> selectAll();
+
+    void updateById(Menu menu);
 }
