@@ -1,80 +1,49 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.open.springqianbailu.dao.UserDao" >
-    <resultMap id="BaseResultMap" type="com.open.springqianbailu.model.User" >
-        <id column="id" property="id" jdbcType="INTEGER" />
-        <result column="userName" property="userName" jdbcType="VARCHAR" />
-        <result column="password" property="password" jdbcType="VARCHAR" />
-    </resultMap>
-    <sql id="Base_Column_List" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.open.springqianbailu.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.open.springqianbailu.model.User">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="userName" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+  </resultMap>
+  <sql id="Base_Column_List" >
         id, userName, password
     </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-        select
-        <include refid="Base_Column_List" />
-        from user
-        where id = #{id,jdbcType=INTEGER}
-    </select>
+  <insert id="insert" parameterType="com.open.springqianbailu.model.User">
+    insert into my_user (userName, password)
+    values ( #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
+  </insert>
 
-    <select id="selectByUserNamePwd" parameterType="hashmap" resultMap="BaseResultMap">
-       select
-       <include refid="Base_Column_List" />
-       from user
-      where userName = #{userName} and password = #{password}
-    </select>
+  <select id="selectByUserNamePwd" parameterType="hashmap" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from my_user
+    where userName = #{userName} and password = #{password}
+  </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-        delete from user
-        where id = #{id,jdbcType=INTEGER}
-    </delete>
-    <insert id="insert" parameterType="com.open.springqianbailu.model.User" >
-        insert into user (userName, password)
-        values (#{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
-    </insert>
-    <insert id="insertSelective" parameterType="com.open.springqianbailu.model.User" >
-        insert into user
-        <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
-                id,
-            </if>
-            <if test="userName != null" >
-                userName,
-            </if>
-            <if test="password != null" >
-                password,
-            </if>
-
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
-                #{id,jdbcType=INTEGER},
-            </if>
-            <if test="userName != null" >
-                #{userName,jdbcType=VARCHAR},
-            </if>
-            <if test="password != null" >
-                #{password,jdbcType=VARCHAR},
-            </if>
-
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.open.springqianbailu.model.User" >
-        update user
-        <set >
-            <if test="userName != null" >
-                userName = #{userName,jdbcType=VARCHAR},
-            </if>
-            <if test="password != null" >
-                password = #{password,jdbcType=VARCHAR},
-            </if>
-
-        </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.open.springqianbailu.model.User" >
-        update user
-        set userName = #{userName,jdbcType=VARCHAR},
-        password = #{password,jdbcType=VARCHAR}
-        where id = #{id,jdbcType=INTEGER}
-    </update>
+  <insert id="insertSelective" parameterType="com.open.springqianbailu.model.User">
+    insert into my_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        userName,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
 </mapper>

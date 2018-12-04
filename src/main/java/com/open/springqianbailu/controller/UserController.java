@@ -5,16 +5,12 @@ import com.open.springqianbailu.Result;
 import com.open.springqianbailu.model.User;
 import com.open.springqianbailu.service.UserService;
 import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/account")
@@ -58,7 +54,7 @@ public class UserController {
 //    }
 
 
-    @ApiOperation(value = "login", notes = "根据userName和pwd来获取用户详细信息")
+    @ApiOperation(value = "login", notes = "根据userName和pwd来获取用户详细信息{\"userName\":\"root\",\"password\":\"123\"}")
     @ApiImplicitParam(name = "reqMap", value = "用户reqMap", required = true, paramType = "body")
     @RequestMapping(value="/login", method=RequestMethod.POST)
     @ResponseBody
@@ -71,7 +67,7 @@ public class UserController {
 
 
 
-    @ApiOperation(value = "register", notes = "注册")
+    @ApiOperation(value = "register", notes = "注册{\"userName\":\"fgj\",\"password\":\"113\"}")
     @ApiImplicitParam(name = "user", value = "用户user", required = true,dataType = "User", paramType = "body")
     @RequestMapping(value="/register", method=RequestMethod.POST)
     @ResponseBody
