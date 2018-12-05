@@ -56,6 +56,27 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
 
+    <!--批量添加-->
+    <insert id="insertBatch" parameterType="java.util.List"  useGeneratedKeys="true">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        insert into menu
+        (title, href, type, updateTime)
+        values
+        <foreach collection="list" item="item" index="index"
+                 separator=",">
+            (
+            #{item.title,jdbcType=VARCHAR},
+            #{item.href,jdbcType=VARCHAR},
+            #{item.type,jdbcType=INTEGER},
+            #{item.updateTime,jdbcType=VARCHAR}
+             )
+        </foreach>
+    </insert>
+
+
     <insert id="insertSelective" parameterType="com.open.springqianbailu.model.Menu">
         insert into menu
         <trim prefix="(" suffix=")" suffixOverrides=",">

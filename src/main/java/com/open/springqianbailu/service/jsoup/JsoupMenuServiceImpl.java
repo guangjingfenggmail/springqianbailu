@@ -22,8 +22,9 @@ public class JsoupMenuServiceImpl implements JsoupMenuService {
             menuMapper.createTable();
             for (Menu menu : list) {
                 menu.setUpdateTime(System.currentTimeMillis()+"");
-                menuMapper.insert(menu);
+//                menuMapper.insert(menu);
             }
+            menuMapper.insertBatch(list);
         }
 //        List<Menu> listDb = menuMapper.selectAll();
 //        if (listDb == null || listDb.size()==0) {

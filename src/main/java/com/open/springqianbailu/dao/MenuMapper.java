@@ -16,4 +16,6 @@ public interface MenuMapper {
     void dropTable();
 
     void createTable();
+
+    int insertBatch(List<Menu> menu);
 }
