@@ -13,4 +13,8 @@ public interface MenuSevice {
     List<Menu> selectAll();
 
     void updateById(Menu menu);
+
+    void dropTable();
+
+    void createTable();
 }

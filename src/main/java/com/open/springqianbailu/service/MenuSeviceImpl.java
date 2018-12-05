@@ -16,11 +16,13 @@ public class MenuSeviceImpl implements MenuSevice {
 
     @Override
     public int insert(Menu menu) {
+        menu.setUpdateTime(System.currentTimeMillis()+"");
         return menuMapper.insert(menu);
     }
 
     @Override
     public int insertSelective(Menu menu) {
+        menu.setUpdateTime(System.currentTimeMillis()+"");
         return menuMapper.insertSelective(menu);
     }
 
@@ -32,6 +34,17 @@ public class MenuSeviceImpl implements MenuSevice {
 
     @Override
     public void updateById(Menu menu) {
+        menu.setUpdateTime(System.currentTimeMillis()+"");
         menuMapper.updateById(menu);
+    }
+
+    @Override
+    public void dropTable() {
+        menuMapper.dropTable();
+    }
+
+    @Override
+    public void createTable() {
+        menuMapper.createTable();
     }
 }

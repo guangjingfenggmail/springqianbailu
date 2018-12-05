@@ -12,4 +12,8 @@ public interface MenuMapper {
     List<Menu> selectAll();
 
     void updateById(Menu menu);
+
+    void dropTable();
+
+    void createTable();
 }

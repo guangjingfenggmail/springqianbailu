@@ -11,6 +11,8 @@ public class Menu implements Serializable {
 
     private Integer type;
 
+    private String updateTime;
+
     public Integer getId() {
         return id;
     }
@@ -41,5 +43,13 @@ public class Menu implements Serializable {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public String getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
     }
 }

@@ -17,19 +17,29 @@ public class JsoupMenuServiceImpl implements JsoupMenuService {
     @Override
     public void updateMenu() {
         List<Menu> list = MenuDocumentDao.parseMenus();
-        List<Menu> listDb = menuMapper.selectAll();
-        if (listDb == null || listDb.size()==0) {
+        if (list!=null && list.size()>0){
+            menuMapper.dropTable();
+            menuMapper.createTable();
             for (Menu menu : list) {
+                menu.setUpdateTime(System.currentTimeMillis()+"");
                 menuMapper.insert(menu);
             }
-        }else {
-            if (list.size()==listDb.size()) {
-                for (int i = 0; i < listDb.size(); i++) {
-                    Menu menu = list.get(i);
-                    menu.setId(listDb.get(i).getId());
-                    menuMapper.updateById(menu);
-                }
-            }
         }
+//        List<Menu> listDb = menuMapper.selectAll();
+//        if (listDb == null || listDb.size()==0) {
+//            for (Menu menu : list) {
+//                menu.setUpdateTime(System.currentTimeMillis()+"");
+//                menuMapper.insert(menu);
+//            }
+//        }else {
+//            if (list.size()==listDb.size()) {
+//                for (int i = 0; i < listDb.size(); i++) {
+//                    Menu menu = list.get(i);
+//                    menu.setId(listDb.get(i).getId());
+//                    menu.setUpdateTime(System.currentTimeMillis()+"");
+//                    menuMapper.updateById(menu);
+//                }
+//            }
+//        }
     }
 }

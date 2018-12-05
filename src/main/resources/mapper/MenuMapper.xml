@@ -6,15 +6,16 @@
         <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="href" jdbcType="VARCHAR" property="href"/>
         <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="updateTime" jdbcType="VARCHAR" property="updateTime"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, title, href,type
+        id, title, href,type,updateTime
     </sql>
     <insert id="insert" parameterType="com.open.springqianbailu.model.Menu">
     insert into menu (title, href,
-      type)
+      type,updateTime)
     values (#{title,jdbcType=VARCHAR}, #{href,jdbcType=VARCHAR},
-      #{type,jdbcType=INTEGER})
+      #{type,jdbcType=INTEGER}, #{updateTime,jdbcType=VARCHAR})
   </insert>
 
     <select id="selectAll" resultMap="BaseResultMap" >
@@ -22,6 +23,21 @@
         <include refid="Base_Column_List" />
         from menu
     </select>
+
+    <delete id="dropTable">
+        drop table if exists menu
+    </delete>
+
+    <insert id="createTable">
+        CREATE TABLE menu (
+          id int(11) NOT NULL AUTO_INCREMENT,
+          title varchar(255) COLLATE utf8_bin NOT NULL COMMENT 'menu标题',
+          type int(255) NOT NULL COMMENT '类型0:图片1:小说2视频3电影',
+          href varchar(255) COLLATE utf8_bin NOT NULL COMMENT 'menu地址',
+          updateTime varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '更新时间',
+          PRIMARY KEY (id)
+        ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+    </insert>
 
     <select id="updateById"  parameterType="com.open.springqianbailu.model.Menu" >
         update menu
@@ -33,6 +49,9 @@
                 href = #{href,jdbcType=VARCHAR},
             </if>
             type = #{type,jdbcType=INTEGER},
+            <if test="updateTime != null" >
+                updateTime = #{updateTime,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </select>
@@ -52,6 +71,9 @@
             <if test="type != null">
                 type,
             </if>
+            <if test="updateTime != null">
+                updateTime,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -65,6 +87,9 @@
             </if>
             <if test="type != null">
                 #{type,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
