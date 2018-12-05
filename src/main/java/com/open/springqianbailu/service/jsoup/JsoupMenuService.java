@@ -5,5 +5,4 @@ public interface JsoupMenuService {
 
     public void updateMenu();
 
-
 }

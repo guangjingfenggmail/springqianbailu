@@ -4,19 +4,21 @@
   <resultMap id="BaseResultMap" type="com.open.springqianbailu.model.SubMenu">
     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="menuId" jdbcType="INTEGER" property="menuid" />
+    <result column="menuId" jdbcType="INTEGER" property="menuId" />
     <result column="href" jdbcType="VARCHAR" property="href" />
+    <result column="updateTime" jdbcType="VARCHAR" property="updateTime"/>
+    <result column="menuName" jdbcType="VARCHAR" property="menuName"/>
   </resultMap>
 
   <sql id="Base_Column_List">
-        id, title,menuId, href
+        id, title,menuId, href,updateTime,menuName
     </sql>
 
   <insert id="insert" parameterType="com.open.springqianbailu.model.SubMenu">
     insert into submenu ( title, menuId,
-      href)
+      href,updateTime,menuName)
     values ( #{title,jdbcType=VARCHAR}, #{menuid,jdbcType=INTEGER},
-      #{href,jdbcType=VARCHAR})
+      #{href,jdbcType=VARCHAR},#{updateTime,jdbcType=VARCHAR},#{menuName,jdbcType=VARCHAR})
   </insert>
 
   <select id="selectByMenuId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -25,6 +27,42 @@
     from submenu
     where menuId = #{menuId,jdbcType=INTEGER}
   </select>
+
+  <delete id="dropTable">
+    drop table if exists submenu
+  </delete>
+
+  <insert id="createTable">
+    CREATE TABLE submenu (
+                             id int(11) NOT NULL AUTO_INCREMENT,
+                             title varchar(255) COLLATE utf8_bin NOT NULL COMMENT '子menu标题',
+                             menuId int(11) NOT NULL COMMENT '父menu主键',
+                             href varchar(255) COLLATE utf8_bin DEFAULT NULL,
+                             updateTime varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '更新时间',
+                             menuName varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '父菜单名称',
+                             PRIMARY KEY (id,menuId) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  </insert>
+  <!--批量添加-->
+  <insert id="insertBatch" parameterType="java.util.List"  useGeneratedKeys="true">
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+      SELECT
+      LAST_INSERT_ID()
+    </selectKey>
+    insert into submenu
+    (title, menuId, href,updateTime,menuName)
+    values
+    <foreach collection="list" item="item" index="index"
+             separator=",">
+      (
+      #{item.title,jdbcType=VARCHAR},
+      #{item.menuId,jdbcType=INTEGER},
+      #{item.href,jdbcType=INTEGER},
+      #{item.updateTime,jdbcType=VARCHAR},
+      #{item.menuName,jdbcType=VARCHAR}
+      )
+    </foreach>
+  </insert>
 
 
   <insert id="insertSelective" parameterType="com.open.springqianbailu.model.SubMenu">

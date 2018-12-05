@@ -1,7 +1,7 @@
 package com.open.springqianbailu.scheduling;
 
 
-import com.open.springqianbailu.service.jsoup.JsoupMenuServiceImpl;
+import com.open.springqianbailu.service.jsoup.JsoupSubMenuServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
@@ -12,15 +12,15 @@ import javax.annotation.Resource;
 
 @Configuration
 @EnableScheduling
-public class MenuSchedulingConfig {
+public class SubMenuSchedulingConfig {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     @Resource
-    private JsoupMenuServiceImpl jsoupMenuService;
+    private JsoupSubMenuServiceImpl jsoupSubMenuService;
 
-    @Scheduled(cron = "0 0/2 * * * ?") // 每1分钟执行一次
+    @Scheduled(cron = "0 0/2 * * * ?") // 每2分钟执行一次
     public void updateMenu() {
-        logger.info("updateMenu 定时任务启动");
-//        jsoupMenuService.updateMenu();
+        logger.info("updateSubMenu 定时任务启动");
+        jsoupSubMenuService.updateSubMenu();
     }
 
 }

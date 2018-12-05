@@ -5,9 +5,13 @@ public class SubMenu {
 
     private String title;
 
-    private Integer menuid;
+    private Integer menuId;
 
     private String href;
+
+    private String updateTime;
+
+    private String menuName;
 
     public Integer getId() {
         return id;
@@ -25,12 +29,12 @@ public class SubMenu {
         this.title = title == null ? null : title.trim();
     }
 
-    public Integer getMenuid() {
-        return menuid;
+    public Integer getMenuId() {
+        return menuId;
     }
 
-    public void setMenuid(Integer menuid) {
-        this.menuid = menuid;
+    public void setMenuId(Integer menuId) {
+        this.menuId = menuId;
     }
 
     public String getHref() {
@@ -39,5 +43,21 @@ public class SubMenu {
 
     public void setHref(String href) {
         this.href = href == null ? null : href.trim();
+    }
+
+    public String getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getMenuName() {
+        return menuName;
+    }
+
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
     }
 }
