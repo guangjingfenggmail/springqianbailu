@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import java.util.List;
 
+import static com.open.springqianbailu.redis.ConstUitls.REDIS_EXPIRE_TIME;
 import static com.open.springqianbailu.redis.ConstUitls.REDIS_MENU_LIST_KEY;
 
 @Controller
@@ -39,7 +40,7 @@ public class MenuController {
         List<Menu> list = (List<Menu>) redisUtil.get(REDIS_MENU_LIST_KEY);
         if (list == null || list.size()==0) {
             list = menuSevice.selectAll();
-            redisUtil.set(REDIS_MENU_LIST_KEY,list);
+            redisUtil.set(REDIS_MENU_LIST_KEY,list,REDIS_EXPIRE_TIME);
         }
         Gson gson = new Gson();
         logger.info("MenuController"+ gson.toJson(list));
@@ -51,7 +52,7 @@ public class MenuController {
     @ApiImplicitParam(name = "menu", value = "menu", required = true, dataType = "Menu", paramType = "body")
     @RequestMapping(value = "/addMenu", method = RequestMethod.POST)
     @ResponseBody
-    public Result register(@RequestBody Menu menu) {
+    public Result addMenu(@RequestBody Menu menu) {
         int result = this.menuSevice.insert(menu);
         return Result.success(result);
     }

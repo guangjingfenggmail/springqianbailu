@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.HashMap;
 
+import static com.open.springqianbailu.redis.ConstUitls.REDIS_EXPIRE_TIME;
 import static com.open.springqianbailu.redis.ConstUitls.REDIS_USER_OBJECT_KEY;
 
 @Controller
@@ -40,7 +41,7 @@ public class UserController {
         User user = (User) redisUtil.get(REDIS_USER_OBJECT_KEY+reqMap.toString());
         if (user==null){
             user = this.userService.userByUserNamePwd(reqMap);
-            redisUtil.set(REDIS_USER_OBJECT_KEY+reqMap.toString(),user);
+            redisUtil.set(REDIS_USER_OBJECT_KEY+reqMap.toString(),user,REDIS_EXPIRE_TIME);
         }
         if (user==null)
             return Result.error(0,"用户未注册");
