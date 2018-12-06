@@ -5,16 +5,12 @@ import com.open.springqianbailu.model.SubMenu;
 
 import java.util.List;
 
-public interface SubMenuMapper {
+public interface SubMenuMapper extends AbsMapper{
     int insert(SubMenu record);
 
     int insertSelective(SubMenu record);
 
     List<SubMenu> selectByMenuId(Integer menuId);
-
-    void dropTable();
-
-    void createTable();
 
     int insertBatch(List<SubMenu> menu);
 }

@@ -38,13 +38,5 @@ public class MenuSeviceImpl implements MenuSevice {
         menuMapper.updateById(menu);
     }
 
-    @Override
-    public void dropTable() {
-        menuMapper.dropTable();
-    }
 
-    @Override
-    public void createTable() {
-        menuMapper.createTable();
-    }
 }

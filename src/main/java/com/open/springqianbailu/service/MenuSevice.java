@@ -4,7 +4,7 @@ import com.open.springqianbailu.model.Menu;
 
 import java.util.List;
 
-public interface MenuSevice {
+public interface MenuSevice extends AbsSevice{
 
     int insert(Menu menu);
 
@@ -14,7 +14,4 @@ public interface MenuSevice {
 
     void updateById(Menu menu);
 
-    void dropTable();
-
-    void createTable();
 }

@@ -4,7 +4,7 @@ import com.open.springqianbailu.model.User;
 
 import java.util.HashMap;
 
-public interface UserService {
+public interface UserService extends AbsSevice{
 
     public boolean addUser(User record);
 

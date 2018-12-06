@@ -4,7 +4,7 @@ import com.open.springqianbailu.model.SubMenu;
 
 import java.util.List;
 
-public interface SubMenuSevice {
+public interface SubMenuSevice extends AbsSevice{
 
     int insert(SubMenu subMenu);
 

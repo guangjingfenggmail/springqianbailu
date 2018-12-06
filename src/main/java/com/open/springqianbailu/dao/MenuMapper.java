@@ -4,7 +4,7 @@ import com.open.springqianbailu.model.Menu;
 
 import java.util.List;
 
-public interface MenuMapper {
+public interface MenuMapper extends AbsMapper {
     int insert(Menu menu);
 
     int insertSelective(Menu menu);
@@ -12,10 +12,6 @@ public interface MenuMapper {
     List<Menu> selectAll();
 
     void updateById(Menu menu);
-
-    void dropTable();
-
-    void createTable();
 
     int insertBatch(List<Menu> menu);
 }
