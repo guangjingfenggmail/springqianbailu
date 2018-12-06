@@ -28,6 +28,13 @@
     where menuId = #{menuId,jdbcType=INTEGER}
   </select>
 
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  select
+  <include refid="Base_Column_List" />
+  from submenu
+  where id = #{id,jdbcType=INTEGER}
+</select>
+
   <delete id="dropTable">
     drop table if exists submenu
   </delete>

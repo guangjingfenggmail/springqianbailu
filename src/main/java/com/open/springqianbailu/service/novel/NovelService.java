@@ -12,4 +12,6 @@ public interface NovelService {
     int insertSelective(Novel novel);
 
     List<Novel> selectByMenuId(HashMap map);
+
+
 }

@@ -13,4 +13,7 @@ public interface SubMenuMapper extends AbsMapper{
     List<SubMenu> selectByMenuId(Integer menuId);
 
     int insertBatch(List<SubMenu> menu);
+
+
+     SubMenu selectById(Integer id);
 }

@@ -29,4 +29,5 @@ public class NovelServiceImpl implements NovelService {
     public List<Novel> selectByMenuId(HashMap map) {
         return novelMapper.selectByMenuId(map);
     }
+
 }

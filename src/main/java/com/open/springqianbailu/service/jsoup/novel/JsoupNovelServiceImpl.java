@@ -26,9 +26,19 @@ public class JsoupNovelServiceImpl implements JsoupNovelService {
         novelMapper.createTable();
         List<SubMenu> subMenuList = subMenuMapper.selectByMenuId(1);
         for (SubMenu menu:subMenuList){
-            List<Novel> list =  NovelDocmentDao.parseNovelList(menu.getId(),menu.getHref());
+            List<Novel> list =  NovelDocmentDao.parseNovelList(menu.getId(),menu.getHref(),1);
             novelMapper.insertBatch(list);
             break;
         }
+    }
+
+    @Override
+    public int parseNovel(String submenuId, String pageNo) {
+        SubMenu menu = subMenuMapper.selectById(Integer.parseInt(submenuId));
+        if (menu!=null){
+            List<Novel> list =  NovelDocmentDao.parseNovelList(menu.getId(),menu.getHref(),Integer.parseInt(pageNo));
+            novelMapper.insertBatch(list);
+        }
+        return 0;
     }
 }
