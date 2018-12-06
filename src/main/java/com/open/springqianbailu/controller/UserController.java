@@ -1,57 +1,35 @@
 package com.open.springqianbailu.controller;
 
 
+import com.google.gson.Gson;
 import com.open.springqianbailu.Result;
+import com.open.springqianbailu.documents.NovelDocmentDao;
 import com.open.springqianbailu.model.User;
+import com.open.springqianbailu.redis.RedisUtil;
 import com.open.springqianbailu.service.UserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
 
+import static com.open.springqianbailu.redis.ConstUitls.REDIS_USER_OBJECT_KEY;
+
 @Controller
 @RequestMapping(value = "/account")
 public class UserController {
+    static Logger logger = LoggerFactory.getLogger(UserController.class.getSimpleName());
+
     @Resource
     private UserService userService;
 
-//    @RequestMapping("/showUser")
-//    @ResponseBody
-//    public User toIndex(HttpServletRequest request, Model model){
-//        int userId = Integer.parseInt(request.getParameter("id"));
-//        User user = this.userService.getUserById(userId);
-//        return user;
-//    }
+    @Resource
+    private RedisUtil redisUtil;
 
-//    @ApiOperation(value = "getUserById", notes = "根据id来获取用户详细信息")
-//    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "String", paramType = "path")
-//    @RequestMapping(value = "/getUserById/{id}", method = RequestMethod.GET)
-//    @ResponseBody
-//    public Result getUserById(@PathVariable String id){
-//        int userId = Integer.parseInt(id);
-//        User user = this.userService.getUserById(userId);
-//        if (user==null)
-//            return Result.error(0,"用户未注册");
-//        return Result.success(user);
-//    }
-//
-//
-//    @ApiOperation(value = "getUserByUserNamePwd", notes = "根据userName和pwd来获取用户详细信息")
-//    @ApiImplicitParams({
-//            @ApiImplicitParam(name = "userName", value = "用户userName", required = true, dataType = "String", paramType = "path"),
-//            @ApiImplicitParam(name = "password", value = "用户password", required = true, dataType = "String", paramType = "path")
-//    })
-//    @RequestMapping(value = "/getUserByUserNamePwd/{userName}/{password}", method = RequestMethod.GET)
-//    @ResponseBody
-//    public Result getUserByUserNamePwd(@PathVariable String userName,@PathVariable String password){
-//        User user = this.userService.getUserByUserNamePwd(userName,password);
-//        if (user==null)
-//            return Result.error(0,"用户未注册");
-//        return Result.success(user);
-//    }
 
 
     @ApiOperation(value = "login", notes = "根据userName和pwd来获取用户详细信息{\"userName\":\"root\",\"password\":\"123\"}")
@@ -59,12 +37,18 @@ public class UserController {
     @RequestMapping(value="/login", method=RequestMethod.POST)
     @ResponseBody
     public Result login(@RequestBody HashMap<String,Object> reqMap){
-        User user = this.userService.userByUserNamePwd(reqMap);
+        User user = (User) redisUtil.get(REDIS_USER_OBJECT_KEY+reqMap.toString());
+        if (user==null){
+            user = this.userService.userByUserNamePwd(reqMap);
+            redisUtil.set(REDIS_USER_OBJECT_KEY+reqMap.toString(),user);
+        }
         if (user==null)
             return Result.error(0,"用户未注册");
+
+        Gson gson = new Gson();
+        logger.info("UserController"+gson.toJson(user));
         return Result.success(user);
     }
-
 
 
     @ApiOperation(value = "register", notes = "注册{\"userName\":\"fgj\",\"password\":\"113\"}")

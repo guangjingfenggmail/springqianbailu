@@ -1,6 +1,8 @@
 package com.open.springqianbailu;
 
-public class Result<T> {
+import java.io.Serializable;
+
+public class Result<T> implements Serializable {
     public Integer status;
     public String message;
     public T data;

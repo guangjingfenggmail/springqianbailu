@@ -29,7 +29,7 @@ public class Swagger2 {
                 .description("更多Spring Boot相关文章请关注：https://gitee.com/didispace/SpringBoot-Learning")
                 .termsOfServiceUrl("https://gitee.com/didispace/SpringBoot-Learning")
                 .contact("程序猿FGJ")
-                .version("1.0")
+                .version("1.0.0")
                 .build();
     }
 }

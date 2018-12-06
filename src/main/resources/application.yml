@@ -25,3 +25,14 @@ spring:
 
 
 
+  #redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    pool:
+      max-idle: 8
+      min-idle: 0
+      max-active: 8
+      max-wait: -1
+    database: 0

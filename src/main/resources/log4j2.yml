@@ -7,7 +7,7 @@ Appenders:
     RollingFile: # 输出到文件，超过256MB归档
       - name: ROLLING_FILE
         ignoreExceptions: false
-        fileName: /springqianbailu/logs/springboot.log
+        fileName: /Users/guangjing.feng/Downloads/zb-api/springqianbailu/logs/springboot.log
         filePattern: "/springqianbailu/logs/$${date:yyyy-MM}/springboot -%d{yyyy-MM-dd}-%i.log.gz"
         PatternLayout:
           pattern: "%d{yyyy-MM-dd HH:mm:ss,SSS}:%4p %t (%F:%L) - %m%n"
@@ -22,7 +22,7 @@ Loggers:
       AppenderRef:
         - ref: CONSOLE
     Logger: #单独设置某些包的输出级别
-      - name: com.open.springqianbailu.dao #复数加上-
+      - name: com.open.springqianbailu #复数加上-
         additivity: false #去除重复的log
         level: trace
         AppenderRef:
