@@ -46,7 +46,7 @@ public class UserController extends AbsController{
     }
 
 
-    @ApiOperation(value = "register", notes = "注册{\"userName\":\"fgj\",\"password\":\"113\"}")
+    @ApiOperation(value = "register", notes = "注册{\"userName\":\"fgj\",\"password\":\"113\",\"email\":\"113@qq.com\",\"updateTime\":\"113\"}")
     @ApiImplicitParam(name = "user", value = "用户user", required = true,dataType = "User", paramType = "body")
     @RequestMapping(value="/register", method=RequestMethod.POST)
     @ResponseBody
