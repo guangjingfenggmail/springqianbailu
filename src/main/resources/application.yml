@@ -36,3 +36,6 @@ spring:
       max-active: 8
       max-wait: -1
     database: 0
+
+  logging:
+    config: classpath:log4j2.yml

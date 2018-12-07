@@ -19,16 +19,16 @@ public class MenuSchedulingConfig {
 //    @Resource
 //    private JsoupMenuServiceImpl jsoupMenuService;
 
-    @Autowired
-    private MenuAsyncTask menuAsyncTask;
+//    @Autowired
+//    private MenuAsyncTask menuAsyncTask;
 
     @Scheduled(cron = "0 0/2 * * * ?") // 每1分钟执行一次
     public void updateMenu() throws Exception {
         logger.info("updateMenu 定时任务启动");
 //        jsoupMenuService.updateMenu();
 
-        menuAsyncTask.doTaskMenu();
-        Thread.currentThread().join();
+//        menuAsyncTask.doTaskMenu();
+//        Thread.currentThread().join();
 
     }
 
