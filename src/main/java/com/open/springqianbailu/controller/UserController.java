@@ -22,15 +22,9 @@ import static com.open.springqianbailu.redis.ConstUitls.REDIS_USER_OBJECT_KEY;
 
 @Controller
 @RequestMapping(value = "/account")
-public class UserController {
-    static Logger logger = LoggerFactory.getLogger(UserController.class.getSimpleName());
-
+public class UserController extends AbsController{
     @Resource
     private UserService userService;
-
-    @Resource
-    private RedisUtil redisUtil;
-
 
 
     @ApiOperation(value = "login", notes = "根据userName和pwd来获取用户详细信息{\"userName\":\"root\",\"password\":\"123\"}")
@@ -47,7 +41,7 @@ public class UserController {
             return Result.error(0,"用户未注册");
 
         Gson gson = new Gson();
-        logger.info("UserController"+gson.toJson(user));
+        logger.info(TAG+"==="+gson.toJson(user));
         return Result.success(user);
     }
 

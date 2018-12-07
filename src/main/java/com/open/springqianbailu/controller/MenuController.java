@@ -24,14 +24,9 @@ import static com.open.springqianbailu.redis.ConstUitls.REDIS_MENU_LIST_KEY;
 
 @Controller
 @RequestMapping(value = "/menu")
-public class MenuController {
-    static Logger logger = LoggerFactory.getLogger(MenuController.class.getSimpleName());
+public class MenuController extends AbsController{
     @Resource
     private MenuSevice menuSevice;
-
-    @Resource
-    private RedisUtil redisUtil;
-
 
     @ApiOperation(value = "getMenus", notes = "获取所有父菜单")
     @RequestMapping(value = "/getMenus", method = RequestMethod.GET)
@@ -43,7 +38,7 @@ public class MenuController {
             redisUtil.set(REDIS_MENU_LIST_KEY,list,REDIS_EXPIRE_TIME);
         }
         Gson gson = new Gson();
-        logger.info("MenuController"+ gson.toJson(list));
+        logger.info(TAG + gson.toJson(list));
         return Result.success(list);
     }
 

@@ -24,13 +24,9 @@ import static com.open.springqianbailu.redis.ConstUitls.REDIS_SUBMENU_LIST_KEY;
 
 @Controller
 @RequestMapping(value = "/submenu")
-public class SubMenuController {
-    static Logger logger = LoggerFactory.getLogger(SubMenuController.class.getSimpleName());
+public class SubMenuController extends AbsController{
     @Resource
     private SubMenuSevice subMenuSevice;
-
-    @Resource
-    private RedisUtil redisUtil;
 
     @ApiOperation(value = "getSubMenus", notes = "根据父菜单id获取所有子菜单")
     @ApiImplicitParam(name = "menuId", value = "父菜单id", required = true, dataType = "String", paramType = "path")
@@ -43,7 +39,7 @@ public class SubMenuController {
             redisUtil.lSet(REDIS_SUBMENU_LIST_KEY+menuId,list,REDIS_EXPIRE_TIME);
         }
         Gson gson = new Gson();
-        logger.info("SubMenuController=="+gson.toJson(list));
+        logger.info(TAG+"=="+gson.toJson(list));
         return Result.success(list);
     }
 }

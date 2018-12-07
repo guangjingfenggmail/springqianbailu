@@ -23,14 +23,11 @@ import static com.open.springqianbailu.redis.ConstUitls.REDIS_EXPIRE_TIME;
 
 @Controller
 @RequestMapping(value = "/novel")
-public class NovelController {
-    static Logger logger = LoggerFactory.getLogger(NovelController.class.getSimpleName());
+public class NovelController extends AbsController{
     @Resource
     private NovelService novelService;
     @Resource
     private JsoupNovelService jsoupNovelService;
-    @Resource
-    private RedisUtil redisUtil;
 
     @ApiOperation(value = "selectByMenuId", notes = "根据submenuId，pageSize，currentPosition获取小说信息{\"submenuId\":0,\"pageSize\":10,\"currentPosition\":0}")
     @ApiImplicitParam(name = "reqMap", value = "用户reqMap", required = true, paramType = "body")
@@ -43,7 +40,7 @@ public class NovelController {
             redisUtil.lSet(reqMap.toString(),list,REDIS_EXPIRE_TIME);
         }
         Gson gson = new Gson();
-        logger.info("NovelController=="+gson.toJson(list));
+        logger.info(TAG+"=="+gson.toJson(list));
         return Result.success(list);
     }
 
