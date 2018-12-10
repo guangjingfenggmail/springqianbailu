@@ -28,6 +28,11 @@
         drop table if exists novel
     </delete>
 
+    <delete id="deleteByPageNo"  parameterType="java.lang.Integer" >
+        delete from novel
+        where pageNo = #{pageNo,jdbcType=INTEGER}
+    </delete>
+
     <insert id="createTable">
          CREATE TABLE novel (
           id int(11) NOT NULL AUTO_INCREMENT,

@@ -14,4 +14,6 @@ public interface NovelMapper extends AbsMapper {
     List<Novel> selectByMenuId(HashMap map);
 
     int insertBatch(List<Novel> menu);
+
+    void deleteByPageNo(int pageNo);
 }

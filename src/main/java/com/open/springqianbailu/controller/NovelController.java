@@ -4,6 +4,7 @@ package com.open.springqianbailu.controller;
 import com.google.gson.Gson;
 import com.open.springqianbailu.Result;
 import com.open.springqianbailu.model.novel.Novel;
+import com.open.springqianbailu.rabbitmq.novel.NovelMessage;
 import com.open.springqianbailu.service.jsoup.novel.JsoupNovelService;
 import com.open.springqianbailu.service.novel.NovelService;
 import io.swagger.annotations.ApiImplicitParam;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import static com.open.springqianbailu.redis.ConstUitls.REDIS_EXPIRE_TIME;
 
@@ -43,14 +45,20 @@ public class NovelController extends AbsController{
 
     @ApiOperation(value = "parseNovel", notes = "根据 submenuId，pageNo 获取小说信息")
     @ApiImplicitParams({
-        @ApiImplicitParam(name = "submenuId", value = "submenuId", required = true, paramType = "path"),
-        @ApiImplicitParam(name = "pageNo", value = "pageNo", required = true, paramType = "path")
+            @ApiImplicitParam(name = "submenuId", value = "submenuId", required = true, paramType = "path"),
+            @ApiImplicitParam(name = "pageNo", value = "pageNo", required = true, paramType = "path")
     })
     @RequestMapping(value = "/parseNovel/{submenuId}/{pageNo}", method = RequestMethod.POST)
     @ResponseBody
     public Result parseNovel(@PathVariable String submenuId, @PathVariable String pageNo) {
-        int result = this.jsoupNovelService.parseNovel(submenuId,pageNo);
-        return Result.success(result);
+        List<Novel> list = (List<Novel>) redisUtil.get(submenuId+pageNo);
+        if (list==null || list.size()==0){
+            NovelMessage message = new NovelMessage();
+            message.submenuId = submenuId;
+            message.pageNo = pageNo;
+            list = jsoupNovelService.parseNovel(message);
+        }
+        return Result.success(list);
     }
 
 }

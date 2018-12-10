@@ -19,7 +19,7 @@ public class NovelListSchedulingConfig {
 
     @Scheduled(cron = "0 0/10 * * * ?") // 每10分钟执行一次
     public void updateNovelList() {
-        logger.info("updateNovelList 定时任务启动");
+        logger.info("updateQueue 定时任务启动");
 //        jsoupNovelService.updateNovelList();
     }
 

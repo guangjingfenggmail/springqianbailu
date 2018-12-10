@@ -99,13 +99,13 @@ public class NovelDocmentDao extends AbsDocumentDao {
                                 String page = pElement.text();
                                 if (pageNo==1){
                                     if (page.endsWith("下一页")){
-                                        href = DOMAIN + href + pElement.attr("href");
+                                        href =  href + pElement.attr("href");
                                         break;
                                     }
                                 }else {
                                     page = page.replace("首页", "").replace("下一页", "").replace("末页", "");
                                     if (page.length()>0 && pageNo == Integer.parseInt(page) ) {
-                                        href = DOMAIN + href + pElement.attr("href");
+                                        href =  href + pElement.attr("href");
                                         break;
                                     }
                                 }

@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    final static String QUEUENAME = "spring-boot-queue";
+    public final static String QUEUENAME = "spring-boot-queue";
 
     @Bean
     Queue queue() {
