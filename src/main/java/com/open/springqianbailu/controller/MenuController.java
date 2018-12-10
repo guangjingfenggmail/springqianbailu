@@ -35,7 +35,7 @@ public class MenuController extends AbsController{
         List<Menu> list = (List<Menu>) redisUtil.get(REDIS_MENU_LIST_KEY);
         if (list == null || list.size()==0) {
             list = menuSevice.selectAll();
-            redisUtil.set(REDIS_MENU_LIST_KEY,list,REDIS_EXPIRE_TIME);
+            redisUtil.lSet(REDIS_MENU_LIST_KEY,list,REDIS_EXPIRE_TIME);
         }
         Gson gson = new Gson();
         logger.error(TAG + gson.toJson(list));

@@ -37,5 +37,13 @@ spring:
       max-wait: -1
     database: 0
 
+  rabbitmq:
+      host: 127.0.0.1
+      port: 5672
+      username: guest
+      password: guest
+      publisher-confirms: true    #  消息发送到交换机确认机制,是否确认回调
+
+
   logging:
     config: classpath:log4j2.yml
