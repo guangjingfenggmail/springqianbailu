@@ -16,6 +16,8 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.open.springqianbailu.redis.ConstUitls.REDIS_NOVEL_LIST_KEY;
+
 
 @RestController
 @RequestMapping(value = "/novel")
@@ -44,7 +46,7 @@ public class NovelController extends AbsController{
     @RequestMapping(value = "/parseNovel/{submenuId}/{pageNo}", method = RequestMethod.POST)
     @ResponseBody
     public Result parseNovel(@PathVariable String submenuId, @PathVariable String pageNo) {
-        List<Novel> list = (List<Novel>) redisUtil.get(submenuId+pageNo);
+        List<Novel> list = (List<Novel>) redisUtil.get(REDIS_NOVEL_LIST_KEY+submenuId+pageNo);
         if (list==null || list.size()==0){
             NovelMessage message = new NovelMessage();
             message.submenuId = submenuId;

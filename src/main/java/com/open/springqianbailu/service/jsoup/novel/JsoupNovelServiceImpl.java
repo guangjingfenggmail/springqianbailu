@@ -43,10 +43,7 @@ public class JsoupNovelServiceImpl implements JsoupNovelService {
 
     @Override
     public int parseNovel(NovelMessage message) {
-        SubMenu menu = subMenuMapper.selectById(Integer.parseInt(message.submenuId));
-        if (menu!=null){
-            novelSender.send(message, menu);
-        }
+        novelSender.send(message);
         return 0;
     }
 

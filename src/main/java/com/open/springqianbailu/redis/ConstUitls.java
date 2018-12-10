@@ -5,4 +5,5 @@ public class ConstUitls {
     public static final String REDIS_USER_OBJECT_KEY = "redis_user_object_key";
     public static final String REDIS_MENU_LIST_KEY = "redis_menu_list_key";
     public static final String REDIS_SUBMENU_LIST_KEY = "redis_submenu_list_key";
+    public static final String REDIS_NOVEL_LIST_KEY = "redis_novel_list_key";
 }

@@ -9,7 +9,7 @@ Configuration:
       - name: log.level.console
         value: info
       - name: log.path
-        value: log
+        value: logs
       - name: project.name
         value: opendoc
       - name: log.pattern
