@@ -7,8 +7,11 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
+import static com.open.springqianbailu.redis.ConstUitls.REDIS_EXPIRE_TIME;
+import static com.open.springqianbailu.redis.ConstUitls.REDIS_SUBMENU_LIST_KEY;
+
 @Service("subMenuSevice")
-public class SubMenuSeviceImpl implements SubMenuSevice {
+public class SubMenuSeviceImpl extends AbsServiceImpl implements SubMenuSevice {
 
     @Resource
     private SubMenuMapper subMenuMapper;
@@ -25,6 +28,11 @@ public class SubMenuSeviceImpl implements SubMenuSevice {
 
     @Override
     public List<SubMenu> selectByMenuId(Integer menuId) {
-        return subMenuMapper.selectByMenuId(menuId);
+        List<SubMenu> list = (List<SubMenu>) redisUtil.get(REDIS_SUBMENU_LIST_KEY+menuId);
+        if (list==null || list.size()==0){
+            list = subMenuMapper.selectByMenuId(menuId);
+            redisUtil.set(REDIS_SUBMENU_LIST_KEY+menuId,list,REDIS_EXPIRE_TIME);
+        }
+        return list;
     }
 }

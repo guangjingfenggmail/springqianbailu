@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
-import static com.open.springqianbailu.redis.ConstUitls.REDIS_EXPIRE_TIME;
 
 @RestController
 @RequestMapping(value = "/novel")
@@ -27,17 +25,12 @@ public class NovelController extends AbsController{
     @Resource
     private JsoupNovelService jsoupNovelService;
 
-
     @ApiOperation(value = "selectByMenuId", notes = "根据submenuId，pageSize，currentPosition获取小说信息{\"submenuId\":0,\"pageSize\":10,\"currentPosition\":0}")
     @ApiImplicitParam(name = "reqMap", value = "用户reqMap", required = true, paramType = "body")
     @RequestMapping(value = "/selectByMenuId", method = RequestMethod.POST)
     @ResponseBody
     public Result selectByMenuId(@RequestBody HashMap<String, Object> reqMap) {
-        List<Novel> list = (List<Novel>) redisUtil.get(reqMap.toString());
-        if (list==null || list.size()==0){
-            list = this.novelService.selectByMenuId(reqMap);
-            redisUtil.set(reqMap.toString(),list,REDIS_EXPIRE_TIME);
-        }
+        List<Novel> list = this.novelService.selectByMenuId(reqMap);
         Gson gson = new Gson();
         logger.info(TAG+"=="+gson.toJson(list));
         return Result.success(list);
@@ -57,6 +50,8 @@ public class NovelController extends AbsController{
             message.submenuId = submenuId;
             message.pageNo = pageNo;
             jsoupNovelService.parseNovel(message);
+
+            return Result.error(0,"处理中...");
         }
         return Result.success(list);
     }
