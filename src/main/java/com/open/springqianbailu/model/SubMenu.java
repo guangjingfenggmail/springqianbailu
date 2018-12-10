@@ -1,6 +1,8 @@
 package com.open.springqianbailu.model;
 
-public class SubMenu {
+import java.io.Serializable;
+
+public class SubMenu implements Serializable {
     private Integer id;
 
     private String title;

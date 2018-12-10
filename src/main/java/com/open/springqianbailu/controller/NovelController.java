@@ -56,7 +56,7 @@ public class NovelController extends AbsController{
             NovelMessage message = new NovelMessage();
             message.submenuId = submenuId;
             message.pageNo = pageNo;
-            list = jsoupNovelService.parseNovel(message);
+            jsoupNovelService.parseNovel(message);
         }
         return Result.success(list);
     }

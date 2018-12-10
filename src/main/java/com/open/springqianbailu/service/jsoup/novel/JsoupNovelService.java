@@ -9,6 +9,6 @@ public interface JsoupNovelService {
 
     public void updateNovelList();
 
-    public List<Novel> parseNovel(NovelMessage message);
+    public int parseNovel(NovelMessage message);
 
 }

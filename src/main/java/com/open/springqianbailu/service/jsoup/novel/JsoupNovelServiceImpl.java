@@ -26,8 +26,6 @@ public class JsoupNovelServiceImpl implements JsoupNovelService {
     @Resource
     private SubMenuMapper subMenuMapper;
 
-    @Resource
-    public RedisUtil redisUtil;
 
     @Autowired
     private NovelSender novelSender;
@@ -44,15 +42,12 @@ public class JsoupNovelServiceImpl implements JsoupNovelService {
     }
 
     @Override
-    public List<Novel> parseNovel(NovelMessage message) {
-        List<Novel> list = new ArrayList<>();
+    public int parseNovel(NovelMessage message) {
         SubMenu menu = subMenuMapper.selectById(Integer.parseInt(message.submenuId));
         if (menu!=null){
-            list =  NovelDocmentDao.parseNovelList(menu.getId(),menu.getHref(),Integer.parseInt(message.pageNo));
-            redisUtil.set(message.submenuId+message.pageNo,list);
-            novelSender.send(message);
+            novelSender.send(message, menu);
         }
-        return list;
+        return 0;
     }
 
 
