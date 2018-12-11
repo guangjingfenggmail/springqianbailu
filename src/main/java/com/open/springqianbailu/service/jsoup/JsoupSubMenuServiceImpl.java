@@ -2,6 +2,7 @@ package com.open.springqianbailu.service.jsoup;
 
 import com.open.springqianbailu.dao.SubMenuMapper;
 import com.open.springqianbailu.documents.MenuDocumentDao;
+import com.open.springqianbailu.interfaces.jsoup.JsoupSubMenuService;
 import com.open.springqianbailu.model.SubMenu;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.open.springqianbailu.service;
+package com.open.springqianbailu.interfaces;
 
 import com.open.springqianbailu.model.SubMenu;
 

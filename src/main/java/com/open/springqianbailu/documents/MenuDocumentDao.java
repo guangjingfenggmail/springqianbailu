@@ -97,6 +97,13 @@ public class MenuDocumentDao extends AbsDocumentDao {
                                         menu.setMenuId(i);
 
                                         String href = aElement.attr("href");
+                                        href = href.replace(" ","").replace("javascript:void(0);","");
+                                        if (href==null || href.length()==0){
+                                            href = DOMAIN;
+                                        }
+                                        if (!href.contains("https") && !href.contains("http")){
+                                            href = "https:"+href;
+                                        }
                                         logger.info("i==" + i + ";j=="+j+";href==" + href);
                                         menu.setHref(href);
                                         menu.setUpdateTime(System.currentTimeMillis()+"");
@@ -116,6 +123,9 @@ public class MenuDocumentDao extends AbsDocumentDao {
                                         menu.setMenuName(headElements.get(i).select("span").first().text());
 
                                         String src = aElement.attr("data-src");
+                                        if (!src.contains("https") && !src.contains("http")){
+                                            src = "https:"+src;
+                                        }
                                         logger.info("i==" + i + ";j=="+j+ ";src==" + src);
                                         menu.setSrc(src);
                                     }

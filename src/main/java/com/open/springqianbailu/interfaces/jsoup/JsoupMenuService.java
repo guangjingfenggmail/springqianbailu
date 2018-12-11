@@ -1,4 +1,4 @@
-package com.open.springqianbailu.service.jsoup;
+package com.open.springqianbailu.interfaces.jsoup;
 
 
 public interface JsoupMenuService {

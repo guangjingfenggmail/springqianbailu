@@ -4,7 +4,7 @@ package com.open.springqianbailu.controller;
 import com.google.gson.Gson;
 import com.open.springqianbailu.Result;
 import com.open.springqianbailu.model.Menu;
-import com.open.springqianbailu.service.MenuSevice;
+import com.open.springqianbailu.interfaces.MenuSevice;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;

@@ -19,7 +19,7 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <!--生成Model类存放位置-->
-        <javaModelGenerator targetPackage="com.open.springqianbailu.model.novel" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.open.springqianbailu.model" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -28,10 +28,10 @@
             <property name="enableSubPackages" value="true"/>
          </sqlMapGenerator>
         <!--生成Dao类存放位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.open.springqianbailu.dao.novel" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.open.springqianbailu.dao" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
          </javaClientGenerator>
         <!--生成对应表及类名-->
-       <table tableName="novel" domainObjectName="Novel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+       <table tableName="slider" domainObjectName="Slider" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
     </context>
  </generatorConfiguration>

@@ -1,6 +1,7 @@
 package com.open.springqianbailu.service;
 
 import com.open.springqianbailu.dao.MenuMapper;
+import com.open.springqianbailu.interfaces.MenuSevice;
 import com.open.springqianbailu.model.Menu;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,7 @@
 package com.open.springqianbailu.service;
 
 import com.open.springqianbailu.dao.UserMapper;
+import com.open.springqianbailu.interfaces.UserService;
 import com.open.springqianbailu.model.User;
 import org.springframework.stereotype.Service;
 
