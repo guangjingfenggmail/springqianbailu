@@ -15,6 +15,11 @@ public class SubMenu implements Serializable {
 
     private String menuName;
 
+    private String src;
+
+    private String price;
+
+
     public Integer getId() {
         return id;
     }
@@ -61,5 +66,21 @@ public class SubMenu implements Serializable {
 
     public void setMenuName(String menuName) {
         this.menuName = menuName;
+    }
+
+    public String getSrc() {
+        return src;
+    }
+
+    public void setSrc(String src) {
+        this.src = src;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 }

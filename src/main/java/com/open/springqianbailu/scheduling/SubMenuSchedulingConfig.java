@@ -17,7 +17,7 @@ public class SubMenuSchedulingConfig {
     @Resource
     private JsoupSubMenuServiceImpl jsoupSubMenuService;
 
-    @Scheduled(cron = "0 0/2 * * * ?") // 每2分钟执行一次
+    @Scheduled(cron = "0 0/1 * * * ?") // 每2分钟执行一次
     public void updateMenu() {
         logger.info("updateSubMenu 定时任务启动");
 //        jsoupSubMenuService.updateSubMenu();

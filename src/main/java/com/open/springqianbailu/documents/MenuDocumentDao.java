@@ -21,14 +21,14 @@ public class MenuDocumentDao extends AbsDocumentDao {
         logger.info("parseMenus start =====");
 
         try {
-            Document doc = Jsoup.connect(DOMAIN)
+            Document doc = Jsoup.connect(DOMAIN+"/index.html")
                     .header("User-Agent",
                             USER_AGENT)
                     .timeout(TIMEOUT)
                     .get();
 
             if (doc != null) {
-                Elements headElements = doc.select("div.k_head-2a");
+                Elements headElements = doc.select("li.nav-item");
                 if (headElements != null && headElements.size() > 0) {
                     Menu menu;
                     for (int i = 0; i < headElements.size(); i++) {
@@ -43,8 +43,12 @@ public class MenuDocumentDao extends AbsDocumentDao {
 
                                 String href = aElement.attr("href");
                                 logger.info("i==" + i + ";href==" + href);
+                                href = href.replace(" ","").replace("javascript:void(0);","");
                                 if (href==null || href.length()==0){
                                     href = DOMAIN;
+                                }
+                                if (!href.contains("https") && !href.contains("http")){
+                                    href = "https:"+href;
                                 }
                                 menu.setHref(href);
 
@@ -71,41 +75,66 @@ public class MenuDocumentDao extends AbsDocumentDao {
         logger.info("parseSubMenus start =====");
 
         try {
-            Document doc = Jsoup.connect(DOMAIN)
+            Document doc = Jsoup.connect(DOMAIN+"/index.html")
                     .header("User-Agent",
                             USER_AGENT)
                     .timeout(TIMEOUT)
                     .get();
 
             if (doc != null) {
-                Elements headElements = doc.select("div.k_head-2a");
+                Elements headElements = doc.select("li.nav-item");
                 if (headElements != null && headElements.size() > 0) {
                     SubMenu menu;
                     for (int i = 0; i < headElements.size(); i++) {
-                        Elements aElements = headElements.get(i).select("a");
+                        Elements aElements = headElements.get(i).select("li");
                         if (aElements!=null && aElements.size()>0){
-                            for(int j=1;j<aElements.size();j++){
+                            for(int j=0;j<aElements.size()-2;j++){
                                 menu = new SubMenu();
-                                Element aElement = aElements.get(j).select("a").first();
+
                                 try {
+                                    Element aElement = aElements.get(j).select("a").first();
                                     if (aElement != null) {
-                                        String title = aElement.text();
-                                        logger.info("i==" + i + ";title==" + title);
-                                        menu.setTitle(title);
                                         menu.setMenuId(i);
 
                                         String href = aElement.attr("href");
-                                        logger.info("i==" + i + ";href==" + href);
+                                        logger.info("i==" + i + ";j=="+j+";href==" + href);
                                         menu.setHref(href);
-
-                                        menu.setMenuName(headElements.get(i).select("a").first().text());
                                         menu.setUpdateTime(System.currentTimeMillis()+"");
 
-                                        list.add(menu);
                                     }
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+
+                                try {
+                                    Element aElement = aElements.get(j).select("img").first();
+                                    if (aElement != null) {
+                                        String title = aElement.attr("alt");
+                                        logger.info("i==" + i + ";j=="+j+ ";title==" + title);
+                                        menu.setTitle(title);
+
+                                        menu.setMenuName(headElements.get(i).select("span").first().text());
+
+                                        String src = aElement.attr("data-src");
+                                        logger.info("i==" + i + ";j=="+j+ ";src==" + src);
+                                        menu.setSrc(src);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                try {
+                                    Element aElement = aElements.get(j).select("p").first();
+                                    if (aElement != null) {
+                                        String price = aElement.text();
+                                        logger.info("i==" + i + ";j=="+j+ ";price==" + price);
+                                        menu.setPrice(price);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                list.add(menu);
                             }
                         }
                     }
