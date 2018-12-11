@@ -19,6 +19,41 @@
     from slider
   </select>
 
+  <delete id="dropTable">
+    drop table if exists slider
+  </delete>
+
+  <insert id="createTable">
+    CREATE TABLE slider (
+      id int(11) NOT NULL AUTO_INCREMENT,
+      href varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '地址',
+      log_code varchar(255) COLLATE utf8_bin DEFAULT NULL,
+      src varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '图片地址',
+      srcset varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '图片地址',
+      PRIMARY KEY (id)
+    ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='主页导航';
+  </insert>
+  <!--批量添加-->
+  <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true">
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+      SELECT
+      LAST_INSERT_ID()
+    </selectKey>
+    insert into slider
+    (href, log_code, src,srcset)
+    values
+    <foreach collection="list" item="item" index="index"
+             separator=",">
+      (
+      #{item.href,jdbcType=VARCHAR},
+      #{item.logCode,jdbcType=INTEGER},
+      #{item.src,jdbcType=INTEGER},
+      #{item.srcset,jdbcType=VARCHAR}
+      )
+    </foreach>
+  </insert>
+
+
   <insert id="insert" parameterType="com.open.springqianbailu.model.Slider">
     insert into slider (id, href, log_code, 
       src, srcset)

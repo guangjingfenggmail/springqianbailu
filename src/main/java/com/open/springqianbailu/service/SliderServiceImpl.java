@@ -2,6 +2,7 @@ package com.open.springqianbailu.service;
 
 
 import com.open.springqianbailu.dao.SliderMapper;
+import com.open.springqianbailu.documents.MenuDocumentDao;
 import com.open.springqianbailu.interfaces.SliderService;
 import com.open.springqianbailu.model.Slider;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,13 @@ public class SliderServiceImpl extends AbsServiceImpl implements SliderService {
         List<Slider> list = (List<Slider>) redisUtil.get(REDIS_SLIDER_BANNDER_LIST_KEY);
         if (list == null || list.size() == 0) {
             list = sliderMapper.selectAll();
+            if (list == null || list.size() == 0) {
+                list = MenuDocumentDao.parseSlider();
+                sliderMapper.dropTable();
+                sliderMapper.createTable();
+                sliderMapper.insertBatch(list);
+
+            }
             redisUtil.set(REDIS_SLIDER_BANNDER_LIST_KEY, list, REDIS_EXPIRE_TIME);
         }
         return list;

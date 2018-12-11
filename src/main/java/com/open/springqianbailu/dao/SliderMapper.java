@@ -11,4 +11,6 @@ public interface SliderMapper extends AbsMapper {
 
     List<Slider> selectAll();
 
+    void insertBatch(List<Slider> list);
+
 }
