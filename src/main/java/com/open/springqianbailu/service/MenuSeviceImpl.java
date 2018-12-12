@@ -7,6 +7,7 @@ import com.open.springqianbailu.interfaces.xiaomi.SplashService;
 import com.open.springqianbailu.model.AppStart;
 import com.open.springqianbailu.model.Menu;
 import com.open.springqianbailu.model.xiaomi.Splash;
+import com.open.springqianbailu.rest.SplashRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -23,7 +24,6 @@ import java.util.UUID;
 
 import static com.open.springqianbailu.redis.ConstUitls.REDIS_EXPIRE_TIME;
 import static com.open.springqianbailu.redis.ConstUitls.REDIS_MENU_LIST_KEY;
-import static com.open.springqianbailu.rest.RestApi.APP_START;
 
 
 @Service("menuSevice")
@@ -74,22 +74,7 @@ public class MenuSeviceImpl extends AbsServiceImpl implements MenuSevice {
         Gson gson = new Gson();
         AppStart result = gson.fromJson(resultStr, AppStart.class);
         if (resultStr == null || resultStr.length() == 0) {
-            HttpHeaders headers = new HttpHeaders();
-            headers.add("Device-Id", "ffffffff-ef26-54fa-9042-d26b0033c587");
-            headers.add("Mishop-Client-Id", "180100031052");
-            MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<String, String>();
-            for (String key : map.keySet()) {
-                postParameters.add(key, map.get(key).toString());
-            }
-
-            HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<MultiValueMap<String, String>>(
-                    postParameters, headers);
-
-            ResponseEntity<String> responseEntity = restTemplate.postForEntity(
-                    APP_START,
-                    requestEntity,
-                    String.class);
-            resultStr = responseEntity.getBody();
+            resultStr = SplashRestService.appStart(map,restTemplate).getBody();
             logger.info("appStart====="+resultStr);
             redisUtil.set(map.toString(), resultStr);
             result = gson.fromJson(resultStr, AppStart.class);
