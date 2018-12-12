@@ -3,17 +3,20 @@ package com.open.springqianbailu.controller;
 
 import com.google.gson.Gson;
 import com.open.springqianbailu.Result;
+import com.open.springqianbailu.model.AppStart;
 import com.open.springqianbailu.model.Menu;
 import com.open.springqianbailu.interfaces.MenuSevice;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -43,4 +46,13 @@ public class MenuController extends AbsController {
         return Result.success(result);
     }
 
+
+    @ApiOperation(value = "appStart", notes = "抓起小米启动页面接口")
+    @ApiImplicitParam(name = "reqMap", value = "reqMap", required = true,  paramType = "body")
+    @RequestMapping(value = "/appStart", method = RequestMethod.POST)
+    @ResponseBody
+    public AppStart appStart(@RequestBody HashMap<String,Object> reqMap) {
+        AppStart result = this.menuSevice.appStart(reqMap);
+        return result;
+    }
 }
