@@ -47,7 +47,7 @@ public class MenuController extends AbsController {
     }
 
 
-    @ApiOperation(value = "appStart", notes = "抓起小米启动页面接口")
+    @ApiOperation(value = "appStart", notes = "抓起小米启动页面接口{\"phone_type\":\"PD1613\",\"phone_name\":\"UNLWVfdu8x6EVdwWYwO9mQTUlkSsYpGCWn/B/zou/IW/4vBZQiTB1xZTHuWS57Z39GzDqT/jFHDtT4mzqVSOXPrnitH4YY3aCBdaTN8+XVM=\",\"device\":\"nFDcqx4H+hs9YUE51Hw2/A==\" }")
     @ApiImplicitParam(name = "reqMap", value = "reqMap", required = true,  paramType = "body")
     @RequestMapping(value = "/appStart", method = RequestMethod.POST)
     @ResponseBody

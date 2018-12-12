@@ -3,8 +3,10 @@ package com.open.springqianbailu.service;
 import com.google.gson.Gson;
 import com.open.springqianbailu.dao.MenuMapper;
 import com.open.springqianbailu.interfaces.MenuSevice;
+import com.open.springqianbailu.interfaces.xiaomi.SplashService;
 import com.open.springqianbailu.model.AppStart;
 import com.open.springqianbailu.model.Menu;
+import com.open.springqianbailu.model.xiaomi.Splash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -32,6 +34,9 @@ public class MenuSeviceImpl extends AbsServiceImpl implements MenuSevice {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Resource
+    private SplashService splashService;
 
     @Override
     public int insert(Menu menu) {
@@ -85,8 +90,17 @@ public class MenuSeviceImpl extends AbsServiceImpl implements MenuSevice {
                     requestEntity,
                     String.class);
             resultStr = responseEntity.getBody();
+            logger.info("appStart====="+resultStr);
             redisUtil.set(map.toString(), resultStr);
             result = gson.fromJson(resultStr, AppStart.class);
+
+            Splash splash = new Splash();
+            AppStart.AppStartModel.SplashBean bean =  result.data.splash;
+
+            splash = gson.fromJson(gson.toJson(bean),Splash.class);
+            splash.setFullDisplayImgUrl(bean.full_display_img_url);
+            splash.setSkipUrl(bean.skip_url);
+            splashService.insert(splash);
         }
         return result;
     }

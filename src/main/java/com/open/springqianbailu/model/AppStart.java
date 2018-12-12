@@ -90,7 +90,7 @@ public class AppStart  extends Result<AppStart.AppStartModel> implements   Seria
             this.tabCfg = tabCfg;
         }
 
-        class SplashBean implements Serializable {
+        public class SplashBean implements Serializable {
             public String ID;
             public String ShowTimes;
             public String start;
