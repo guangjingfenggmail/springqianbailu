@@ -5,7 +5,9 @@ import com.open.springqianbailu.dao.MenuMapper;
 import com.open.springqianbailu.interfaces.MenuSevice;
 import com.open.springqianbailu.interfaces.xiaomi.SplashService;
 import com.open.springqianbailu.model.AppStart;
+import com.open.springqianbailu.model.AppTabcfg;
 import com.open.springqianbailu.model.Menu;
+import com.open.springqianbailu.model.tab.SplashBean;
 import com.open.springqianbailu.model.xiaomi.Splash;
 import com.open.springqianbailu.rest.SplashRestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ import java.util.UUID;
 
 import static com.open.springqianbailu.redis.ConstUitls.REDIS_EXPIRE_TIME;
 import static com.open.springqianbailu.redis.ConstUitls.REDIS_MENU_LIST_KEY;
+import static com.open.springqianbailu.rest.RestApi.APP_START;
+import static com.open.springqianbailu.rest.RestApi.APP_TABCFG;
 
 
 @Service("menuSevice")
@@ -70,22 +74,38 @@ public class MenuSeviceImpl extends AbsServiceImpl implements MenuSevice {
 
     @Override
     public AppStart appStart(HashMap<String, Object> map) {
-        String resultStr = (String) redisUtil.get(map.toString());
+        String resultStr = (String) redisUtil.get("appStart"+map.toString());
         Gson gson = new Gson();
         AppStart result = gson.fromJson(resultStr, AppStart.class);
         if (resultStr == null || resultStr.length() == 0) {
-            resultStr = SplashRestService.appStart(map,restTemplate).getBody();
+            resultStr = SplashRestService.responseEntity(map,restTemplate,APP_START).getBody();
             logger.info("appStart====="+resultStr);
-            redisUtil.set(map.toString(), resultStr);
+            redisUtil.set("appStart"+map.toString(), resultStr);
             result = gson.fromJson(resultStr, AppStart.class);
 
             Splash splash = new Splash();
-            AppStart.AppStartModel.SplashBean bean =  result.data.splash;
+           SplashBean bean =  result.data.splash;
 
             splash = gson.fromJson(gson.toJson(bean),Splash.class);
             splash.setFullDisplayImgUrl(bean.full_display_img_url);
             splash.setSkipUrl(bean.skip_url);
             splashService.insert(splash);
+        }
+        return result;
+    }
+
+
+
+    @Override
+    public AppTabcfg appTabcfg(HashMap<String, Object> map) {
+        String resultStr = (String) redisUtil.get("appTabcfg"+map.toString());
+        Gson gson = new Gson();
+        AppTabcfg result = gson.fromJson(resultStr, AppTabcfg.class);
+        if (resultStr == null || resultStr.length() == 0) {
+            resultStr = SplashRestService.responseEntity(map,restTemplate,APP_TABCFG).getBody();
+            logger.info("appTabcfg====="+resultStr);
+            redisUtil.set("appTabcfg"+map.toString(), resultStr);
+            result = gson.fromJson(resultStr, AppTabcfg.class);
         }
         return result;
     }

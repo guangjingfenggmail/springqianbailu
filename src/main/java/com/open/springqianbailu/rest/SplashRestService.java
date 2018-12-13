@@ -9,12 +9,11 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 
-import static com.open.springqianbailu.rest.RestApi.APP_START;
 
 public class SplashRestService {
 
 
-    public static ResponseEntity<String> appStart(HashMap<String, Object> map,RestTemplate restTemplate){
+    public static ResponseEntity<String> responseEntity(HashMap<String, Object> map,RestTemplate restTemplate,String url){
         HttpHeaders headers = new HttpHeaders();
         headers.add("Device-Id", "ffffffff-ef26-54fa-9042-d26b0033c587");
         headers.add("Mishop-Client-Id", "180100031052");
@@ -27,9 +26,12 @@ public class SplashRestService {
                 postParameters, headers);
 
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(
-                APP_START,
+                url,
                 requestEntity,
                 String.class);
         return responseEntity;
     }
+
+
+
 }

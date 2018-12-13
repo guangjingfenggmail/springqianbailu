@@ -4,6 +4,7 @@ package com.open.springqianbailu.controller;
 import com.google.gson.Gson;
 import com.open.springqianbailu.Result;
 import com.open.springqianbailu.model.AppStart;
+import com.open.springqianbailu.model.AppTabcfg;
 import com.open.springqianbailu.model.Menu;
 import com.open.springqianbailu.interfaces.MenuSevice;
 import io.swagger.annotations.ApiImplicitParam;
@@ -53,6 +54,16 @@ public class MenuController extends AbsController {
     @ResponseBody
     public AppStart appStart(@RequestBody HashMap<String,Object> reqMap) {
         AppStart result = this.menuSevice.appStart(reqMap);
+        return result;
+    }
+
+
+    @ApiOperation(value = "appTabcfg", notes = "抓起小米启动页面接口{}")
+    @ApiImplicitParam(name = "reqMap", value = "reqMap", required = true,  paramType = "body")
+    @RequestMapping(value = "/appTabcfg", method = RequestMethod.POST)
+    @ResponseBody
+    public AppTabcfg appTabcfg(@RequestBody HashMap<String,Object> reqMap) {
+        AppTabcfg result = this.menuSevice.appTabcfg(reqMap);
         return result;
     }
 }
