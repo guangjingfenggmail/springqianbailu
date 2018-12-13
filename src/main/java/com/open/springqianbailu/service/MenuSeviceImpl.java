@@ -4,11 +4,14 @@ import com.google.gson.Gson;
 import com.open.springqianbailu.dao.MenuMapper;
 import com.open.springqianbailu.interfaces.MenuSevice;
 import com.open.springqianbailu.interfaces.xiaomi.SplashService;
+import com.open.springqianbailu.interfaces.xiaomi.TabCfgTableService;
 import com.open.springqianbailu.model.AppStart;
 import com.open.springqianbailu.model.AppTabcfg;
 import com.open.springqianbailu.model.Menu;
 import com.open.springqianbailu.model.tab.SplashBean;
+import com.open.springqianbailu.model.tab.TabConfigBean;
 import com.open.springqianbailu.model.xiaomi.Splash;
+import com.open.springqianbailu.model.xiaomi.TabCfgTable;
 import com.open.springqianbailu.rest.SplashRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -42,6 +45,9 @@ public class MenuSeviceImpl extends AbsServiceImpl implements MenuSevice {
     @Resource
     private SplashService splashService;
 
+    @Resource
+    private TabCfgTableService tabCfgTableService;
+
     @Override
     public int insert(Menu menu) {
         menu.setUpdateTime(System.currentTimeMillis() + "");
@@ -74,19 +80,19 @@ public class MenuSeviceImpl extends AbsServiceImpl implements MenuSevice {
 
     @Override
     public AppStart appStart(HashMap<String, Object> map) {
-        String resultStr = (String) redisUtil.get("appStart"+map.toString());
+        String resultStr = (String) redisUtil.get("appStart" + map.toString());
         Gson gson = new Gson();
         AppStart result = gson.fromJson(resultStr, AppStart.class);
         if (resultStr == null || resultStr.length() == 0) {
-            resultStr = SplashRestService.responseEntity(map,restTemplate,APP_START).getBody();
-            logger.info("appStart====="+resultStr);
-            redisUtil.set("appStart"+map.toString(), resultStr);
+            resultStr = SplashRestService.responseEntity(map, restTemplate, APP_START).getBody();
+            logger.info("appStart=====" + resultStr);
+            redisUtil.set("appStart" + map.toString(), resultStr);
             result = gson.fromJson(resultStr, AppStart.class);
 
             Splash splash = new Splash();
-           SplashBean bean =  result.data.splash;
+            SplashBean bean = result.data.splash;
 
-            splash = gson.fromJson(gson.toJson(bean),Splash.class);
+            splash = gson.fromJson(gson.toJson(bean), Splash.class);
             splash.setFullDisplayImgUrl(bean.full_display_img_url);
             splash.setSkipUrl(bean.skip_url);
             splashService.insert(splash);
@@ -95,17 +101,30 @@ public class MenuSeviceImpl extends AbsServiceImpl implements MenuSevice {
     }
 
 
-
     @Override
     public AppTabcfg appTabcfg(HashMap<String, Object> map) {
-        String resultStr = (String) redisUtil.get("appTabcfg"+map.toString());
+        String resultStr = (String) redisUtil.get("appTabcfg" + map.toString());
         Gson gson = new Gson();
         AppTabcfg result = gson.fromJson(resultStr, AppTabcfg.class);
         if (resultStr == null || resultStr.length() == 0) {
-            resultStr = SplashRestService.responseEntity(map,restTemplate,APP_TABCFG).getBody();
-            logger.info("appTabcfg====="+resultStr);
-            redisUtil.set("appTabcfg"+map.toString(), resultStr);
+            resultStr = SplashRestService.responseEntity(map, restTemplate, APP_TABCFG).getBody();
+            logger.info("appTabcfg=====" + resultStr);
+            redisUtil.set("appTabcfg" + map.toString(), resultStr);
             result = gson.fromJson(resultStr, AppTabcfg.class);
+
+            List<TabConfigBean> list = result.data.getTab_config();
+            tabCfgTableService.dropTable();
+            tabCfgTableService.createTable();
+            for (TabConfigBean bean : list) {
+                TabCfgTable tabCfgTable = new TabCfgTable();
+                tabCfgTable = gson.fromJson(gson.toJson(bean), TabCfgTable.class);
+                tabCfgTable.setIconNormal(bean.icon_normal);
+                tabCfgTable.setIconSelected(bean.icon_selected);
+                tabCfgTable.setTextColorNormal(bean.text_color_normal);
+                tabCfgTable.setTextColorSelected(bean.text_color_selected);
+//                tabCfgTable.setShow(bean.show+"");
+                tabCfgTableService.insert(tabCfgTable);
+            }
         }
         return result;
     }

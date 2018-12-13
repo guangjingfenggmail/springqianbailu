@@ -2,7 +2,7 @@ package com.open.springqianbailu.model.tab;
 
 import java.io.Serializable;
 
-class TabConfigBean implements Serializable {
+public class TabConfigBean implements Serializable {
     public String icon_normal;
     public String icon_selected;
     public String name;
