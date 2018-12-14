@@ -1,5 +1,7 @@
 package com.open.springqianbailu.rest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +12,10 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 
 
-public class SplashRestService {
+public class XiaomiRestService {
+
+    public  String TAG = getClass().getSimpleName();
+    public Logger logger = LoggerFactory.getLogger(getClass().getSimpleName());
 
 
     public static ResponseEntity<String> responseEntity(HashMap<String, Object> map,RestTemplate restTemplate,String url){

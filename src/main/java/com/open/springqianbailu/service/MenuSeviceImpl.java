@@ -12,20 +12,14 @@ import com.open.springqianbailu.model.tab.SplashBean;
 import com.open.springqianbailu.model.tab.TabConfigBean;
 import com.open.springqianbailu.model.xiaomi.Splash;
 import com.open.springqianbailu.model.xiaomi.TabCfgTable;
-import com.open.springqianbailu.rest.SplashRestService;
+import com.open.springqianbailu.rest.XiaomiRestService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 import static com.open.springqianbailu.redis.ConstUitls.REDIS_EXPIRE_TIME;
 import static com.open.springqianbailu.redis.ConstUitls.REDIS_MENU_LIST_KEY;
@@ -84,7 +78,7 @@ public class MenuSeviceImpl extends AbsServiceImpl implements MenuSevice {
         Gson gson = new Gson();
         AppStart result = gson.fromJson(resultStr, AppStart.class);
         if (resultStr == null || resultStr.length() == 0) {
-            resultStr = SplashRestService.responseEntity(map, restTemplate, APP_START).getBody();
+            resultStr = XiaomiRestService.responseEntity(map, restTemplate, APP_START).getBody();
             logger.info("appStart=====" + resultStr);
             redisUtil.set("appStart" + map.toString(), resultStr);
             result = gson.fromJson(resultStr, AppStart.class);
@@ -107,7 +101,7 @@ public class MenuSeviceImpl extends AbsServiceImpl implements MenuSevice {
         Gson gson = new Gson();
         AppTabcfg result = gson.fromJson(resultStr, AppTabcfg.class);
         if (resultStr == null || resultStr.length() == 0) {
-            resultStr = SplashRestService.responseEntity(map, restTemplate, APP_TABCFG).getBody();
+            resultStr = XiaomiRestService.responseEntity(map, restTemplate, APP_TABCFG).getBody();
             logger.info("appTabcfg=====" + resultStr);
             redisUtil.set("appTabcfg" + map.toString(), resultStr);
             result = gson.fromJson(resultStr, AppTabcfg.class);
