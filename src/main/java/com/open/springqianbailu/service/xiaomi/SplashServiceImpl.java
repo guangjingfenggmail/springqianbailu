@@ -7,6 +7,7 @@ import com.open.springqianbailu.service.AbsServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 @Service("splashService")
@@ -23,5 +24,10 @@ public class SplashServiceImpl extends AbsServiceImpl implements SplashService {
     @Override
     public int insertSelective(Splash record) {
         return splashMapper.insertSelective(record);
+    }
+
+    @Override
+    public List<Splash> selectAll() {
+        return splashMapper.selectAll();
     }
 }

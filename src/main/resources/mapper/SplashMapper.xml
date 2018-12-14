@@ -11,6 +11,10 @@
     <result column="duration" jdbcType="VARCHAR" property="duration" />
   </resultMap>
 
+  <sql id="Base_Column_List">
+        id, start, url,full_display_img_url,end,skip_url,duration
+    </sql>
+
   <delete id="dropTable">
     drop table if exists splash
   </delete>
@@ -28,6 +32,13 @@
   ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='启动图片';
 
   </insert>
+
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from splash
+  </select>
 
 
   <insert id="insert" parameterType="com.open.springqianbailu.model.xiaomi.Splash">

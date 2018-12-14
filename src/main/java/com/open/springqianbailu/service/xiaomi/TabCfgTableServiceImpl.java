@@ -7,6 +7,7 @@ import com.open.springqianbailu.service.AbsServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service("tabCfgTableService")
 public class TabCfgTableServiceImpl extends AbsServiceImpl implements TabCfgTableService
@@ -33,5 +34,10 @@ public class TabCfgTableServiceImpl extends AbsServiceImpl implements TabCfgTabl
     @Override
     public void createTable() {
         tabCfgTableMapper.createTable();
+    }
+
+    @Override
+    public List<TabCfgTable> selectAll() {
+        return tabCfgTableMapper.selectAll();
     }
 }

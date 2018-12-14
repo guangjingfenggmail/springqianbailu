@@ -12,6 +12,10 @@
     <result column="show" jdbcType="VARCHAR" property="show" />
   </resultMap>
 
+  <sql id="Base_Column_List">
+        id, icon_normal, icon_selected,name,type,text_color_normal,text_color_selected,show
+    </sql>
+
   <delete id="dropTable">
     drop table if exists tabcfg
   </delete>
@@ -30,6 +34,12 @@
     ) ENGINE=InnoDB  AUTO_INCREMENT=0  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
   </insert>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from tabcfg
+  </select>
 
   <insert id="insert" parameterType="com.open.springqianbailu.model.xiaomi.TabCfgTable">
     insert into tabcfg(icon_normal,icon_selected,name,type,text_color_normal,text_color_selected)
