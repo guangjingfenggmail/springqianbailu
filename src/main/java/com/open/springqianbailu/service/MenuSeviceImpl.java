@@ -122,7 +122,6 @@ public class MenuSeviceImpl extends AbsServiceImpl implements MenuSevice {
                 tabCfgTable.setIconSelected(bean.icon_selected);
                 tabCfgTable.setTextColorNormal(bean.text_color_normal);
                 tabCfgTable.setTextColorSelected(bean.text_color_selected);
-//                tabCfgTable.setShow(bean.show+"");
                 tabCfgTableService.insert(tabCfgTable);
             }
         }

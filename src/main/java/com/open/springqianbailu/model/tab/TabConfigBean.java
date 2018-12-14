@@ -9,7 +9,6 @@ public class TabConfigBean implements Serializable {
     public String type;
     public String text_color_normal;
     public String text_color_selected;
-    public boolean show;
 
     public String getIcon_normal() {
         return icon_normal;
@@ -59,11 +58,5 @@ public class TabConfigBean implements Serializable {
         this.text_color_selected = text_color_selected;
     }
 
-    public boolean isShow() {
-        return show;
-    }
 
-    public void setShow(boolean show) {
-        this.show = show;
-    }
 }

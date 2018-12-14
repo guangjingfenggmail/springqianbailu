@@ -3,10 +3,14 @@ package com.open.springqianbailu.controller;
 
 import com.google.gson.Gson;
 import com.open.springqianbailu.Result;
+import com.open.springqianbailu.interfaces.xiaomi.TabCfgTableService;
 import com.open.springqianbailu.model.AppStart;
 import com.open.springqianbailu.model.AppTabcfg;
 import com.open.springqianbailu.model.Menu;
 import com.open.springqianbailu.interfaces.MenuSevice;
+import com.open.springqianbailu.model.tab.TabCfgBean;
+import com.open.springqianbailu.model.tab.TabConfigBean;
+import com.open.springqianbailu.model.xiaomi.TabCfgTable;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -26,6 +31,9 @@ import java.util.List;
 public class MenuController extends AbsController {
     @Resource
     private MenuSevice menuSevice;
+
+    @Resource
+    private TabCfgTableService tabCfgTableService;
 
     @ApiOperation(value = "getMenus", notes = "获取所有父菜单")
     @RequestMapping(value = "/getMenus", method = RequestMethod.GET)
@@ -63,7 +71,33 @@ public class MenuController extends AbsController {
     @RequestMapping(value = "/appTabcfg", method = RequestMethod.POST)
     @ResponseBody
     public AppTabcfg appTabcfg(@RequestBody HashMap<String,Object> reqMap) {
-        AppTabcfg result = this.menuSevice.appTabcfg(reqMap);
-        return result;
+        List<TabCfgTable> list = tabCfgTableService.selectAll();
+        if (list==null || list.size()==0) {
+            AppTabcfg result = this.menuSevice.appTabcfg(reqMap);
+            return result;
+        }
+        AppTabcfg appTabcfg = new AppTabcfg();
+        appTabcfg.code = 200;
+        appTabcfg.indo = "Success";
+
+        TabCfgBean data = new TabCfgBean();
+        data.tab_bg = "";
+        List<TabConfigBean> tab_config = new ArrayList<>();
+
+        TabConfigBean bean;
+        for (TabCfgTable tabCfgTable:list){
+            bean = new TabConfigBean();
+            bean.icon_normal = tabCfgTable.getIconNormal();
+            bean.icon_selected = tabCfgTable.getIconSelected();
+            bean.text_color_normal = tabCfgTable.getTextColorNormal();
+            bean.text_color_selected = tabCfgTable.getTextColorSelected();
+            bean.name = tabCfgTable.getName();
+            bean.type = tabCfgTable.getType();
+            tab_config.add(bean);
+        }
+
+        data.tab_config = tab_config;
+        appTabcfg.data = data;
+        return appTabcfg;
     }
 }

@@ -17,7 +17,6 @@ public class TabCfgTable implements Serializable {
 
     private String textColorSelected;
 
-    private String show;
 
     public Integer getId() {
         return id;
@@ -75,11 +74,5 @@ public class TabCfgTable implements Serializable {
         this.textColorSelected = textColorSelected == null ? null : textColorSelected.trim();
     }
 
-    public String getShow() {
-        return show;
-    }
 
-    public void setShow(String show) {
-        this.show = show == null ? null : show.trim();
-    }
 }

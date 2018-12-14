@@ -155,7 +155,7 @@
             </plugin>
 
             <!--配置文件的位置-->
-            <!--为了测试mybatis逆向工程而新增的pom内容 2018年1月29日13:46:57
+            <!--为了测试mybatis逆向工程而新增的pom内容 2018年1月29日13:46:57-->
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
@@ -181,7 +181,7 @@
                         <version>1.3.7</version>
                     </dependency>
                 </dependencies>
-            </plugin>-->
+            </plugin>
         </plugins>
     </build>
 

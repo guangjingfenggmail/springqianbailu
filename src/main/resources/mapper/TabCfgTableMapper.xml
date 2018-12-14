@@ -9,11 +9,10 @@
     <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="text_color_normal" jdbcType="VARCHAR" property="textColorNormal" />
     <result column="text_color_selected" jdbcType="VARCHAR" property="textColorSelected" />
-    <result column="show" jdbcType="VARCHAR" property="show" />
   </resultMap>
 
   <sql id="Base_Column_List">
-        id, icon_normal, icon_selected,name,type,text_color_normal,text_color_selected,show
+        id, icon_normal, icon_selected,name,type,text_color_normal,text_color_selected
     </sql>
 
   <delete id="dropTable">
@@ -29,7 +28,6 @@
       `type` varchar(255) COLLATE utf8_bin DEFAULT NULL,
       `text_color_normal` varchar(255) COLLATE utf8_bin DEFAULT NULL,
       `text_color_selected` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-      `show` varchar(255) COLLATE utf8_bin DEFAULT NULL,
       PRIMARY KEY (`id`)
     ) ENGINE=InnoDB  AUTO_INCREMENT=0  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -71,9 +69,6 @@
       <if test="textColorSelected != null">
         text_color_selected,
       </if>
-      <if test="show != null">
-        show,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -96,9 +91,6 @@
       </if>
       <if test="textColorSelected != null">
         #{textColorSelected,jdbcType=VARCHAR},
-      </if>
-      <if test="show != null">
-        #{show,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
