@@ -5,7 +5,6 @@
   <generatorConfiguration>
       <!--数据库驱动
     <classPathEntry    location="D:\code\springqianbailu\springqianbailu\src\main\resources\mysql-connector-java-8.0.13.jar"/>
-
     -->
     <classPathEntry    location="/Users/guangjing.feng/Downloads/zb-api/springqianbailu/src/main/resources/mysql-connector-java-8.0.13.jar"/>
 
@@ -21,7 +20,7 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <!--生成Model类存放位置-->
-        <javaModelGenerator targetPackage="com.open.springqianbailu.model.xiaomi" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.open.springqianbailu.model.xiaomi.viewtype" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -30,10 +29,10 @@
             <property name="enableSubPackages" value="true"/>
          </sqlMapGenerator>
         <!--生成Dao类存放位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.open.springqianbailu.dao.xiaomi" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.open.springqianbailu.dao.xiaomi.viewtype" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
          </javaClientGenerator>
         <!--生成对应表及类名-->
-       <table tableName="home_appinfo" domainObjectName="HomeAppinfoTable" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+       <table tableName="view_type_item" domainObjectName="Item" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
     </context>
  </generatorConfiguration>

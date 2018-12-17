@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 14/12/2018 18:02:21
+ Date: 17/12/2018 18:12:33
 */
 
 SET NAMES utf8mb4;
@@ -47,20 +47,6 @@ INSERT INTO `home_appinfo` VALUES (8, 'Super MI', 'home/tab_page', '#ed5b00', '#
 INSERT INTO `home_appinfo` VALUES (9, '新款游戏本', 'home/tab_page', '#ed5b00', '#747474', '', '');
 INSERT INTO `home_appinfo` VALUES (10, '影音娱乐', 'home/tab_page', '#ed5b00', '#747474', '', '');
 COMMIT;
-
--- ----------------------------
--- Table structure for home_tab_header
--- ----------------------------
-DROP TABLE IF EXISTS `home_tab_header`;
-CREATE TABLE `home_tab_header` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `img_url` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `img_url_webp` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `img_url_color` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `action` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `view_type` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Table structure for menu
@@ -102,7 +88,7 @@ CREATE TABLE `my_user` (
   `email` varchar(255) COLLATE utf8_bin NOT NULL COMMENT '邮箱',
   `updateTime` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of my_user
@@ -237,6 +223,57 @@ INSERT INTO `tabcfg` VALUES (1, 'http://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-
 INSERT INTO `tabcfg` VALUES (2, 'http://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/0036c91424c5da4c670b3423757b771a.png', 'http://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/1910f5331b957805b8030b78957ed68d.png', '分类', 'category', '#747474', '#ED5B00');
 INSERT INTO `tabcfg` VALUES (3, 'http://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f12e3e07d4a334a59f73569fed277087.png', 'http://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/a701bd19eef30cee89de7533184df15a.png', '发现', 'discovery', '#747474', '#ED5B00');
 INSERT INTO `tabcfg` VALUES (4, 'http://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/0a801110e3a081836b32ba24046415c6.png', 'http://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/d967a25eb331aaa3c9fa39b6ca13974e.png', '我的', 'mine', '#747474', '#ED5B00');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for view_type_action
+-- ----------------------------
+DROP TABLE IF EXISTS `view_type_action`;
+CREATE TABLE `view_type_action` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `item_id` int(11) NOT NULL,
+  `type` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `path` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `extra` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `log_code` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`,`item_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of view_type_action
+-- ----------------------------
+BEGIN;
+INSERT INTO `view_type_action` VALUES (1, 1, 'plugin', 'ShopPlugin://com.xiaomi.shop2.plugin.goodsdetail.GoodsDetailFragment?pluginId=101', '{\"goodsId\":\"\",\"commodityId\":\"10000117\",\"productId\":\"10000117\"}', '31apphomegallery001003#t=ad&act=product&page=home&pid=10000117&page_id=6707&bid=3312427.1&adp=2490&adm=9237');
+INSERT INTO `view_type_action` VALUES (2, 2, 'plugin', 'ShopPlugin://com.xiaomi.shop2.plugin.goodsdetail.GoodsDetailFragment?pluginId=101', '{\"goodsId\":\"\",\"commodityId\":\"10000099\",\"productId\":\"10000099\"}', '31apphomegallery002003#t=ad&act=product&page=home&pid=10000099&page_id=6707&bid=3312427.2&adp=2681&adm=9349');
+INSERT INTO `view_type_action` VALUES (3, 3, 'plugin', 'ShopPlugin://com.xiaomi.shop2.plugin.goodsdetail.GoodsDetailFragment?pluginId=101', '{\"goodsId\":\"\",\"commodityId\":\"8912\",\"productId\":\"8912\"}', '31apphomegallery003003#t=ad&act=product&page=home&pid=8912&page_id=6707&bid=3312427.3&adp=2557&adm=10183');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for view_type_item
+-- ----------------------------
+DROP TABLE IF EXISTS `view_type_item`;
+CREATE TABLE `view_type_item` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sections_index` int(11) DEFAULT NULL,
+  `img_url` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `img_url_webp` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `img_url_color` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `w` int(11) unsigned zerofill DEFAULT NULL,
+  `h` int(11) unsigned zerofill DEFAULT NULL,
+  `ad_position_id` int(11) DEFAULT NULL,
+  `material_id` int(11) DEFAULT NULL,
+  `view_type` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `stat` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of view_type_item
+-- ----------------------------
+BEGIN;
+INSERT INTO `view_type_item` VALUES (1, NULL, 'https://i8.mifile.cn/b2c-mimall-media/6b185a5261c85931c7d3cb916d99dec0.jpg?w=1080&h=768&bg=9DBCE8', 'http://i8.mifile.cn/v1/a1/9d5ef021-b2f6-f0ee-3a96-1c4cba6be619.webp?w=1080&h=768&bg=9DBCE8', '#9DBCE8', 00000001080, 00000000768, 2490, 9237, 'gallery', NULL);
+INSERT INTO `view_type_item` VALUES (2, NULL, 'https://i8.mifile.cn/b2c-mimall-media/150ad6f5ee6f90312e4b9198afaccb34.jpg?w=1080&h=768&bg=537FB6', 'http://i8.mifile.cn/v1/a1/1deeb827-5e80-0f26-aed6-86a108f9f2ed.webp?w=1080&h=768&bg=537FB6', '#537FB6', 00000001080, 00000000768, 2681, 9349, 'gallery', NULL);
+INSERT INTO `view_type_item` VALUES (3, NULL, 'https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/a0b5b5361dc04f7e7b7104b3ee568202.jpg?w=1080&h=768&bg=E0CFCC', 'http://i8.mifile.cn/v1/a1/f04d5f8f-9981-deec-4d52-a4c6e43869b9.webp?w=1080&h=768&bg=E0CFCC', '#E0CFCC', 00000001080, 00000000768, 2557, 10183, 'gallery', NULL);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
