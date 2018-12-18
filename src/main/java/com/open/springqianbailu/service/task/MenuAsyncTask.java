@@ -1,4 +1,4 @@
-package com.open.springqianbailu.async;
+package com.open.springqianbailu.service.task;
 
 
 import com.open.springqianbailu.dao.MenuMapper;
