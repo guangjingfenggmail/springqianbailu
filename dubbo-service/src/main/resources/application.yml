@@ -16,7 +16,7 @@ spring:
   profiles: dev
 
   datasource:
-    url: jdbc:mysql://localhost:3306/xiaomi?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/xiaomi?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true
     username: root
     password: cT;sEw#-w49f
     driver-class-name: com.mysql.jdbc.Driver
@@ -45,5 +45,3 @@ spring:
       publisher-confirms: true    #  消息发送到交换机确认机制,是否确认回调
 
 
-  logging:
-    config: classpath:log4j2.yml
