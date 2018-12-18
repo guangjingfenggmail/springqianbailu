@@ -3,7 +3,7 @@ package com.open.springqianbailu.service.xiaomi;
 import com.open.springqianbailu.dao.xiaomi.HomeAppinfoTableMapper;
 import com.open.springqianbailu.interfaces.xiaomi.HomeAppinfoService;
 import com.open.springqianbailu.model.xiaomi.HomeAppinfoTable;
-import com.open.springqianbailu.rabbitmq.xiaomi.HomeAppinfoSender;
+import com.open.springqianbailu.rabbitmq.xiaomi.HomeSender;
 import com.open.springqianbailu.rabbitmq.xiaomi.Message;
 import com.open.springqianbailu.rest.xiaomi.HomeTabRestService;
 import com.open.springqianbailu.service.AbsServiceImpl;
@@ -21,7 +21,7 @@ public class HomeAppinfoServiceImpl extends AbsServiceImpl implements HomeAppinf
     private HomeAppinfoTableMapper homeAppinfoTableMapper;
 
     @Autowired
-    private HomeAppinfoSender homeAppinfoSender;
+    private HomeSender homeSender;
 
 
     @Override
@@ -45,7 +45,7 @@ public class HomeAppinfoServiceImpl extends AbsServiceImpl implements HomeAppinf
             if (list == null || list.size() == 0) {
                 list =  HomeTabRestService.homeAppInfo(restTemplate,redisUtil);
                 if (list!=null && list.size()>0) {
-                    homeAppinfoSender.send(new Message());
+                    homeSender.send(new Message());
                 }
             }
             redisUtil.set("HomeAppinfoService" + "selectAll",list);

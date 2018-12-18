@@ -13,7 +13,7 @@ import java.util.UUID;
 
 
 @Component
-public class HomeAppinfoSender implements RabbitTemplate.ConfirmCallback {
+public class HomeSender implements RabbitTemplate.ConfirmCallback {
 
     public String TAG = getClass().getSimpleName();
     public Logger logger = LoggerFactory.getLogger(getClass().getSimpleName());
@@ -26,7 +26,16 @@ public class HomeAppinfoSender implements RabbitTemplate.ConfirmCallback {
         logger.info(TAG+"send========");
         CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
         logger.info(TAG+"callbackSender UUID: " + correlationData.getId());
-        template.convertAndSend(RabbitMQConfig.QUEUENAME ,message,correlationData);
+        template.convertAndSend(RabbitMQConfig.QUEUENAME_APPINFO ,message,correlationData);
+    }
+
+
+    public void sendViewType(Message message) {
+        Gson gson = new Gson();
+        logger.info(TAG+"send========");
+        CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
+        logger.info(TAG+"callbackSender UUID: " + correlationData.getId());
+        template.convertAndSend(RabbitMQConfig.QUEUENAME_VIEWTYPE_ITEM ,message,correlationData);
     }
 
     @Override

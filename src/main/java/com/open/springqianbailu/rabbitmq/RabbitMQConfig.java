@@ -15,11 +15,18 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    public final static String QUEUENAME = "spring-boot-queue";
+    public final static String QUEUENAME_APPINFO = "queue-appinfo";
+
+    public final static String QUEUENAME_VIEWTYPE_ITEM = "queue-view-type-item";
 
     @Bean
     Queue queue() {
-        return new Queue(QUEUENAME, false);
+        return new Queue(QUEUENAME_APPINFO, false);
+    }
+
+    @Bean
+    Queue queue2() {
+        return new Queue(QUEUENAME_VIEWTYPE_ITEM, false);
     }
 
 

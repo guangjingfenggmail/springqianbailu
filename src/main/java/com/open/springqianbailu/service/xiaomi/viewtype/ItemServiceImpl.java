@@ -3,8 +3,9 @@ package com.open.springqianbailu.service.xiaomi.viewtype;
 import com.open.springqianbailu.dao.xiaomi.viewtype.ActionMapper;
 import com.open.springqianbailu.dao.xiaomi.viewtype.ItemMapper;
 import com.open.springqianbailu.interfaces.xiaomi.viewtype.ItemService;
-import com.open.springqianbailu.model.xiaomi.viewtype.Action;
 import com.open.springqianbailu.model.xiaomi.viewtype.Item;
+import com.open.springqianbailu.rabbitmq.xiaomi.HomeSender;
+import com.open.springqianbailu.rabbitmq.xiaomi.Message;
 import com.open.springqianbailu.rest.xiaomi.HomeTabRestService;
 import com.open.springqianbailu.service.AbsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class ItemServiceImpl extends AbsServiceImpl implements ItemService {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private HomeSender homeSender;
+
 
     @Override
     public int insert(Item record) {
@@ -44,20 +48,9 @@ public class ItemServiceImpl extends AbsServiceImpl implements ItemService {
             list = itemMapper.selectByViewType(view_type);
             if (list == null || list.size() == 0) {
                 list = HomeTabRestService.homeBanner(restTemplate, redisUtil);
-                itemMapper.dropTable();
-                itemMapper.createTable();
-
-                actionMapper.dropTable();
-                actionMapper.createTable();
-                for (int i = 0; i < list.size(); i++) {
-                    Item item = list.get(i);
-                    item.setView_type(view_type);
-                    itemMapper.insert(item);
-
-                    Action action = item.getAction();
-                    action.setItem_id(i + 1);
-                    actionMapper.insert(action);
-                }
+                Message msg = new Message();
+                msg.setParam(view_type);
+                homeSender.sendViewType(msg);
             }
             redisUtil.set("selectByViewType" + view_type, list);
         }
