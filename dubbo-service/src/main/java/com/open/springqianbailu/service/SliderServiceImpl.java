@@ -5,7 +5,6 @@ import com.open.springqianbailu.dao.SliderMapper;
 import com.open.springqianbailu.documents.MenuDocumentDao;
 import com.open.springqianbailu.interfaces.SliderService;
 import com.open.springqianbailu.model.Slider;
-import com.open.springqianbailu.serivce.AbsServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,7 +13,7 @@ import java.util.List;
 import static com.open.springqianbailu.redis.ConstUitls.REDIS_EXPIRE_TIME;
 import static com.open.springqianbailu.redis.ConstUitls.REDIS_SLIDER_BANNDER_LIST_KEY;
 
-@Service("sliderService")
+@Service
 public class SliderServiceImpl extends AbsServiceImpl implements SliderService {
     @Resource
     private SliderMapper sliderMapper;

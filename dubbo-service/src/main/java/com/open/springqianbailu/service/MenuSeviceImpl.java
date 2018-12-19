@@ -13,7 +13,6 @@ import com.open.springqianbailu.model.tab.TabConfigBean;
 import com.open.springqianbailu.model.xiaomi.Splash;
 import com.open.springqianbailu.model.xiaomi.TabCfgTable;
 import com.open.springqianbailu.rest.XiaomiRestService;
-import com.open.springqianbailu.serivce.AbsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -28,7 +27,7 @@ import static com.open.springqianbailu.rest.RestApi.APP_START;
 import static com.open.springqianbailu.rest.RestApi.APP_TABCFG;
 
 
-@Service("menuSevice")
+@Service
 public class MenuSeviceImpl extends AbsServiceImpl implements MenuSevice {
 
     @Resource

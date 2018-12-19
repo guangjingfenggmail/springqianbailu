@@ -1,4 +1,4 @@
-package com.open.springqianbailu.serivce;
+package com.open.springqianbailu.service;
 
 import com.open.springqianbailu.redis.RedisUtil;
 import org.slf4j.Logger;

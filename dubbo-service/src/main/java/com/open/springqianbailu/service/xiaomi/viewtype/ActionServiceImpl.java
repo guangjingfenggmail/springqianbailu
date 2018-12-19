@@ -3,13 +3,13 @@ package com.open.springqianbailu.service.xiaomi.viewtype;
 import com.open.springqianbailu.dao.xiaomi.viewtype.ActionMapper;
 import com.open.springqianbailu.interfaces.xiaomi.viewtype.ActionService;
 import com.open.springqianbailu.model.xiaomi.viewtype.Action;
-import com.open.springqianbailu.serivce.AbsServiceImpl;
+import com.open.springqianbailu.service.AbsServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
-@Service("actionService")
+@Service
 public class ActionServiceImpl extends AbsServiceImpl implements ActionService {
 
     @Resource

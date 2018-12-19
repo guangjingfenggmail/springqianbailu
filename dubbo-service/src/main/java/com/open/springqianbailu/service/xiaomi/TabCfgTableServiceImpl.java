@@ -3,13 +3,13 @@ package com.open.springqianbailu.service.xiaomi;
 import com.open.springqianbailu.dao.xiaomi.TabCfgTableMapper;
 import com.open.springqianbailu.interfaces.xiaomi.TabCfgTableService;
 import com.open.springqianbailu.model.xiaomi.TabCfgTable;
-import com.open.springqianbailu.serivce.AbsServiceImpl;
+import com.open.springqianbailu.service.AbsServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
-@Service("tabCfgTableService")
+@Service
 public class TabCfgTableServiceImpl extends AbsServiceImpl implements TabCfgTableService
 {
 

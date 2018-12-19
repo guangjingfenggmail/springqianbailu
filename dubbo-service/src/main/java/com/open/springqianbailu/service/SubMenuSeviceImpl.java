@@ -3,7 +3,6 @@ package com.open.springqianbailu.service;
 import com.open.springqianbailu.dao.SubMenuMapper;
 import com.open.springqianbailu.interfaces.SubMenuSevice;
 import com.open.springqianbailu.model.SubMenu;
-import com.open.springqianbailu.serivce.AbsServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -12,7 +11,7 @@ import java.util.List;
 import static com.open.springqianbailu.redis.ConstUitls.REDIS_EXPIRE_TIME;
 import static com.open.springqianbailu.redis.ConstUitls.REDIS_SUBMENU_LIST_KEY;
 
-@Service("subMenuSevice")
+@Service
 public class SubMenuSeviceImpl extends AbsServiceImpl implements SubMenuSevice {
 
     @Resource

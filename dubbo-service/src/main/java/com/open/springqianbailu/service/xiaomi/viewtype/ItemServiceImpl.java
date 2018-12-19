@@ -7,7 +7,7 @@ import com.open.springqianbailu.model.xiaomi.viewtype.Item;
 import com.open.springqianbailu.rabbitmq.Message;
 import com.open.springqianbailu.rabbitmq.xiaomi.HomeSender;
 import com.open.springqianbailu.rest.xiaomi.HomeTabRestService;
-import com.open.springqianbailu.serivce.AbsServiceImpl;
+import com.open.springqianbailu.service.AbsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.annotation.Resource;
 import java.util.List;
 
-@Service("itemService")
+@Service
 public class ItemServiceImpl extends AbsServiceImpl implements ItemService {
 
     @Resource

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
-@Service("jsoupSubMenuService")
+@Service
 public class JsoupSubMenuServiceImpl implements JsoupSubMenuService {
 
     @Resource

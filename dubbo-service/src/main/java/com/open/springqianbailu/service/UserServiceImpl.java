@@ -3,7 +3,6 @@ package com.open.springqianbailu.service;
 import com.open.springqianbailu.dao.UserMapper;
 import com.open.springqianbailu.interfaces.UserService;
 import com.open.springqianbailu.model.User;
-import com.open.springqianbailu.serivce.AbsServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -12,7 +11,7 @@ import java.util.HashMap;
 import static com.open.springqianbailu.redis.ConstUitls.REDIS_EXPIRE_TIME;
 import static com.open.springqianbailu.redis.ConstUitls.REDIS_USER_OBJECT_KEY;
 
-@Service("userService")
+@Service
 public class UserServiceImpl extends AbsServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
