@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.HashMap;
 
-import static com.open.springqianbailu.redis.ConstUitls.REDIS_EXPIRE_TIME;
-import static com.open.springqianbailu.redis.ConstUitls.REDIS_USER_OBJECT_KEY;
 
 @Service
 public class UserServiceImpl extends AbsServiceImpl implements UserService {
@@ -19,11 +17,7 @@ public class UserServiceImpl extends AbsServiceImpl implements UserService {
 
     @Override
     public User userByUserNamePwd(HashMap<String, Object> reqMap) {
-        User user = (User) redisUtil.get(REDIS_USER_OBJECT_KEY + reqMap.toString());
-        if (user == null) {
-            user = userMapper.selectByUserNamePwd(reqMap);
-            redisUtil.set(REDIS_USER_OBJECT_KEY + reqMap.toString(), user, REDIS_EXPIRE_TIME);
-        }
+        User  user = userMapper.selectByUserNamePwd(reqMap);
         return user;
     }
 

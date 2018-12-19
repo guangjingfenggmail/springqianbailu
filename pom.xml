@@ -10,11 +10,8 @@
         <module>dubbo-api</module>
         <module>dubbo-common</module>
         <module>dubbo-controller</module>
-        <module>dubbo-jsoup</module>
-        <module>dubbo-service</module>
         <module>dubbo-model</module>
-        <module>dubbo-rest</module>
-        <module>dubbo-sender</module>
+        <module>dubbo-service</module>
     </modules>
     <packaging>pom</packaging>
     <!--<packaging>war</packaging>-->
