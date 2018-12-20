@@ -1,6 +1,6 @@
 package com.open.springqianbailu.dao;
 
-import com.open.springqianbailu.model.User;
+import com.open.springqianbailu.model.table.User;
 
 import java.util.HashMap;
 import java.util.List;

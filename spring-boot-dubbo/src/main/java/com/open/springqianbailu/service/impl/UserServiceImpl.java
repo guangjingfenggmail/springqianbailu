@@ -3,7 +3,7 @@ package com.open.springqianbailu.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.open.springqianbailu.RedisUtil;
 import com.open.springqianbailu.dao.UserMapper;
-import com.open.springqianbailu.model.User;
+import com.open.springqianbailu.model.table.User;
 import com.open.springqianbailu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

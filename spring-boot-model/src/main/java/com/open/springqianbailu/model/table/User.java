@@ -1,4 +1,4 @@
-package com.open.springqianbailu.model;
+package com.open.springqianbailu.model.table;
 
 import java.io.Serializable;
 

@@ -4,7 +4,7 @@ package com.open.springqianbailu.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.google.gson.Gson;
 import com.open.springqianbailu.Result;
-import com.open.springqianbailu.model.User;
+import com.open.springqianbailu.model.table.User;
 import com.open.springqianbailu.service.UserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
