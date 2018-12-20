@@ -5,6 +5,8 @@ import com.open.springqianbailu.Result;
 import com.open.springqianbailu.model.bean.HomeAppInfo;
 import com.open.springqianbailu.service.HomeAppinfoService;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +16,8 @@ import com.alibaba.dubbo.config.annotation.Reference;
 @Controller
 @RequestMapping(value = "/home")
 public class HomeTabController   {
+    public  String TAG = getClass().getSimpleName();
+    public Logger logger = LoggerFactory.getLogger(getClass().getSimpleName());
 
     @Reference
     private HomeAppinfoService homeAppinfoService;
