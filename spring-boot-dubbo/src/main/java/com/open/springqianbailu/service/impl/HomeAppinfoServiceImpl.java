@@ -3,7 +3,9 @@ package com.open.springqianbailu.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.open.springqianbailu.RedisUtil;
 import com.open.springqianbailu.dao.HomeAppinfoTableMapper;
+import com.open.springqianbailu.model.rabbitmq.Message;
 import com.open.springqianbailu.model.table.HomeAppinfoTable;
+import com.open.springqianbailu.rabbitmq.HomeSender;
 import com.open.springqianbailu.rest.HomeTabRestService;
 import com.open.springqianbailu.service.HomeAppinfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +20,8 @@ public class HomeAppinfoServiceImpl  implements HomeAppinfoService {
     @Autowired
     private HomeAppinfoTableMapper homeAppinfoTableMapper;
 
-//    @Autowired
-//    private HomeSender homeSender;
+    @Autowired
+    private HomeSender homeSender;
 
     @Resource
     public RedisUtil redisUtil;
@@ -45,9 +47,9 @@ public class HomeAppinfoServiceImpl  implements HomeAppinfoService {
             list = homeAppinfoTableMapper.selectAll();
             if (list == null || list.size() == 0) {
                 list =  HomeTabRestService.homeAppInfo(restTemplate,redisUtil);
-//                if (list!=null && list.size()>0) {
-//                    homeSender.send(new Message());
-//                }
+                if (list!=null && list.size()>0) {
+                    homeSender.send(new Message());
+                }
             }
             redisUtil.set("HomeAppinfoService" + "selectAll",list);
         }
