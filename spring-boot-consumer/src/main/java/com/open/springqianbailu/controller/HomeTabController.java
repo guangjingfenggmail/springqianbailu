@@ -1,6 +1,7 @@
 package com.open.springqianbailu.controller;
 
 
+import com.google.gson.Gson;
 import com.open.springqianbailu.Result;
 import com.open.springqianbailu.model.bean.HomeAppInfo;
 import com.open.springqianbailu.service.HomeAppinfoService;
@@ -28,6 +29,8 @@ public class HomeTabController   {
     public Result getAppInfo() {
         HomeAppInfo homeAppInfo = new HomeAppInfo();
         homeAppInfo.setTabs(homeAppinfoService.selectAll());
+        Gson gson = new Gson();
+        logger.info(TAG+gson.toJson(homeAppInfo));
         return Result.success(homeAppInfo);
     }
 

@@ -46,6 +46,8 @@ public class MenuController   {
     @ResponseBody
     public Result addMenu(@RequestBody Menu menu) {
         int result = this.menuSevice.insert(menu);
+        Gson gson = new Gson();
+        logger.info(TAG + gson.toJson(menu));
         return Result.success(result);
     }
 

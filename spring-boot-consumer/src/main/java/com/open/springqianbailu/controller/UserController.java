@@ -63,6 +63,8 @@ public class UserController{
     @ResponseBody
     public Result register(@RequestBody User user){
         boolean result =  this.userService.addUser(user);
+        Gson gson = new Gson();
+        logger.info(TAG + gson.toJson(user));
         return Result.success(result);
     }
 
