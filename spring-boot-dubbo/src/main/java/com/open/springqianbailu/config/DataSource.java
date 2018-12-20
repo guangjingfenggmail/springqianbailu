@@ -1,4 +1,4 @@
-package com.jaycekon.dubbo.config;
+package com.open.springqianbailu.config;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -12,5 +12,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.CLASS)
 @Target({ElementType.TYPE})
 public @interface DataSource {
-    String value() default "test_1";
+    String value() default "xiaomi";
 }

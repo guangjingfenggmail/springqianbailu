@@ -1,4 +1,4 @@
-package com.jaycekon.dubbo.config;
+package com.open.springqianbailu.config;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -18,14 +18,12 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 2018/1/15 18:46
  */
 @Configuration
-@MapperScan(value = "com.jaycekon.dubbo.mapper", sqlSessionFactoryRef = "db1SqlSessionFactory")
+@MapperScan(value = "com.open.springqianbailu.dao", sqlSessionFactoryRef = "db1SqlSessionFactory")
 @EnableTransactionManagement
 public class DataSourceConfig {
 

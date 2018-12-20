@@ -1,4 +1,4 @@
-package com.jaycekon.dubbo.config;
+package com.open.springqianbailu.config;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -23,7 +23,7 @@ public class DataSourceAspect {
     private static Logger logger = LoggerFactory.getLogger(DataSourceAspect.class);
 
 
-    @Before("@annotation(com.jaycekon.dubbo.config.DataSource)")
+    @Before("@annotation(com.open.springqianbailu.config.DataSource)")
     public void before(JoinPoint point) {
         Class<?> className = point.getTarget().getClass();
         String methodName = point.getSignature().getName();

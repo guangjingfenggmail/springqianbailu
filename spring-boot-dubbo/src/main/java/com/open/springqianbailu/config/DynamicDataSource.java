@@ -1,9 +1,8 @@
-package com.jaycekon.dubbo.config;
+package com.open.springqianbailu.config;
 
 import com.sun.istack.internal.Nullable;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

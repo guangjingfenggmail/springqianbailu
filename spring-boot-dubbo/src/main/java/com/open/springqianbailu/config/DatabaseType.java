@@ -1,4 +1,4 @@
-package com.jaycekon.dubbo.config;
+package com.open.springqianbailu.config;
 
 /**
  * 列出数据源类型

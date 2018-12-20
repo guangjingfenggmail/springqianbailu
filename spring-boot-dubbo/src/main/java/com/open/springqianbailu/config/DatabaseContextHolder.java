@@ -1,4 +1,4 @@
-package com.jaycekon.dubbo.config;
+package com.open.springqianbailu.config;
 
 /**
  * 保存一个线程安全的DatabaseType容器
