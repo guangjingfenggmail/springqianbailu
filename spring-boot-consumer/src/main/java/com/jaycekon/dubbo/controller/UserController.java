@@ -3,13 +3,14 @@ package com.jaycekon.dubbo.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.jaycekon.dubbo.domain.User;
 import com.jaycekon.dubbo.service.UserService;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by Jaycekon on 2017/9/19.
  */
-@RestController
+@Controller
 @RequestMapping("/user")
 public class UserController {
 
@@ -19,7 +20,8 @@ public class UserController {
     UserService userService;
 
     @RequestMapping("/save")
-    public User saveUser() {
+    @ResponseBody
+    public Object saveUser() {
         User user = new User();
         user.setUsername("jaycekon");
         user.setPassword("jaycekong824");

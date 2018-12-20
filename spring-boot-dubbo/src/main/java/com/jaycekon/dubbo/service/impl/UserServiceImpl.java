@@ -7,13 +7,12 @@ import com.jaycekon.dubbo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.Serializable;
 
 /**
  * Created by Jaycekon on 2017/9/19.
  */
-@Service(interfaceClass = UserService.class) //dubbo的service，注入接口
 @Component
+@Service(interfaceClass = UserService.class) //dubbo的service，注入接口
 public class UserServiceImpl implements UserService {
 
     @Autowired
