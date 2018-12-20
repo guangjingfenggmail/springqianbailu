@@ -1,4 +1,4 @@
-package com.jaycekon.mybatis.multi.config;
+package com.jaycekon.dubbo.config;
 
 /**
  * 列出数据源类型

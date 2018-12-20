@@ -1,6 +1,7 @@
-package com.jaycekon.mybatis.multi.mapper;
+package com.jaycekon.dubbo.mapper;
 
-import com.jaycekon.mybatis.multi.model.User;
+
+import com.jaycekon.dubbo.domain.User;
 
 /**
  * @author

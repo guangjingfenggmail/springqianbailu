@@ -7,5 +7,7 @@ import com.jaycekon.dubbo.domain.User;
  */
 public interface UserService {
 
-    User saveUser(User user);
+      void inserUser(String username, String password);
+
+      User selectUser(int id);
 }

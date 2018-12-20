@@ -1,4 +1,4 @@
-package com.jaycekon.mybatis.multi.config;
+package com.jaycekon.dubbo.config;
 
 /**
  * 保存一个线程安全的DatabaseType容器

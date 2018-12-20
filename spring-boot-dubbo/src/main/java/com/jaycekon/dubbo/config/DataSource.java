@@ -1,4 +1,4 @@
-package com.jaycekon.mybatis.multi.config;
+package com.jaycekon.dubbo.config;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

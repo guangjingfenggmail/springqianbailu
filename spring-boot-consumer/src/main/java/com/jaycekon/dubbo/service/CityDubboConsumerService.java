@@ -20,6 +20,7 @@ public class CityDubboConsumerService {
         User user = new User();
         user.setUsername("jaycekon");
         user.setPassword("jaycekong824");
-        return userService.saveUser(user);
+        userService.inserUser(user.getUsername(),user.getPassword());
+        return user;
     }
 }

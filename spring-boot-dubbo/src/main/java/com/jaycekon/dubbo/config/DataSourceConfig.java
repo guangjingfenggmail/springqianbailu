@@ -1,4 +1,4 @@
-package com.jaycekon.mybatis.multi.config;
+package com.jaycekon.dubbo.config;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -6,8 +6,8 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.boot.autoconfigure.SpringBootVFS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -25,7 +25,7 @@ import java.util.Map;
  * 2018/1/15 18:46
  */
 @Configuration
-@MapperScan(value = "com.jaycekon.mybatis.multi.mapper", sqlSessionFactoryRef = "db1SqlSessionFactory")
+@MapperScan(value = "com.jaycekon.dubbo.mapper", sqlSessionFactoryRef = "db1SqlSessionFactory")
 @EnableTransactionManagement
 public class DataSourceConfig {
 

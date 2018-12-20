@@ -1,7 +1,7 @@
-package com.jaycekon.mybatis.multi.config;
+package com.jaycekon.dubbo.config;
 
+import com.sun.istack.internal.Nullable;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
-import org.springframework.lang.Nullable;
 
 import java.util.Arrays;
 import java.util.HashMap;

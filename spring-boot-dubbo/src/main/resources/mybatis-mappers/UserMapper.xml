@@ -1,14 +1,14 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jaycekon.mybatis.multi.mapper.UserMapper">
+<mapper namespace="com.jaycekon.dubbo.mapper.UserMapper">
 
-    <insert id="insert" parameterType="User">
+    <insert id="insert" parameterType="com.jaycekon.dubbo.domain.User">
         INSERT INTO `user`(`username`, `password`)
          VALUES ( #{username}, #{password});
     </insert>
 
-    <select id="select" parameterType="java.lang.Integer" resultType="User">
+    <select id="select" parameterType="java.lang.Integer" resultType="com.jaycekon.dubbo.domain.User">
         select * from user where id = #{id}
     </select>
 </mapper>
