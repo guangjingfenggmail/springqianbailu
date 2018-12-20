@@ -14,10 +14,10 @@
         <module>spring-boot-consumer</module>
         <module>spring-boot-api</module>
         <module>spring-boot-model</module>
+        <module>spring-boot-config</module>
     </modules>
 
     <dependencies>
-
 
     </dependencies>
 </project>
