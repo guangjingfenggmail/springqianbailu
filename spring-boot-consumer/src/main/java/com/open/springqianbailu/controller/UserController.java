@@ -6,6 +6,8 @@ import com.google.gson.Gson;
 import com.open.springqianbailu.Result;
 import com.open.springqianbailu.model.User;
 import com.open.springqianbailu.service.UserService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,8 @@ public class UserController{
     @Reference
     private UserService userService;
 
+    @ApiOperation(value = "login", notes = "根据userName和pwd来获取用户详细信息{\"userName\":\"root\",\"password\":\"123\"}")
+    @ApiImplicitParam(name = "reqMap", value = "用户reqMap", required = true, paramType = "body")
     @RequestMapping(value="/login", method=RequestMethod.POST)
     @ResponseBody
     public Result login(@RequestBody HashMap<String,Object> reqMap){
@@ -39,7 +43,8 @@ public class UserController{
         return Result.success(user);
     }
 
-    @RequestMapping(value="/allUsers")
+    @ApiOperation(value = "allUsers", notes = "获取用户信息")
+    @RequestMapping(value="/allUsers",method=RequestMethod.GET)
     @ResponseBody
     public Result allUsers(){
         List<User> list = this.userService.selectAll();
@@ -51,6 +56,9 @@ public class UserController{
         return Result.success(list);
     }
 
+
+    @ApiOperation(value = "register", notes = "注册{\"userName\":\"fgj\",\"password\":\"113\",\"email\":\"113@qq.com\",\"updateTime\":\"113\"}")
+    @ApiImplicitParam(name = "user", value = "用户user", required = true,dataType = "User", paramType = "body")
     @RequestMapping(value="/register", method=RequestMethod.POST)
     @ResponseBody
     public Result register(@RequestBody User user){
