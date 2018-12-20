@@ -25,7 +25,7 @@ import java.util.Map;
  * 2018/1/15 18:46
  */
 @Configuration
-@MapperScan(value = "com.jaycekon.mybatis.multi.mapper.db1", sqlSessionFactoryRef = "db1SqlSessionFactory")
+@MapperScan(value = "com.jaycekon.mybatis.multi.mapper", sqlSessionFactoryRef = "db1SqlSessionFactory")
 @EnableTransactionManagement
 public class DataSourceConfig {
 

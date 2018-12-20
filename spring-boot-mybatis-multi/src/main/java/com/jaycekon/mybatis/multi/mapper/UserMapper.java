@@ -1,4 +1,4 @@
-package com.jaycekon.mybatis.multi.mapper.db2;
+package com.jaycekon.mybatis.multi.mapper;
 
 import com.jaycekon.mybatis.multi.model.User;
 

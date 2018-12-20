@@ -1,6 +1,5 @@
 package com.jaycekon.mybatis.multi.controller;
 
-import com.jaycekon.mybatis.multi.service.SchoolService;
 import com.jaycekon.mybatis.multi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,16 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class TestController {
     @Autowired
-    private SchoolService schoolService;
-
-    @Autowired
     private UserService userService;
-
 
     @RequestMapping("/test")
     public String test() {
-        schoolService.addSchool("ceshi1", "ceshi1");
-        userService.inserUser("root2", "root2");
+        userService.inserUser("root1", "root1");
         return "hello";
     }
 }
