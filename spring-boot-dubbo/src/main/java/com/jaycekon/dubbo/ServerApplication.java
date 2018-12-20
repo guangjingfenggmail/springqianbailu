@@ -2,6 +2,7 @@ package com.jaycekon.dubbo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 /**
  * Spring Boot 应用启动类
@@ -9,7 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Created by Jaycekon on 20/09/2017.
  */
 // Spring Boot 应用的标识
-@SpringBootApplication
+@CrossOrigin//允许跨越访问
+@SpringBootApplication//springBoot项目入口
 public class ServerApplication {
 
     public static void main(String[] args) {

@@ -1,21 +1,10 @@
 package com.jaycekon.dubbo.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.Accessors;
-
 import java.io.Serializable;
 
 /**
  * Created by Jaycekon on 2017/9/19.
  */
-@Getter
-@Setter
-@NoArgsConstructor
-@Accessors(chain = true)
-@AllArgsConstructor
 public class User implements Serializable {
     private int id;
     private String username;
