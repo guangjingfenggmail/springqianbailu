@@ -1,10 +1,10 @@
 package com.open.springqianbailu.task;
 
 
-import com.open.springqianbailu.documents.MenuDocumentDao;
-import com.open.springqianbailu.model.table.Menu;
-import com.open.springqianbailu.service.MenuSevice;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.open.springqianbailu.documents.MenuDocumentDao;
+import com.open.springqianbailu.model.table.SubMenu;
+import com.open.springqianbailu.service.SubMenuSevice;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
@@ -12,17 +12,17 @@ import java.util.List;
 import java.util.Random;
 
 @Component
-public class MenuAsyncTask {
+public class SubMenuAsyncTask {
     public static Random random = new Random();
 
     @Reference
-    private MenuSevice menuSevice;
+    private SubMenuSevice subMenuSevice;
 
     @Async("taskExecutor")
     public void doTaskMenu() throws Exception {
-        List<Menu> list = MenuDocumentDao.parseMenus();
+        List<SubMenu> list = MenuDocumentDao.parseSubMenus();
         if (list!=null && list.size()>0){
-            menuSevice.doTaskMenu(list);
+            subMenuSevice.doTaskMenu(list);
         }
     }
 }

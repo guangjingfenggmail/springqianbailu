@@ -3,6 +3,7 @@ package com.open.springqianbailu.service.impl;
 
 import com.open.springqianbailu.RedisUtil;
 import com.open.springqianbailu.dao.SliderMapper;
+import com.open.springqianbailu.documents.MenuDocumentDao;
 import com.open.springqianbailu.model.table.Slider;
 import com.open.springqianbailu.service.SliderService;
 import org.springframework.stereotype.Component;
@@ -37,13 +38,12 @@ public class SliderServiceImpl   implements SliderService {
         List<Slider> list = (List<Slider>) redisUtil.get("SliderService"+"selectAll");
         if (list == null || list.size() == 0) {
             list = sliderMapper.selectAll();
-//            if (list == null || list.size() == 0) {
-//                list = MenuDocumentDao.parseSlider();
-//                sliderMapper.dropTable();
-//                sliderMapper.createTable();
-//                sliderMapper.insertBatch(list);
-//
-//            }
+            if (list == null || list.size() == 0) {
+                list = MenuDocumentDao.parseSlider();
+                sliderMapper.dropTable();
+                sliderMapper.createTable();
+                sliderMapper.insertBatch(list);
+            }
             redisUtil.set("SliderService"+"selectAll", list, REDIS_EXPIRE_TIME);
         }
         return list;

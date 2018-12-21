@@ -11,10 +11,10 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 
 @SpringBootApplication
-public class JsoupApplication {
+public class TaskApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(JsoupApplication.class, args);
+        SpringApplication.run(TaskApplication.class, args);
     }
 
 
