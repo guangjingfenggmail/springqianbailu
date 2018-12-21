@@ -9,7 +9,18 @@ public interface SchedulerService {
      *
      * @throws SchedulerException
      */
-    void startJob() throws SchedulerException;
+    void startAllJob() throws SchedulerException;
+
+
+    /**
+     * 开始执行job任务
+     *
+     * @param name
+     * @param group
+     * @return
+     * @throws SchedulerException
+     */
+    void startJob(String name, String group) throws SchedulerException;
 
     /**
      * 获取Job信息
@@ -50,4 +61,31 @@ public interface SchedulerService {
      */
      void pauseJob(String name, String group) throws SchedulerException;
 
+
+    /**
+     * 恢复所有任务
+     *
+     * @throws SchedulerException
+     */
+      void resumeAllJob() throws SchedulerException;
+
+
+    /**
+     * 恢复某个任务
+     *
+     * @param name
+     * @param group
+     * @throws SchedulerException
+     */
+      void resumeJob(String name, String group) throws SchedulerException;
+
+
+    /**
+     * 删除某个任务
+     *
+     * @param name
+     * @param group
+     * @throws SchedulerException
+     */
+      void deleteJob(String name, String group) throws SchedulerException;
 }
