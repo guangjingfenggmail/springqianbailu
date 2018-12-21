@@ -5,6 +5,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.open.springqianbailu.documents.MenuDocumentDao;
 import com.open.springqianbailu.model.table.Menu;
 import com.open.springqianbailu.service.MenuSevice;
+import com.open.springqianbailu.service.jsoup.JsoupMenuService;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
@@ -15,14 +16,18 @@ import java.util.Random;
 public class MenuAsyncTask {
     public static Random random = new Random();
 
+//    @Reference
+//    private MenuSevice menuSevice;
+
     @Reference
-    private MenuSevice menuSevice;
+    private JsoupMenuService jsoupMenuService;
 
     @Async("taskExecutor")
     public void doTaskMenu() throws Exception {
-        List<Menu> list = MenuDocumentDao.parseMenus();
-        if (list!=null && list.size()>0){
-            menuSevice.doTaskMenu(list);
-        }
+//        List<Menu> list = MenuDocumentDao.parseMenus();
+//        if (list!=null && list.size()>0){
+//            menuSevice.doTaskMenu(list);
+//        }
+        jsoupMenuService.updateMenu();
     }
 }
