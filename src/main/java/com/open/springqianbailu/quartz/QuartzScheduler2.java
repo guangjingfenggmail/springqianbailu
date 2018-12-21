@@ -27,7 +27,6 @@ public class QuartzScheduler2 {
      */
     public void startJob() throws SchedulerException {
         startJob1(scheduler);
-        startJob2(scheduler);
         scheduler.start();
     }
 
@@ -145,11 +144,5 @@ public class QuartzScheduler2 {
         scheduler.scheduleJob(jobDetail, cronTrigger);
     }
 
-    private void startJob2(Scheduler scheduler) throws SchedulerException {
-        JobDetail jobDetail = JobBuilder.newJob(SchedulerQuartzJob2.class).withIdentity("job2", "group2").build();
-        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0 0/5 * * * ?");
-        CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("job2", "group2")
-                .withSchedule(cronScheduleBuilder).build();
-        scheduler.scheduleJob(jobDetail, cronTrigger);
-    }
+
 }
