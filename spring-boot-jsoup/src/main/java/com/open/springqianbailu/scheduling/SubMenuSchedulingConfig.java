@@ -1,7 +1,7 @@
 package com.open.springqianbailu.scheduling;
 
 
-import com.open.springqianbailu.task.MenuAsyncTask;
+import com.open.springqianbailu.task.SubMenuAsyncTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,19 +12,16 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 @Configuration
 @EnableScheduling
-public class MenuSchedulingConfig {
+public class SubMenuSchedulingConfig {
     private final Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
-    private MenuAsyncTask menuAsyncTask;
+    private SubMenuAsyncTask subMenuAsyncTask;
 
-    @Scheduled(cron = "0 0/1 * * * ?") // 每1分钟执行一次
-    public void updateMenu() throws Exception {
-        logger.info("updateMenu 定时任务启动");
-
-        menuAsyncTask.doTaskMenu();
+    @Scheduled(cron = "0 0/2 * * * ?") // 每2分钟执行一次
+    public void updateMenu()  throws Exception{
+        logger.info("updateSubMenu 定时任务启动");
+        subMenuAsyncTask.doTaskMenu();
 //        Thread.currentThread().join();
-
     }
 
 }
