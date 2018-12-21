@@ -29,6 +29,14 @@ public class HomeSender implements RabbitTemplate.ConfirmCallback {
         template.convertAndSend(RabbitMQConfig.QUEUENAME_APPINFO ,message,correlationData);
     }
 
+    public void sendViewType(Message message) {
+        Gson gson = new Gson();
+        logger.info(TAG+"send========");
+        CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
+        logger.info(TAG+"callbackSender UUID: " + correlationData.getId());
+        template.convertAndSend(RabbitMQConfig.QUEUENAME_VIEWTYPE_ITEM ,message,correlationData);
+    }
+
     @Override
     public void confirm(CorrelationData correlationData, boolean b, String s) {
         logger.info(TAG+correlationData.getId());

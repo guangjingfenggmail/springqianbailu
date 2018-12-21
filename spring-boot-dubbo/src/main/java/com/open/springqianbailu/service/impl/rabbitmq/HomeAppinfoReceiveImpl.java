@@ -35,13 +35,14 @@ public class HomeAppinfoReceiveImpl   {
     @RabbitListener(queues = RabbitMQConfig.QUEUENAME_APPINFO)//监听器监听指定的Queue
     public void processC(Message message) {
         Gson gson = new Gson();
-        logger.info("Receive:" + gson.toJson(message));
+        logger.info(TAG+"======start handle message ===="+ gson.toJson(message));
         List<HomeAppinfoTable> list = HomeTabRestService.homeAppInfo(restTemplate,redisUtil);
         if (list!=null && list.size()>0) {
             homeAppinfoTableMapper.dropTable();
             homeAppinfoTableMapper.createTable();
             homeAppinfoTableMapper.insertBatch(list);
         }
+        logger.info(TAG+"======end handle message ====");
     }
 
 }

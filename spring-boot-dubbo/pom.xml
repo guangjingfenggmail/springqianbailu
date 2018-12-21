@@ -140,6 +140,13 @@
             <artifactId>jsoup</artifactId>
             <version>1.8.1</version>
         </dependency>
+
+        <!--添加fastjson解析JSON数据-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.16</version>
+        </dependency>
     </dependencies>
 
     <build>
