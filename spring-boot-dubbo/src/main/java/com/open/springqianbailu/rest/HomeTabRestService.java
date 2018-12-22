@@ -79,4 +79,40 @@ public class HomeTabRestService extends XiaomiRestService {
         return bean.getBody().getItems();
     }
 
+    public static List<Item> homeSections(RestTemplate restTemplate, RedisUtil redisUtil){
+        List<Item> list = new ArrayList<Item>();
+        String resultStr = (String) redisUtil.get("HomeTabRestService" + "homeAppInfo");
+        if (resultStr==null || resultStr.length()==0){
+            resultStr = responseEntity(new HashMap<String, Object>(), restTemplate,HOME_APPINFO).getBody();
+            redisUtil.set("HomeTabRestService" + "homeAppInfo",resultStr);
+        }
+
+        JSONObject object = JSON.parseObject(resultStr);
+        if (object==null)
+            return list;
+        JSONObject dataObject = object.getJSONObject("data");
+        if (dataObject==null)
+            return list;
+
+        JSONArray tabsArray = dataObject.getJSONArray("tabs");
+        if (tabsArray==null || tabsArray.size()==0)
+            return list;
+
+        JSONObject appInfoObject = tabsArray.getJSONObject(0);
+        if (appInfoObject==null)
+            return list;
+
+        JSONObject tabDataObject = appInfoObject.getJSONObject("tab_data");
+        if (tabDataObject==null)
+            return list;
+
+        JSONObject sectionsObject = tabDataObject.getJSONObject("sections");
+
+        Gson gson = new Gson();
+        ViewTypeBean bean = gson.fromJson(sectionsObject.toJSONString(),ViewTypeBean.class);
+        if (bean==null || bean.getBody()==null || bean.getBody().getItems()==null)
+            return list;
+
+        return bean.getBody().getItems();
+    }
 }
