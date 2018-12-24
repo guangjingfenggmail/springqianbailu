@@ -92,6 +92,15 @@ public class ItemServiceImpl  implements ItemService {
                         continue;
                     }
 
+                    if("divider_line".equals(bean.getView_type())){
+                        Item item = new Item();
+                        item.setLine_color(body.getLine_color());
+                        item.setLine_height(body.getLine_height());
+                        item.setView_type(bean.getView_type());
+                        itemMapper.insert(item);
+                        continue;
+                    }
+
                     List<Item> list1 =body.getItems();
                     if (list1==null || list1.size()==0)
                         continue;

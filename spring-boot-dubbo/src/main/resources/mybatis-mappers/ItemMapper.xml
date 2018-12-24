@@ -13,10 +13,14 @@
     <result column="material_id" jdbcType="INTEGER" property="material_id" />
     <result column="view_type" jdbcType="VARCHAR" property="view_type" />
     <result column="stat" jdbcType="VARCHAR" property="stat" />
+    <result column="line_color" jdbcType="VARCHAR" property="line_color" />
+    <result column="line_height" jdbcType="VARCHAR" property="line_height" />
+    <result column="title_logo_url" jdbcType="VARCHAR" property="title_logo_url" />
+
   </resultMap>
 
   <sql id="Base_Column_List">
-        id, sections_index,img_url, img_url_webp,img_url_color,w,h,ad_position_id,view_type,stat
+        id, sections_index,img_url, img_url_webp,img_url_color,w,h,ad_position_id,view_type,stat,line_color,line_height,title_logo_url
     </sql>
 
   <delete id="dropTable">
@@ -36,6 +40,9 @@
     `material_id` int(11) DEFAULT NULL,
     `view_type` varchar(255) COLLATE utf8_bin DEFAULT NULL,
     `stat` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `line_color` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `line_height` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `title_logo_url` varchar(255) COLLATE utf8_bin DEFAULT NULL,
     PRIMARY KEY (`id`)
   ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -52,11 +59,12 @@
     insert into view_type_item (id, sections_index, img_url, 
       img_url_webp, img_url_color, w, 
       h, ad_position_id, material_id, 
-      view_type, stat)
+      view_type, stat,line_color,line_height,title_logo_url)
     values (#{id,jdbcType=INTEGER}, #{sections_index,jdbcType=INTEGER}, #{img_url,jdbcType=VARCHAR},
       #{img_url_webp,jdbcType=VARCHAR}, #{img_url_color,jdbcType=VARCHAR}, #{w,jdbcType=INTEGER},
       #{h,jdbcType=INTEGER}, #{ad_position_id,jdbcType=INTEGER}, #{material_id,jdbcType=INTEGER},
-      #{view_type,jdbcType=VARCHAR}, #{stat,jdbcType=VARCHAR})
+      #{view_type,jdbcType=VARCHAR}, #{stat,jdbcType=VARCHAR}, #{line_color,jdbcType=VARCHAR}, #{line_height,jdbcType=VARCHAR}
+      , #{title_logo_url,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.open.springqianbailu.model.table.viewtype.Item">
     insert into view_type_item
@@ -94,6 +102,15 @@
       <if test="stat != null">
         stat,
       </if>
+      <if test="line_color != null">
+        line_color,
+      </if>
+      <if test="line_height != null">
+        line_height,
+      </if>
+      <if test="title_logo_url != null">
+        title_logo_url,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -128,6 +145,16 @@
       </if>
       <if test="stat != null">
         #{stat,jdbcType=VARCHAR},
+      </if>
+
+      <if test="line_color != null">
+        #{line_color,jdbcType=VARCHAR},
+      </if>
+      <if test="line_height != null">
+        #{line_height,jdbcType=VARCHAR},
+      </if>
+      <if test="title_logo_url != null">
+        #{title_logo_url,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
