@@ -47,11 +47,11 @@ public class ViewTypeReceiveImpl   {
         if (list==null || list.size()==0)
             return;
 
-        itemMapper.dropTable();
-        itemMapper.createTable();
-
-        actionMapper.dropTable();
-        actionMapper.createTable();
+//        itemMapper.dropTable();
+//        itemMapper.createTable();
+//
+//        actionMapper.dropTable();
+//        actionMapper.createTable();
         for (int i = 0; i < list.size(); i++) {
             Item item = list.get(i);
             item.setView_type(message.getParam());

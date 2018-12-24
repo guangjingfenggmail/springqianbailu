@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.open.springqianbailu.RedisUtil;
 import com.open.springqianbailu.model.bean.HomeRestAppInfo;
+import com.open.springqianbailu.model.bean.tab.HomeSections;
 import com.open.springqianbailu.model.bean.tab.ViewTypeBean;
 import com.open.springqianbailu.model.table.HomeAppinfoTable;
 import com.open.springqianbailu.model.table.viewtype.Item;
@@ -79,12 +80,12 @@ public class HomeTabRestService extends XiaomiRestService {
         return bean.getBody().getItems();
     }
 
-    public static List<Item> homeSections(RestTemplate restTemplate, RedisUtil redisUtil){
-        List<Item> list = new ArrayList<Item>();
-        String resultStr = (String) redisUtil.get("HomeTabRestService" + "homeAppInfo");
+    public static List<ViewTypeBean> homeSections(RestTemplate restTemplate, RedisUtil redisUtil){
+        List<ViewTypeBean> list = new ArrayList<ViewTypeBean>();
+        String resultStr = (String) redisUtil.get("HomeTabRestService" + "homeSections");
         if (resultStr==null || resultStr.length()==0){
             resultStr = responseEntity(new HashMap<String, Object>(), restTemplate,HOME_APPINFO).getBody();
-            redisUtil.set("HomeTabRestService" + "homeAppInfo",resultStr);
+            redisUtil.set("HomeTabRestService" + "homeSections",resultStr);
         }
 
         JSONObject object = JSON.parseObject(resultStr);
@@ -106,13 +107,13 @@ public class HomeTabRestService extends XiaomiRestService {
         if (tabDataObject==null)
             return list;
 
-        JSONObject sectionsObject = tabDataObject.getJSONObject("sections");
+//        JSONArray sectionsArray = tabDataObject.getJSONArray("sections");
 
         Gson gson = new Gson();
-        ViewTypeBean bean = gson.fromJson(sectionsObject.toJSONString(),ViewTypeBean.class);
-        if (bean==null || bean.getBody()==null || bean.getBody().getItems()==null)
+        HomeSections bean = gson.fromJson(tabDataObject.toJSONString(),HomeSections.class);
+        if (bean==null || bean.getSections()==null|| bean.getSections().size()==0)
             return list;
 
-        return bean.getBody().getItems();
+        return bean.getSections();
     }
 }

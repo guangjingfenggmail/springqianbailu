@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.dubbo.config.annotation.Reference;
 
+import java.util.List;
+
 
 @Controller
 @RequestMapping(value = "/home")
@@ -53,5 +55,17 @@ public class HomeTabController   {
         body.setItems(itemService.selectByViewType(viewType));
         viewTypeBean.setBody(body);
         return Result.success(viewTypeBean);
+    }
+
+
+    @ApiOperation(value = "homeSections", notes = "根据viewType 获取home sections  ")
+    @RequestMapping(value = "/homeSections", method = RequestMethod.GET)
+    @ResponseBody
+    public Result homeSections() {
+        List<ViewTypeBean> list = itemService.getHomeSections();
+        if (list==null || list.size()==0){
+            return Result.error(-1,"no data");
+        }
+        return Result.success(list);
     }
 }

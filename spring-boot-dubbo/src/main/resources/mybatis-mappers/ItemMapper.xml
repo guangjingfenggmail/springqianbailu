@@ -48,7 +48,7 @@
     where view_type = #{view_type,jdbcType=VARCHAR}
   </select>
 
-  <insert id="insert" parameterType="com.open.springqianbailu.model.table.viewtype.Item">
+  <insert id="insert" useGeneratedKeys="true"  keyProperty="id"  parameterType="com.open.springqianbailu.model.table.viewtype.Item">
     insert into view_type_item (id, sections_index, img_url, 
       img_url_webp, img_url_color, w, 
       h, ad_position_id, material_id, 

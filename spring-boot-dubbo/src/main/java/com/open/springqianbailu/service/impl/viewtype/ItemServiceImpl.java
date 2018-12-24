@@ -3,7 +3,10 @@ package com.open.springqianbailu.service.impl.viewtype;
 import com.open.springqianbailu.RedisUtil;
 import com.open.springqianbailu.dao.viewtype.ActionMapper;
 import com.open.springqianbailu.dao.viewtype.ItemMapper;
+import com.open.springqianbailu.model.bean.tab.Body;
+import com.open.springqianbailu.model.bean.tab.ViewTypeBean;
 import com.open.springqianbailu.model.rabbitmq.Message;
+import com.open.springqianbailu.model.table.viewtype.Action;
 import com.open.springqianbailu.model.table.viewtype.Item;
 import com.open.springqianbailu.rabbitmq.HomeSender;
 import com.open.springqianbailu.rest.HomeTabRestService;
@@ -47,7 +50,7 @@ public class ItemServiceImpl  implements ItemService {
 
     @Override
     public List<Item> selectByViewType(String view_type) {
-        List<Item> list = (List<Item>) redisUtil.get("selectByViewType" + view_type);
+        List<Item> list = (List<Item>) redisUtil.get("ItemService"+"selectByViewType" + view_type);
         if (list == null || list.size() == 0) {
             list = itemMapper.selectByViewType(view_type);
             if (list == null || list.size() == 0) {
@@ -56,7 +59,45 @@ public class ItemServiceImpl  implements ItemService {
                 msg.setParam(view_type);
                 homeSender.sendViewType(msg);
             }
-            redisUtil.set("selectByViewType" + view_type, list);
+            redisUtil.set("ItemService"+"selectByViewType" + view_type, list);
+        }
+        return list;
+    }
+
+    @Override
+    public List<ViewTypeBean> getHomeSections() {
+        List<ViewTypeBean> list = (List<ViewTypeBean>) redisUtil.get("ItemService"+"getHomeSections");
+        if (list == null || list.size() == 0) {
+//            list = itemMapper.selectByViewType(view_type);
+            if (list == null || list.size() == 0) {
+                list = HomeTabRestService.homeSections(restTemplate, redisUtil);
+                for (int i = 0; i < list.size(); i++) {
+                    ViewTypeBean bean = list.get(i);
+                    if (bean==null)
+                        continue;
+                    Body body = bean.getBody();
+                    if (body==null)
+                        continue;
+                    List<Item> list1 =body.getItems();
+                    if (list1==null || list1.size()==0)
+                        continue;
+
+                    for (int j=0;j<list1.size();j++) {
+                        Item item = list1.get(j);
+                        if(item==null)
+                            continue;
+                        item.setView_type(item.getView_type());
+                        itemMapper.insert(item);
+
+                        Action action = item.getAction();
+                        if (action==null)
+                            continue;
+                        action.setItem_id(item.getId());
+                        actionMapper.insert(action);
+                    }
+                }
+            }
+            redisUtil.set("ItemService"+"selectByViewType", list);
         }
         return list;
     }
