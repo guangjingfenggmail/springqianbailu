@@ -49,8 +49,8 @@ public class ItemServiceImpl  implements ItemService {
     }
 
     @Override
-    public List<Item> selectByViewType(String view_type) {
-        List<Item> list = (List<Item>) redisUtil.get("ItemService"+"selectByViewType" + view_type);
+    public List<Item> getHomeBanner(String view_type) {
+        List<Item> list = (List<Item>) redisUtil.get("ItemService"+"getHomeBanner" + view_type);
         if (list == null || list.size() == 0) {
             list = itemMapper.selectByViewType(view_type);
             if (list == null || list.size() == 0) {
@@ -59,6 +59,18 @@ public class ItemServiceImpl  implements ItemService {
                 msg.setParam(view_type);
                 homeSender.sendViewType(msg);
             }
+            redisUtil.set("ItemService"+"getHomeBanner" + view_type, list);
+        }
+        return list;
+    }
+
+
+
+    @Override
+    public List<Item> selectByViewType(String view_type) {
+        List<Item> list = (List<Item>) redisUtil.get("ItemService"+"selectByViewType" + view_type);
+        if (list == null || list.size() == 0) {
+            list = itemMapper.selectByViewType(view_type);
             redisUtil.set("ItemService"+"selectByViewType" + view_type, list);
         }
         return list;

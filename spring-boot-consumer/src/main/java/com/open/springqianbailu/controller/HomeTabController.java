@@ -52,7 +52,7 @@ public class HomeTabController   {
     public Result getHomeBanner(@PathVariable String viewType) {
         ViewTypeBean viewTypeBean = new ViewTypeBean();
         Body body = new Body();
-        body.setItems(itemService.selectByViewType(viewType));
+        body.setItems(itemService.getHomeBanner(viewType));
         viewTypeBean.setBody(body);
         return Result.success(viewTypeBean);
     }
@@ -67,5 +67,18 @@ public class HomeTabController   {
             return Result.error(-1,"no data");
         }
         return Result.success(list);
+    }
+
+
+    @ApiOperation(value = "selectByViewType", notes = "根据viewType 获取home banner \"gallery\"")
+    @ApiImplicitParam(name = "viewType", value = "viewType", required = true, dataType = "String", paramType = "path")
+    @RequestMapping(value = "/selectByViewType/{viewType}", method = RequestMethod.GET)
+    @ResponseBody
+    public Result selectByViewType(@PathVariable String viewType) {
+        ViewTypeBean viewTypeBean = new ViewTypeBean();
+        Body body = new Body();
+        body.setItems(itemService.selectByViewType(viewType));
+        viewTypeBean.setBody(body);
+        return Result.success(viewTypeBean);
     }
 }

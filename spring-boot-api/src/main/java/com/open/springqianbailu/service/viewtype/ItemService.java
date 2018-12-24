@@ -11,6 +11,8 @@ public interface ItemService   {
 
     int insertSelective(Item record);
 
+    List<Item> getHomeBanner(String view_type);
+
     List<Item> selectByViewType(String view_type);
 
     List<ViewTypeBean> getHomeSections();
