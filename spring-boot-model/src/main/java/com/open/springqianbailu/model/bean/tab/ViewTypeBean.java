@@ -1,8 +1,9 @@
 package com.open.springqianbailu.model.bean.tab;
 
 
+import java.io.Serializable;
 
-public class ViewTypeBean {
+public class ViewTypeBean implements Serializable {
 
     private String view_type;
     private String stat;

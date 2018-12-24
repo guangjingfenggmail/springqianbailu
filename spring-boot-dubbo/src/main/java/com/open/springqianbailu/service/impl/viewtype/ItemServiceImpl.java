@@ -76,8 +76,10 @@ public class ItemServiceImpl  implements ItemService {
                     if (bean==null)
                         continue;
                     Body body = bean.getBody();
-                    if (body==null)
+                    if (body==null){
                         continue;
+                    }
+
                     List<Item> list1 =body.getItems();
                     if (list1==null || list1.size()==0)
                         continue;
@@ -86,7 +88,7 @@ public class ItemServiceImpl  implements ItemService {
                         Item item = list1.get(j);
                         if(item==null)
                             continue;
-                        item.setView_type(item.getView_type());
+                        item.setView_type(bean.getView_type());
                         itemMapper.insert(item);
 
                         Action action = item.getAction();

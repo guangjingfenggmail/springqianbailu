@@ -24,7 +24,7 @@
     `item_id` int(11) NOT NULL,
     `type` varchar(255) COLLATE utf8_bin DEFAULT NULL,
     `path` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-    `extra` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `extra` varchar(2000) COLLATE utf8_bin DEFAULT NULL,
     `log_code` varchar(255) COLLATE utf8_bin DEFAULT NULL,
     PRIMARY KEY (`id`,`item_id`) USING BTREE
   ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

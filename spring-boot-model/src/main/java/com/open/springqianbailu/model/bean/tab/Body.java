@@ -3,9 +3,10 @@ package com.open.springqianbailu.model.bean.tab;
 
 import com.open.springqianbailu.model.table.viewtype.Item;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Body{
+public class Body implements Serializable {
     private List<Item> items;
 
     public List<Item> getItems() {
