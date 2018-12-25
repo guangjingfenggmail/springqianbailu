@@ -20,7 +20,7 @@ public class SubMenuSchedulingConfig {
     @Scheduled(cron = "0 0/2 * * * ?") // 每2分钟执行一次
     public void updateMenu()  throws Exception{
         logger.info("updateSubMenu 定时任务启动");
-//        subMenuAsyncTask.doTaskMenu();
+        subMenuAsyncTask.doTaskMenu();
 //        Thread.currentThread().join();
     }
 

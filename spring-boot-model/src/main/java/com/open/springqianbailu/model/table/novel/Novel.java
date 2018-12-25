@@ -1,24 +1,21 @@
-package com.open.springqianbailu.model.table;
+package com.open.springqianbailu.model.table.novel;
 
 import java.io.Serializable;
 
-public class SubMenu implements Serializable {
+public class Novel implements Serializable {
     private Integer id;
 
     private String title;
 
-    private Integer menuId;
+    private String content;
 
     private String href;
 
     private String updateTime;
 
-    private String menuName;
+    private Integer submenuId;
 
-    private String src;
-
-
-
+    private Integer pageNo;
 
     public Integer getId() {
         return id;
@@ -36,12 +33,12 @@ public class SubMenu implements Serializable {
         this.title = title == null ? null : title.trim();
     }
 
-    public Integer getMenuId() {
-        return menuId;
+    public String getContent() {
+        return content;
     }
 
-    public void setMenuId(Integer menuId) {
-        this.menuId = menuId;
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
     }
 
     public String getHref() {
@@ -57,24 +54,22 @@ public class SubMenu implements Serializable {
     }
 
     public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime;
+        this.updateTime = updateTime == null ? null : updateTime.trim();
     }
 
-    public String getMenuName() {
-        return menuName;
+    public Integer getSubmenuId() {
+        return submenuId;
     }
 
-    public void setMenuName(String menuName) {
-        this.menuName = menuName;
+    public void setSubmenuId(Integer submenuId) {
+        this.submenuId = submenuId;
     }
 
-    public String getSrc() {
-        return src;
+    public Integer getPageNo() {
+        return pageNo;
     }
 
-    public void setSrc(String src) {
-        this.src = src;
+    public void setPageNo(Integer pageNo) {
+        this.pageNo = pageNo;
     }
-
-
 }
