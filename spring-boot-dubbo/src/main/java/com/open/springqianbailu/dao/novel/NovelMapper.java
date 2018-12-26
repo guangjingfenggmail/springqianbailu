@@ -13,6 +13,8 @@ public interface NovelMapper   {
 
     List<Novel> selectByMenuId(HashMap map);
 
+    List<Novel> selectByHref(String href);
+
     int insertBatch(List<Novel> menu);
 
     void deleteByPageNo(int pageNo);

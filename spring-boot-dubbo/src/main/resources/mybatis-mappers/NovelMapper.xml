@@ -15,7 +15,7 @@
         id, title,content, href,updateTime,submenuId,pageNo
     </sql>
 
-    <insert id="insert" parameterType="com.open.springqianbailu.model.table.novel.Novel">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.open.springqianbailu.model.table.novel.Novel">
     insert into novel (title, content,
       href, updateTime, submenuId,pageNo
       )
@@ -51,6 +51,13 @@
         <include refid="Base_Column_List" />
         from novel
         where submenuId = #{submenuId} limit #{currentPosition},#{pageSize}
+    </select>
+
+    <select id="selectByHref" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from novel
+        where href = #{href}
     </select>
 
     <!--批量添加-->

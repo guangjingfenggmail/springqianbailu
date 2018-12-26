@@ -20,7 +20,7 @@ public class NovelListSchedulingConfig {
     @Scheduled(cron = "0 0/1 * * * ?") // 每10分钟执行一次
     public void updateNovelList() {
         logger.info("updateQueue 定时任务启动");
-        novelAsyncTask.updateNovelList();
+//        novelAsyncTask.updateNovelList();
     }
 
 }

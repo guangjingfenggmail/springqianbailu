@@ -7,6 +7,8 @@ import com.open.springqianbailu.RedisUtil;
 import com.open.springqianbailu.Result;
 import com.open.springqianbailu.model.rabbitmq.NovelMessage;
 import com.open.springqianbailu.model.table.novel.Novel;
+import com.open.springqianbailu.model.table.novel.NovelArticle;
+import com.open.springqianbailu.service.novel.NovelArticleService;
 import com.open.springqianbailu.service.novel.NovelService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -30,6 +32,9 @@ public class NovelController  {
     public RedisUtil redisUtil;
     @Reference
     private NovelService novelService;
+
+    @Reference
+    private NovelArticleService novelArticleService;
 
     @ApiOperation(value = "selectByMenuId", notes = "根据submenuId，pageSize，currentPosition获取小说信息{\"submenuId\":0,\"pageSize\":10,\"currentPosition\":0}")
     @ApiImplicitParam(name = "reqMap", value = "用户reqMap", required = true, paramType = "body")
@@ -62,4 +67,14 @@ public class NovelController  {
         return Result.success(list);
     }
 
+    @ApiOperation(value = "getNovelArticle", notes = "根据 href，page 获取小说信息 {\"href\":\"/xs/885694.html\",\"page\":\"1\"}")
+    @ApiImplicitParam(name = "map", value = "map", required = true, paramType = "body")
+    @RequestMapping(value = "/getNovelArticle", method = RequestMethod.POST)
+    @ResponseBody
+    public Result getNovelArticle(@RequestBody HashMap<String,Object> map) {
+        String href = (String) map.get("href");
+        String page = (String) map.get("page");
+        List<NovelArticle> list = novelArticleService.selectArticle(href,page);
+        return Result.success(list);
+    }
 }
