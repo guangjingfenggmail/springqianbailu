@@ -33,9 +33,9 @@
 
   <select id="selectByItemId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select
-    <include refid="Base_Column_List"/>
-    from view_type_action
-    where item_id = #{item_id,jdbcType=INTEGER}
+    *
+    from view_type_action d
+    where d.item_id = #{id,jdbcType=INTEGER}
   </select>
 
 
@@ -74,7 +74,7 @@
         #{id,jdbcType=INTEGER},
       </if>
       <if test="item_id != null">
-        #{itemId,jdbcType=INTEGER},
+        #{item_id,jdbcType=INTEGER},
       </if>
       <if test="type != null">
         #{type,jdbcType=VARCHAR},

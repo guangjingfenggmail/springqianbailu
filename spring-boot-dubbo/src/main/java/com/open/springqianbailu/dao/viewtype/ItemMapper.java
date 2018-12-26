@@ -12,6 +12,8 @@ public interface ItemMapper  {
 
     List<Item> selectByViewType(String view_type);
 
+    List<Item> selectById(Integer view_type_id);
+
     void dropTable();
 
     void createTable();

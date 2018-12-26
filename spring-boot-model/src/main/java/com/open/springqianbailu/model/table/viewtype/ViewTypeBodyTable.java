@@ -1,6 +1,7 @@
 package com.open.springqianbailu.model.table.viewtype;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class ViewTypeBodyTable implements Serializable {
     private Integer id;
@@ -18,6 +19,8 @@ public class ViewTypeBodyTable implements Serializable {
     private String bg_color;
 
     private String recommend_flag;
+
+    private List<Item> items;
 
     public Integer getId() {
         return id;
@@ -81,5 +84,13 @@ public class ViewTypeBodyTable implements Serializable {
 
     public void setRecommend_flag(String recommend_flag) {
         this.recommend_flag = recommend_flag;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 }

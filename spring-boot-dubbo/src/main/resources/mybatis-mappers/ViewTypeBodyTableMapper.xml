@@ -11,18 +11,40 @@
     <result column="bg_color" jdbcType="VARCHAR" property="bg_color" />
     <result column="recommend_flag" jdbcType="VARCHAR" property="recommend_flag" />
   </resultMap>
-  <insert id="insert" parameterType="com.open.springqianbailu.model.table.viewtype.ViewTypeBodyTable">
-    insert into view_type_body (view_type_id, line_color,
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.open.springqianbailu.model.table.viewtype.ViewTypeBodyTable">
+    insert into view_type_body (id,view_type_id, line_color,
       line_height, w, h, bg_color, 
       recommend_flag)
-    values (#{view_type_id,jdbcType=INTEGER}, #{line_color,jdbcType=VARCHAR},
+    values (#{id,jdbcType=INTEGER},#{view_type_id,jdbcType=INTEGER}, #{line_color,jdbcType=VARCHAR},
       #{line_height,jdbcType=DOUBLE}, #{w,jdbcType=VARCHAR}, #{h,jdbcType=VARCHAR}, #{bg_color,jdbcType=VARCHAR},
       #{recommend_flag,jdbcType=VARCHAR})
   </insert>
 
   <sql id="Base_Column_List">
         id, view_type_id,line_color,line_height,w,h,bg_color,recommend_flag
-    </sql>
+   </sql>
+
+  <resultMap id="collectionResultMap"  type="com.open.springqianbailu.model.table.viewtype.ViewTypeBodyTable">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="view_type_id" jdbcType="INTEGER" property="view_type_id" />
+    <result column="line_color" jdbcType="VARCHAR" property="line_color" />
+    <result column="line_height" jdbcType="DOUBLE" property="line_height" />
+    <result column="w" jdbcType="VARCHAR" property="w" />
+    <result column="h" jdbcType="VARCHAR" property="h" />
+    <result column="bg_color" jdbcType="VARCHAR" property="bg_color" />
+    <result column="recommend_flag" jdbcType="VARCHAR" property="recommend_flag" />
+
+    <collection property="items" column="view_type_id"
+                 select="com.open.springqianbailu.dao.viewtype.ItemMapper.selectById"/>
+
+  </resultMap>
+
+  <select id="selectById" resultMap="collectionResultMap" parameterType="java.lang.Integer">
+    select
+    *
+    from `view_type_body` b
+    where b.view_type_id = #{id,jdbcType=VARCHAR}
+  </select>
 
   <delete id="dropTable">
         drop table if exists view_type_body

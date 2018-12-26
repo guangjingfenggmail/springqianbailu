@@ -10,4 +10,6 @@ public interface ViewTypeTableService {
     int insertSelective(ViewTypeTable record);
 
     List<ViewTypeTable> selectByViewType(String view_type);
+
+    List<ViewTypeTable> getHomeSections(String data_type);
 }

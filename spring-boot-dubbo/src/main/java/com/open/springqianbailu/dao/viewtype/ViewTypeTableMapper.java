@@ -15,6 +15,8 @@ public interface ViewTypeTableMapper {
 
     List<ViewTypeTable> selectByViewType(String view_type);
 
+    List<ViewTypeTable> selectByDataType(String data_type);
+
     void deleteByViewType(String view_type);
 
 }
