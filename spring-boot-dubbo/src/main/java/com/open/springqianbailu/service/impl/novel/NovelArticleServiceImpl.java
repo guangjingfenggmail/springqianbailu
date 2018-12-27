@@ -73,9 +73,13 @@ public class NovelArticleServiceImpl implements NovelArticleService {
                                 novelArticleMapper.insert(article);
                                 List<NovelPage> pageList = articleBean.getPageList();
                                 if (pageList != null && pageList.size() > 0) {
-                                    for (NovelPage novelPage : pageList) {
-                                        novelPage.setNovel_id(novel.getId());
-                                        novelPageMapper.insert(novelPage);
+                                    if(page.equals("1")){
+                                        novelPageMapper.dropTable();
+                                        novelPageMapper.createTable();
+                                        for (NovelPage novelPage : pageList) {
+                                            novelPage.setNovel_id(novel.getId());
+                                            novelPageMapper.insert(novelPage);
+                                        }
                                     }
                                 }
                             }
