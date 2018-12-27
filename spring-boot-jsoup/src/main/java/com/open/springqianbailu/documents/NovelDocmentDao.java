@@ -175,10 +175,10 @@ public class NovelDocmentDao extends AbsDocumentDao {
         ArticleBean articleBean = new ArticleBean();
         List<NovelArticle> articleList = new ArrayList<NovelArticle>();
         List<NovelPage> pageList = new ArrayList<NovelPage>();
-        href = DOMAIN + href;
-        logger.info("parseNovelArticleList href =====" + href);
+        String href1 = DOMAIN + href;
+        logger.info("parseNovelArticleList href =====" + href1);
         try {
-            Document doc = Jsoup.connect(href)
+            Document doc = Jsoup.connect(href1)
                     .header("User-Agent",
                             USER_AGENT)
                     .timeout(TIMEOUT)
@@ -197,13 +197,14 @@ public class NovelDocmentDao extends AbsDocumentDao {
                                 int index = 1;
                                 for (int i = 0; i < aElements.size(); i++) {
                                     Element pElement = aElements.get(i).select("a").first();
-                                    String aHref = pElement.attr("href");
                                     String page = pElement.text();
                                     if (page.contains("页:") || page.contains("共")|| page.contains("上一页")|| page.contains("下一页")) {
                                         continue;
                                     }
+                                    // /xs/885694.html
+                                    String hrefgg = href.replace(".html","");
                                     novelPage = new NovelPage();
-                                    novelPage.setHref(aHref);
+                                    novelPage.setHref(hrefgg+"_"+index+".html");
                                     novelPage.setPage(index);
                                     pageList.add(novelPage);
                                     index++;
@@ -223,7 +224,7 @@ public class NovelDocmentDao extends AbsDocumentDao {
                     logger.info("title==" + title);
                     novel.setContent(title);
                     novel.setPage(pageNo);
-                    novel.setHref(href);
+                    novel.setHref(href1);
                     articleList.add(novel);
                 }
             }

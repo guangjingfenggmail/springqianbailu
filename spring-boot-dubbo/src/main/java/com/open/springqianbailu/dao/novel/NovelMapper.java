@@ -13,7 +13,7 @@ public interface NovelMapper   {
 
     List<Novel> selectByMenuId(HashMap map);
 
-    List<Novel> selectByHref(String href);
+    List<Novel> selectByHref(HashMap map);
 
     int insertBatch(List<Novel> menu);
 

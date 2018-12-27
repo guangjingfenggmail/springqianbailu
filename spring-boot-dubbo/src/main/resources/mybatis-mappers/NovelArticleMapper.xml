@@ -13,11 +13,18 @@
     id, novel_id,href, page,content
   </sql>
 
+  <select id="selectById" resultMap="BaseResultMap" parameterType="hashmap" >
+    select
+    <include refid="Base_Column_List" />
+    from novel_article
+    where novel_id = #{novelId} and page = #{pageId}
+  </select>
+
   <select id="selectArticle" resultMap="BaseResultMap" parameterType="hashmap" >
     select
     <include refid="Base_Column_List" />
     from novel_article
-    where href = #{href} and page = #{page}
+    where novel_id = #{novel_id} and page = #{page}
   </select>
 
   <delete id="dropTable">

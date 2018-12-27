@@ -15,6 +15,30 @@
         id, title,content, href,updateTime,submenuId,pageNo
     </sql>
 
+    <resultMap id="collectionResultMap" type="com.open.springqianbailu.model.table.novel.Novel">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="href" jdbcType="VARCHAR" property="href"/>
+        <result column="updateTime" jdbcType="VARCHAR" property="updateTime"/>
+        <result column="submenuId" jdbcType="VARCHAR" property="submenuId"/>
+        <result column="pageNo" jdbcType="INTEGER" property="pageNo"/>
+        <result column="page_id" property="page_id"/>
+        <collection property="pageList" column="{novelId=id,pageId=page_id}"
+                     select="com.open.springqianbailu.dao.novel.NovelPageMapper.selectById">
+        </collection>
+
+        <collection property="articleList" column="{novelId=id,pageId=page_id}"
+                    select="com.open.springqianbailu.dao.novel.NovelArticleMapper.selectById">
+        </collection>
+    </resultMap>
+
+    <select id="selectByHref" resultMap="collectionResultMap" parameterType="hashmap">
+        select *,#{page} page_id
+        from `novel`
+        where  href = #{href,jdbcType=VARCHAR}
+      </select>
+
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.open.springqianbailu.model.table.novel.Novel">
     insert into novel (title, content,
       href, updateTime, submenuId,pageNo
@@ -51,13 +75,6 @@
         <include refid="Base_Column_List" />
         from novel
         where submenuId = #{submenuId} limit #{currentPosition},#{pageSize}
-    </select>
-
-    <select id="selectByHref" resultMap="BaseResultMap" parameterType="java.lang.String" >
-        select
-        <include refid="Base_Column_List" />
-        from novel
-        where href = #{href}
     </select>
 
     <!--批量添加-->

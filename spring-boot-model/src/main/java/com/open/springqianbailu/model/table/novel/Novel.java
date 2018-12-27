@@ -1,6 +1,7 @@
 package com.open.springqianbailu.model.table.novel;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Novel implements Serializable {
     private Integer id;
@@ -16,6 +17,20 @@ public class Novel implements Serializable {
     private Integer submenuId;
 
     private Integer pageNo;
+
+    private List<NovelPage> pageList;
+
+    private List<NovelArticle> articleList;
+
+    private Integer page_id;
+
+    public Integer getPage_id() {
+        return page_id;
+    }
+
+    public void setPage_id(Integer page_id) {
+        this.page_id = page_id;
+    }
 
     public Integer getId() {
         return id;
@@ -71,5 +86,21 @@ public class Novel implements Serializable {
 
     public void setPageNo(Integer pageNo) {
         this.pageNo = pageNo;
+    }
+
+    public List<NovelPage> getPageList() {
+        return pageList;
+    }
+
+    public void setPageList(List<NovelPage> pageList) {
+        this.pageList = pageList;
+    }
+
+    public List<NovelArticle> getArticleList() {
+        return articleList;
+    }
+
+    public void setArticleList(List<NovelArticle> articleList) {
+        this.articleList = articleList;
     }
 }

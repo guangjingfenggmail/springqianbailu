@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class NovelPage implements Serializable {
     private Integer id;
 
-    private Integer novel_artcile_id;
+    private Integer novel_id;
 
     private String href;
 
@@ -19,12 +19,12 @@ public class NovelPage implements Serializable {
         this.id = id;
     }
 
-    public Integer getNovel_artcile_id() {
-        return novel_artcile_id;
+    public Integer getNovel_id() {
+        return novel_id;
     }
 
-    public void setNovel_artcile_id(Integer novel_artcile_id) {
-        this.novel_artcile_id = novel_artcile_id;
+    public void setNovel_id(Integer novel_id) {
+        this.novel_id = novel_id;
     }
 
     public String getHref() {
