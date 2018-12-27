@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 
 @Component
@@ -45,30 +46,36 @@ public class NovelArticleServiceImpl implements NovelArticleService {
     public List<NovelArticle> selectArticle(String href, String page) {
         List<NovelArticle> list = (List<NovelArticle>) redisUtil.get("NovelArticleService" + "getNovelArticle" + href + page);
         if (list == null || list.size() == 0) {
-            ArticleBean articleBean = NovelDocmentDao.parseNovelArticleList(href, Integer.parseInt(page));
-            if (articleBean != null) {
-                list = articleBean.getArticleList();
-                redisUtil.set("NovelArticleService" + "getNovelArticle" + href + page, list);
+            HashMap map = new HashMap();
+            map.put("href",href);
+            map.put("page",page);
+            list = novelArticleMapper.selectArticle(map);
+            if (list == null || list.size() == 0) {
+                ArticleBean articleBean = NovelDocmentDao.parseNovelArticleList(href, Integer.parseInt(page));
+                if (articleBean != null) {
+                    list = articleBean.getArticleList();
 
-                List<Novel> novelList = novelMapper.selectByHref(href);
-                if (novelList == null || novelList.size() == 0)
-                    return list;
+                    List<Novel> novelList = novelMapper.selectByHref(href);
+                    if (novelList == null || novelList.size() == 0)
+                        return list;
 
-                Novel novel = novelList.get(0);
-                if (list != null && list.size() > 0) {
-                    for (NovelArticle article : list) {
-                        article.setNovel_id(novel.getId());
-                        novelArticleMapper.insert(article);
-                        List<NovelPage> pageList = articleBean.getPageList();
-                        if (pageList != null && pageList.size() > 0) {
-                            for (NovelPage novelPage : pageList) {
-                                novelPage.setNovel_artcile_id(article.getId());
-                                novelPageMapper.insert(novelPage);
+                    Novel novel = novelList.get(0);
+                    if (list != null && list.size() > 0) {
+                        for (NovelArticle article : list) {
+                            article.setNovel_id(novel.getId());
+                            novelArticleMapper.insert(article);
+                            List<NovelPage> pageList = articleBean.getPageList();
+                            if (pageList != null && pageList.size() > 0) {
+                                for (NovelPage novelPage : pageList) {
+                                    novelPage.setNovel_artcile_id(article.getId());
+                                    novelPageMapper.insert(novelPage);
+                                }
                             }
                         }
                     }
                 }
             }
+            redisUtil.set("NovelArticleService" + "getNovelArticle" + href + page, list);
         }
         return list;
     }

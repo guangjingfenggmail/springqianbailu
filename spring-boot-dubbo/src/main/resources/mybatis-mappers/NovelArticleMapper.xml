@@ -6,11 +6,19 @@
     <result column="novel_id" jdbcType="INTEGER" property="novel_id" />
     <result column="href" jdbcType="VARCHAR" property="href" />
     <result column="page" jdbcType="INTEGER" property="page" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
   </resultMap>
 
   <sql id="Base_Column_List">
-    id, novel_id,href, page
+    id, novel_id,href, page,content
   </sql>
+
+  <select id="selectArticle" resultMap="BaseResultMap" parameterType="hashmap" >
+    select
+    <include refid="Base_Column_List" />
+    from novel_article
+    where href = #{href} and page = #{page}
+  </select>
 
   <delete id="dropTable">
     drop table if exists novel_article
