@@ -1,6 +1,10 @@
 package com.open.springqianbailu.documents;
 
+import com.open.springqianbailu.model.bean.jsoup.novel.ArticleBean;
 import com.open.springqianbailu.model.table.gallery.Gallery;
+import com.open.springqianbailu.model.table.gallery.GalleryImage;
+import com.open.springqianbailu.model.table.novel.NovelArticle;
+import com.open.springqianbailu.model.table.novel.NovelPage;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -195,4 +199,57 @@ public class GalleryDocmentDao extends AbsDocumentDao {
 
 
 
+    public static Gallery parseImageList(String href, int pageNo) {
+        logger.info("parseImageList start =====");
+        Gallery articleBean = new Gallery();
+        List<GalleryImage> articleList = new ArrayList<GalleryImage>();
+        String href1 = DOMAIN + href;
+        logger.info("parseImageList href =====" + href1);
+        try {
+            Document doc = Jsoup.connect(href1)
+                    .header("User-Agent",
+                            USER_AGENT)
+                    .timeout(TIMEOUT)
+                    .get();
+            if (doc != null) {
+                Element articleElement = doc.select("div.cat_pos").first();
+                GalleryImage novel;
+                if (articleElement != null) {
+                    String title = "";
+                    try {
+                        Element spanElement = articleElement.select("span").first();
+                        title = spanElement.text();
+                        logger.info("title==" + title);
+                    }catch (Exception e){
+                        logger.error("GalleryDocmentDao", e);
+                    }
+
+                    try {
+                        Elements imgElements = doc.select("div.pics").first().select("img");
+                        if (imgElements!=null){
+                            for (int i=0;i<imgElements.size();i++){
+                                novel = new GalleryImage();
+                                Element imgElement = imgElements.get(i);
+                                String src = imgElement.attr("src");
+                                logger.info("src==" + src);
+
+                                novel.setSrc(src);
+                                novel.setTitle(title);
+                                articleList.add(novel);
+                            }
+                        }
+                    }catch (Exception e){
+                        logger.error("GalleryDocmentDao", e);
+                    }
+                }
+            }
+
+        } catch (
+                Exception e) {
+            logger.error("GalleryDocmentDao", e);
+        }
+        articleBean.setImageList(articleList);
+        logger.info("parseImageList end =====");
+        return articleBean;
+    }
 }

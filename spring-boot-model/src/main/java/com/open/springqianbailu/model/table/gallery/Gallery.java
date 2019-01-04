@@ -2,6 +2,7 @@ package com.open.springqianbailu.model.table.gallery;
 
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Gallery implements Serializable {
     private Integer id;
@@ -21,6 +22,16 @@ public class Gallery implements Serializable {
     private Integer page_id;
 
     private String createDate;
+
+    private List<GalleryImage> imageList;
+
+    public List<GalleryImage> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<GalleryImage> imageList) {
+        this.imageList = imageList;
+    }
 
     public Integer getId() {
         return id;

@@ -7,6 +7,9 @@ import com.open.springqianbailu.RedisUtil;
 import com.open.springqianbailu.Result;
 import com.open.springqianbailu.model.rabbitmq.NovelMessage;
 import com.open.springqianbailu.model.table.gallery.Gallery;
+import com.open.springqianbailu.model.table.gallery.GalleryImage;
+import com.open.springqianbailu.model.table.novel.NovelArticle;
+import com.open.springqianbailu.service.gallery.GalleryImageService;
 import com.open.springqianbailu.service.gallery.GalleryService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -30,7 +33,8 @@ public class GalleryController {
     @Reference
     private GalleryService galleryService;
 
-
+    @Reference
+    private GalleryImageService  galleryImageService;
 
     @ApiOperation(value = "selectByMenuId", notes = "根据submenuId（1-8），pageSize，currentPosition获取图片信息{\"submenuId\":1,\"pageSize\":10,\"currentPosition\":0}")
     @ApiImplicitParam(name = "reqMap", value = "用户reqMap", required = true, paramType = "body")
@@ -76,5 +80,14 @@ public class GalleryController {
         return Result.success(list);
     }
 
-
+    @ApiOperation(value = "getImageList", notes = "根据 href，page 获取小说信息 {\"href\":\"/tttppp/996064.html\",\"page\":\"1\"}")
+    @ApiImplicitParam(name = "map", value = "map", required = true, paramType = "body")
+    @RequestMapping(value = "/getImageList", method = RequestMethod.POST)
+    @ResponseBody
+    public Result getImageList(@RequestBody HashMap<String,Object> map) {
+        String href = (String) map.get("href");
+        String page = (String) map.get("page");
+        List<GalleryImage> list = galleryImageService.selectImage(href,page);
+        return Result.success(list);
+    }
 }

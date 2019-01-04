@@ -16,6 +16,30 @@
         id, title,content, href,updateTime,submenuId,pageNo,createDate
     </sql>
 
+
+
+    <resultMap id="collectionResultMap" type="com.open.springqianbailu.model.table.gallery.Gallery">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="href" jdbcType="VARCHAR" property="href"/>
+        <result column="updateTime" jdbcType="VARCHAR" property="updateTime"/>
+        <result column="submenuId" jdbcType="VARCHAR" property="submenuId"/>
+        <result column="pageNo" jdbcType="INTEGER" property="pageNo"/>
+        <result column="page_id" property="page_id"/>
+        <result column="createDate" jdbcType="VARCHAR" property="createDate"/>
+
+        <collection property="imageList" column="{galleryId=id,pageId=page_id}"
+                    select="com.open.springqianbailu.dao.gallery.GalleryImageMapper.selectById">
+        </collection>
+    </resultMap>
+
+    <select id="selectByHref" resultMap="collectionResultMap" parameterType="hashmap">
+        select *,#{page} page_id
+        from `gallery`
+        where  href = #{href,jdbcType=VARCHAR}
+      </select>
+
   <delete id="dropTable">
         drop table if exists gallery
     </delete>
