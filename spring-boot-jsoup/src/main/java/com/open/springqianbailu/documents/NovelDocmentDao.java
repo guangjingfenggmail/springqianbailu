@@ -37,6 +37,7 @@ public class NovelDocmentDao extends AbsDocumentDao {
                         Novel novel;
                         for (int i = 0; i < liElements.size(); i++) {
                             novel = new Novel();
+                            //<li><a href="/xs/995778.html" target="_blank"><span>2019-01-03</span>一直要好的女生</a></li>
                             Element aElement = liElements.get(i).select("a").first();
                             try {
                                 if (aElement != null) {
@@ -50,6 +51,11 @@ public class NovelDocmentDao extends AbsDocumentDao {
                                     if (hrefa == null || hrefa.length() == 0) {
                                         hrefa = href;
                                     }
+
+                                    String date = aElement.select("span").text();
+                                    logger.info("i==" + i + ";date==" + date);
+                                    novel.setCreateDate(date);
+
                                     novel.setHref(hrefa);
                                     novel.setUpdateTime(System.currentTimeMillis() + "");
                                     novel.setSubmenuId(id);
@@ -146,6 +152,11 @@ public class NovelDocmentDao extends AbsDocumentDao {
                                             hrefa = href;
                                         }
                                         novel.setHref(hrefa);
+
+                                        String date = aElement.select("span").text();
+                                        logger.info("i==" + i + ";date==" + date);
+                                        novel.setCreateDate(date);
+
                                         novel.setUpdateTime(System.currentTimeMillis() + "");
                                         novel.setSubmenuId(id);
                                         novel.setPageNo(pageNo);

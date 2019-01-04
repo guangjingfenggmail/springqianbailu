@@ -22,4 +22,6 @@ public interface NovelMapper   {
     void dropTable();
 
     void createTable();
+
+    List<Novel> selectByDate(HashMap map);
 }

@@ -9,10 +9,11 @@
         <result column="updateTime" jdbcType="VARCHAR" property="updateTime"/>
         <result column="submenuId" jdbcType="INTEGER" property="submenuId"/>
         <result column="pageNo" jdbcType="INTEGER" property="pageNo"/>
+        <result column="createDate" jdbcType="VARCHAR" property="createDate"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, title,content, href,updateTime,submenuId,pageNo
+        id, title,content, href,updateTime,submenuId,pageNo,createDate
     </sql>
 
     <resultMap id="collectionResultMap" type="com.open.springqianbailu.model.table.novel.Novel">
@@ -24,6 +25,7 @@
         <result column="submenuId" jdbcType="VARCHAR" property="submenuId"/>
         <result column="pageNo" jdbcType="INTEGER" property="pageNo"/>
         <result column="page_id" property="page_id"/>
+        <result column="createDate" jdbcType="VARCHAR" property="createDate"/>
         <collection property="pageList" column="{novelId=id,pageId=page_id}"
                      select="com.open.springqianbailu.dao.novel.NovelPageMapper.selectById">
         </collection>
@@ -41,10 +43,11 @@
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.open.springqianbailu.model.table.novel.Novel">
     insert into novel (title, content,
-      href, updateTime, submenuId,pageNo
+      href, updateTime, submenuId,pageNo,createDate
       )
     values ( #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
       #{href,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{submenuId,jdbcType=INTEGER}, #{pageNo,jdbcType=INTEGER}
+      , #{createDate,jdbcType=VARCHAR}
       )
   </insert>
 
@@ -66,6 +69,7 @@
           updateTime varchar(255) COLLATE utf8_bin NOT NULL COMMENT '时间',
           submenuId int(11) DEFAULT NULL COMMENT '子菜单id',
           pageNo int(11) DEFAULT NULL COMMENT 'web页面页码',
+          createDate varchar(255) COLLATE utf8_bin NOT NULL COMMENT '',
           PRIMARY KEY (id)
         ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
     </insert>
@@ -77,6 +81,13 @@
         where submenuId = #{submenuId} limit #{currentPosition},#{pageSize}
     </select>
 
+    <select id="selectByDate" resultMap="BaseResultMap" parameterType="hashmap" >
+        select
+        <include refid="Base_Column_List" />
+        from novel
+        where submenuId = #{submenuId} and createDate = #{createDate}
+    </select>
+
     <!--批量添加-->
     <insert id="insertBatch" parameterType="java.util.List"  useGeneratedKeys="true">
         <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
@@ -84,7 +95,7 @@
             LAST_INSERT_ID()
         </selectKey>
         insert into novel
-        (title, content, href,updateTime,submenuId,pageNo)
+        (title, content, href,updateTime,submenuId,pageNo,createDate)
         values
         <foreach collection="list" item="item" index="index"
                  separator=",">
@@ -94,7 +105,8 @@
             #{item.href,jdbcType=VARCHAR},
             #{item.updateTime,jdbcType=VARCHAR},
             #{item.submenuId,jdbcType=INTEGER},
-            #{item.pageNo,jdbcType=INTEGER}
+            #{item.pageNo,jdbcType=INTEGER},
+            #{item.createDate,jdbcType=VARCHAR}
             )
         </foreach>
     </insert>
@@ -123,6 +135,9 @@
             <if test="pageNo != null">
                 pageNo,
             </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -145,6 +160,9 @@
             </if>
             <if test="pageNo != null">
                 #{pageNo,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>

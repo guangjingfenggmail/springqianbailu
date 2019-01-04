@@ -47,6 +47,19 @@ public class NovelController  {
         return Result.success(list);
     }
 
+
+    @ApiOperation(value = "selectByDate", notes = "根据submenuId，createDate 获取小说信息{\"submenuId\":9,\"createDate\":\"2019-12-30\"}")
+    @ApiImplicitParam(name = "reqMap", value = "用户reqMap", required = true, paramType = "body")
+    @RequestMapping(value = "/selectByDate", method = RequestMethod.POST)
+    @ResponseBody
+    public Result selectByDate(@RequestBody HashMap<String, Object> reqMap) {
+        List<Novel> list = this.novelService.selectByDate(reqMap);
+        Gson gson = new Gson();
+        logger.info(TAG+"=="+gson.toJson(list));
+        return Result.success(list);
+    }
+
+
     @ApiOperation(value = "parseNovel", notes = "根据 submenuId，pageNo 获取小说信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "submenuId", value = "submenuId", required = true, paramType = "path"),

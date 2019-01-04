@@ -18,4 +18,6 @@ public interface NovelService {
     public void updateNovelList();
 
     public int parseNovel(NovelMessage message);
+
+    List<Novel> selectByDate(HashMap map);
 }

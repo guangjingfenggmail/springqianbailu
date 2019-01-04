@@ -24,6 +24,8 @@ public class Novel implements Serializable {
 
     private Integer page_id;
 
+    private String createDate;
+
     public Integer getPage_id() {
         return page_id;
     }
@@ -102,5 +104,13 @@ public class Novel implements Serializable {
 
     public void setArticleList(List<NovelArticle> articleList) {
         this.articleList = articleList;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
     }
 }
