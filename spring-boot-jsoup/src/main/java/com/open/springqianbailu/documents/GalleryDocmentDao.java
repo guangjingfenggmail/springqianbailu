@@ -1,9 +1,6 @@
 package com.open.springqianbailu.documents;
 
-import com.open.springqianbailu.model.bean.jsoup.novel.ArticleBean;
-import com.open.springqianbailu.model.table.novel.Novel;
-import com.open.springqianbailu.model.table.novel.NovelArticle;
-import com.open.springqianbailu.model.table.novel.NovelPage;
+import com.open.springqianbailu.model.table.gallery.Gallery;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -15,14 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class NovelDocmentDao extends AbsDocumentDao {
-    static Logger logger = LoggerFactory.getLogger(NovelDocmentDao.class.getSimpleName());
+public class GalleryDocmentDao extends AbsDocumentDao {
+    static Logger logger = LoggerFactory.getLogger(GalleryDocmentDao.class.getSimpleName());
 
-    public static List<Novel> parseNovelList(int id, String href) {
-        logger.info("parseNovelList start =====");
-        List<Novel> list = new ArrayList<Novel>();
+    public static List<Gallery> parseList(int id, String href) {
+        logger.info("parseList start =====");
+        List<Gallery> list = new ArrayList<Gallery>();
         href = DOMAIN + href;
-        logger.info("parseNovelList href =====" + href);
+        logger.info("parseList href =====" + href);
         try {
             Document doc = Jsoup.connect(href)
                     .header("User-Agent",
@@ -34,9 +31,9 @@ public class NovelDocmentDao extends AbsDocumentDao {
                 if (divElement != null) {
                     Elements liElements = divElement.select("ul").first().select("li");
                     if (liElements != null && liElements.size() > 0) {
-                        Novel novel;
+                        Gallery novel;
                         for (int i = 0; i < liElements.size(); i++) {
-                            novel = new Novel();
+                            novel = new Gallery();
                             //<li><a href="/xs/995778.html" target="_blank"><span>2019-01-03</span>一直要好的女生</a></li>
                             Element aElement = liElements.get(i).select("a").first();
                             try {
@@ -64,12 +61,12 @@ public class NovelDocmentDao extends AbsDocumentDao {
                                         String page = pageElement.select("a").get(1).text();
                                         novel.setPageNo(Integer.parseInt(page));
                                     } catch (Exception e) {
-                                        logger.error("NovelDocmentDao", e);
+                                        logger.error("GalleryDocmentDao", e);
                                     }
                                     list.add(novel);
                                 }
                             } catch (Exception e) {
-                                logger.error("NovelDocmentDao", e);
+                                logger.error("GalleryDocmentDao", e);
                             }
                         }
                     }
@@ -78,19 +75,19 @@ public class NovelDocmentDao extends AbsDocumentDao {
             }
 
         } catch (Exception e) {
-            logger.error("NovelDocmentDao", e);
+            logger.error("GalleryDocmentDao", e);
         }
-        logger.info("parseNovelList end =====");
+        logger.info("parseList end =====");
         return list;
     }
 
 
-    public static List<Novel> parseNovelList(int id, String
+    public static List<Gallery> parseList(int id, String
             href, int pageNo) {
-        logger.info("parseNovelList start =====");
-        List<Novel> list = new ArrayList<Novel>();
+        logger.info("parseList start =====");
+        List<Gallery> list = new ArrayList<Gallery>();
         href = DOMAIN + href;
-        logger.info("parseNovelList href =====" + href);
+        logger.info("parseList href =====" + href);
         try {
             Document doc = Jsoup.connect(href)
                     .header("User-Agent",
@@ -107,6 +104,22 @@ public class NovelDocmentDao extends AbsDocumentDao {
                             for (int i = 0; i < aElements.size(); i++) {
                                 Element pElement = aElements.get(i).select("a").first();
                                 String page = pElement.text();
+                                /**
+                                 * 		<div class="pagination"><ul><a>首页</a>
+                                 * <a>1</a>
+                                 * <a href='list42.html'>2</a>
+                                 * <a href='list43.html'>3</a>
+                                 * <a href='list44.html'>4</a>
+                                 * <a href='list45.html'>5</a>
+                                 * <a href='list46.html'>6</a>
+                                 * <a href='list47.html'>7</a>
+                                 * <a href='list48.html'>8</a>
+                                 * <a href='list49.html'>9</a>
+                                 * <a href='list410.html'>10</a>
+                                 * <a href='list411.html'>11</a>
+                                 * <a href='list42.html'>下一页</a>
+                                 * <a href='list4789.html'>末页</a>
+                                 */
                                 if (pageNo == 1) {
                                     if (page.endsWith("下一页")) {
 //                                        href = href + pElement.attr("href");
@@ -122,10 +135,10 @@ public class NovelDocmentDao extends AbsDocumentDao {
                             }
                         }
                     } catch (Exception e) {
-                        logger.error("NovelDocmentDao", e);
+                        logger.error("GalleryDocmentDao", e);
                     }
 
-                    logger.info("parseNovelList href =====" + href + ";pageNo==" + pageNo);
+                    logger.info("parseList href =====" + href + ";pageNo==" + pageNo);
                     doc = Jsoup.connect(href)
                             .header("User-Agent",
                                     USER_AGENT)
@@ -135,9 +148,9 @@ public class NovelDocmentDao extends AbsDocumentDao {
                         divElement = doc.select("div.channel").first();
                         Elements liElements = divElement.select("ul").first().select("li");
                         if (liElements != null && liElements.size() > 0) {
-                            Novel novel;
+                            Gallery novel;
                             for (int i = 0; i < liElements.size(); i++) {
-                                novel = new Novel();
+                                novel = new Gallery();
                                 Element aElement = liElements.get(i).select("a").first();
                                 try {
                                     if (aElement != null) {
@@ -163,7 +176,7 @@ public class NovelDocmentDao extends AbsDocumentDao {
                                         list.add(novel);
                                     }
                                 } catch (Exception e) {
-                                    logger.error("NovelDocmentDao", e);
+                                    logger.error("GalleryDocmentDao", e);
                                 }
                             }
                         }
@@ -174,79 +187,12 @@ public class NovelDocmentDao extends AbsDocumentDao {
             }
 
         } catch (Exception e) {
-            logger.error("NovelDocmentDao", e);
+            logger.error("GalleryDocmentDao", e);
         }
-        logger.info("parseNovelList end =====");
+        logger.info("parseList end =====");
         return list;
     }
 
 
-    public static ArticleBean parseNovelArticleList(String href, int pageNo) {
-        logger.info("parseNovelArticleList start =====");
-        ArticleBean articleBean = new ArticleBean();
-        List<NovelArticle> articleList = new ArrayList<NovelArticle>();
-        List<NovelPage> pageList = new ArrayList<NovelPage>();
-        String href1 = DOMAIN + href;
-        logger.info("parseNovelArticleList href =====" + href1);
-        try {
-            Document doc = Jsoup.connect(href1)
-                    .header("User-Agent",
-                            USER_AGENT)
-                    .timeout(TIMEOUT)
-                    .get();
-            if (doc != null) {
-                if (pageNo == 1) {
-                    Element divElement = doc.select("div.pagination").first();
-                    if (divElement != null) {
-                        try {
-                            /***
-                             * <div class="pagination"><ul><a>共15页: </a><a href='#'>上一页</a><a href='#'>1</a><a href='885694_2.html'>2</a><a href='885694_3.html'>3</a><a href='885694_4.html'>4</a><a href='885694_5.html'>5</a><a href='885694_6.html'>6</a><a href='885694_7.html'>7</a><a href='885694_8.html'>8</a><a href='885694_9.html'>9</a><a href='885694_10.html'>10</a><a href='885694_11.html'>11</a><a href='885694_12.html'>12</a><a href='885694_13.html'>13</a><a href='885694_14.html'>14</a><a href='885694_15.html'>15</a><a href='885694_2.html'>下一页</a></ul></div>
-                             */
-                            Elements aElements = divElement.select("a");
-                            if (aElements != null) {
-                                NovelPage novelPage;
-                                int index = 1;
-                                for (int i = 0; i < aElements.size(); i++) {
-                                    Element pElement = aElements.get(i).select("a").first();
-                                    String page = pElement.text();
-                                    if (page.contains("页:") || page.contains("共")|| page.contains("上一页")|| page.contains("下一页")) {
-                                        continue;
-                                    }
-                                    // /xs/885694.html
-                                    String hrefgg = href.replace(".html","");
-                                    novelPage = new NovelPage();
-                                    novelPage.setHref(hrefgg+"_"+index+".html");
-                                    novelPage.setPage(index);
-                                    pageList.add(novelPage);
-                                    index++;
-                                }
-                            }
-                        } catch (Exception e) {
-                            logger.error("NovelDocmentDao", e);
-                        }
-                    }
-                }
 
-                Element articleElement = doc.select("div.content").first();
-                NovelArticle novel;
-                if (articleElement != null) {
-                    novel = new NovelArticle();
-                    String title = articleElement.text();
-                    logger.info("title==" + title);
-                    novel.setContent(title);
-                    novel.setPage(pageNo);
-                    novel.setHref(href1);
-                    articleList.add(novel);
-                }
-            }
-
-        } catch (
-                Exception e) {
-            logger.error("NovelDocmentDao", e);
-        }
-        articleBean.setArticleList(articleList);
-        articleBean.setPageList(pageList);
-        logger.info("parseNovelArticleList end =====");
-        return articleBean;
-    }
 }

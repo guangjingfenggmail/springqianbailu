@@ -50,10 +50,10 @@ public class NovelServiceImpl  implements NovelService {
 
     @Override
     public List<Novel> selectByMenuId(HashMap reqMap) {
-        List<Novel> list = (List<Novel>) redisUtil.get(reqMap.toString());
+        List<Novel> list = (List<Novel>) redisUtil.get(TAG+reqMap.toString());
         if (list==null || list.size()==0){
             list = novelMapper.selectByMenuId(reqMap);
-            redisUtil.set(reqMap.toString(),list,REDIS_EXPIRE_TIME);
+            redisUtil.set(TAG+reqMap.toString(),list,REDIS_EXPIRE_TIME);
         }
         return list;
     }
@@ -77,10 +77,10 @@ public class NovelServiceImpl  implements NovelService {
 
     @Override
     public List<Novel> selectByDate(HashMap map) {
-        List<Novel> list = (List<Novel>) redisUtil.get(map.toString());
+        List<Novel> list = (List<Novel>) redisUtil.get(TAG+map.toString());
         if (list==null || list.size()==0){
             list = novelMapper.selectByDate(map);
-            redisUtil.set(map.toString(),list,REDIS_EXPIRE_TIME);
+            redisUtil.set(TAG+map.toString(),list,REDIS_EXPIRE_TIME);
         }
         return list;
     }

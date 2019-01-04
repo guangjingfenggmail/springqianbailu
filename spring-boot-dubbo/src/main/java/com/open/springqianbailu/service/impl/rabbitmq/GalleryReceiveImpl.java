@@ -4,11 +4,11 @@ package com.open.springqianbailu.service.impl.rabbitmq;
 import com.google.gson.Gson;
 import com.open.springqianbailu.RedisUtil;
 import com.open.springqianbailu.dao.SubMenuMapper;
-import com.open.springqianbailu.dao.novel.NovelMapper;
-import com.open.springqianbailu.documents.NovelDocmentDao;
+import com.open.springqianbailu.dao.gallery.GalleryMapper;
+import com.open.springqianbailu.documents.GalleryDocmentDao;
 import com.open.springqianbailu.model.rabbitmq.NovelMessage;
 import com.open.springqianbailu.model.table.SubMenu;
-import com.open.springqianbailu.model.table.novel.Novel;
+import com.open.springqianbailu.model.table.gallery.Gallery;
 import com.open.springqianbailu.rabbitmq.RabbitMQConfig;
 import com.rabbitmq.client.Channel;
 import org.slf4j.Logger;
@@ -22,18 +22,18 @@ import java.util.List;
 
 
 @Component
-public class NovelReceiveImpl {
+public class GalleryReceiveImpl {
     public  String TAG = getClass().getSimpleName();
     public Logger logger = LoggerFactory.getLogger(getClass().getSimpleName());
 
     @Resource
     private SubMenuMapper subMenuMapper;
     @Resource
-    private NovelMapper novelMapper;
+    private GalleryMapper galleryMapper;
     @Resource
     public RedisUtil redisUtil;
 
-    @RabbitListener(queues = RabbitMQConfig.QUEUENAME_NOVEL)//监听器监听指定的Queue
+    @RabbitListener(queues = RabbitMQConfig.QUEUENAME_GALLERY)//监听器监听指定的Queue
     public void processC(NovelMessage message, Channel channel, Message msg) {
         try {
             Gson gson = new Gson();
@@ -43,14 +43,14 @@ public class NovelReceiveImpl {
             if (menu==null)
                 return;
 
-            List<Novel> list =  NovelDocmentDao.parseNovelList(menu.getId(),menu.getHref(),Integer.parseInt(message.pageNo));
+            List<Gallery> list =  GalleryDocmentDao.parseList(menu.getId(),menu.getHref(),Integer.parseInt(message.pageNo));
             redisUtil.set(TAG+"parseNovel"+message.submenuId+message.pageNo,list);
             //删除当前记录
-            novelMapper.deleteByPageNo(Integer.parseInt(message.pageNo));
+            galleryMapper.deleteByPageNo(Integer.parseInt(message.pageNo));
             if (list==null || list.size()==0)
                 return;
             //入库
-            novelMapper.insertBatch(list);
+            galleryMapper.insertBatch(list);
 
             //rabbitmq执行中出现异常无限报错解决
             channel.basicReject(msg.getMessageProperties().getDeliveryTag(),false);

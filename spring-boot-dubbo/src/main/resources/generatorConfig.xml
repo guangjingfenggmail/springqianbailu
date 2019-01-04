@@ -7,9 +7,10 @@
 
 1.cd /Users/guangjing.feng/Downloads/zb-api/springqianbailu/spring-boot-dubbo/src/main/resources/
 2.java -jar ./mybatis-generator-core-1.3.7.jar -configfile ./generatorConfig.xml -overwrite
-          <classPathEntry    location="/Users/guangjing.feng/Downloads/zb-api/springqianbailu/src/main/resources/mysql-connector-java-8.0.13.jar"/>
-    -->
     <classPathEntry    location="D:\code\springqianbailu\springqianbail-dubbo-937xe\spring-boot-dubbo\src\main\resources\mysql-connector-java-8.0.13.jar"/>
+
+    -->
+    <classPathEntry    location="/Users/guangjing.feng/github/springqianbailu/spring-boot-dubbo/src/main/resources/mysql-connector-java-8.0.13.jar"/>
 
     <context id="DB2Tables"    targetRuntime="MyBatis3">
          <commentGenerator>
@@ -23,7 +24,7 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <!--生成Model类存放位置-->
-        <javaModelGenerator targetPackage="com.open.springqianbailu.model.table.novel" targetProject="../java">
+        <javaModelGenerator targetPackage="com.open.springqianbailu.model.table.gallery" targetProject="../java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -32,10 +33,10 @@
             <property name="enableSubPackages" value="true"/>
          </sqlMapGenerator>
         <!--生成Dao类存放位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.open.springqianbailu.dao.novel" targetProject="../java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.open.springqianbailu.dao.gallery" targetProject="../java">
             <property name="enableSubPackages" value="true"/>
          </javaClientGenerator>
         <!--生成对应表及类名-->
-       <table tableName="novel_page" domainObjectName="NovelPage" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+       <table tableName="gallery" domainObjectName="Gallery" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
     </context>
  </generatorConfiguration>
