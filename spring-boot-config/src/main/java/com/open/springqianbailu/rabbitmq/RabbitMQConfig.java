@@ -10,6 +10,7 @@ public class RabbitMQConfig {
 
     public final static String QUEUENAME_NOVEL = "queue-novel";
     public final static String QUEUENAME_GALLERY = "queue-gallery";
+    public final static String QUEUENAME_VIDEO = "queue-video";
 
     @Bean
     Queue queue() {
@@ -20,6 +21,9 @@ public class RabbitMQConfig {
     Queue queueg() {
         return new Queue(QUEUENAME_GALLERY, false);
     }
-
+    @Bean
+    Queue queuev() {
+        return new Queue(QUEUENAME_VIDEO, false);
+    }
 
 }

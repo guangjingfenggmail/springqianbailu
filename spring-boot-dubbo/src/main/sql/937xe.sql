@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 04/01/2019 17:30:47
+ Date: 07/01/2019 10:54:27
 */
 
 SET NAMES utf8mb4;
@@ -99,7 +99,85 @@ CREATE TABLE `gallery_image` (
   `src` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `title` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`,`gallery_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of gallery_image
+-- ----------------------------
+BEGIN;
+INSERT INTO `gallery_image` VALUES (1, 1301, 'http://pic.988aiai.com/images/20190104/14f48ae7f9450e50duwppp31iznq.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (2, 1301, 'http://pic.988aiai.com/images/20190104/14f48ae7f9450e50duwppp31iznq.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (3, 1301, 'http://pic.988aiai.com/images/20190104/2328fd1c207c6a023fkne5i1yzgl.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (4, 1301, 'http://pic.988aiai.com/images/20190104/2328fd1c207c6a023fkne5i1yzgl.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (5, 1301, 'http://pic.988aiai.com/images/20190104/362e92a855c999cdfjyihu4dftgi.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (6, 1301, 'http://pic.988aiai.com/images/20190104/362e92a855c999cdfjyihu4dftgi.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (7, 1301, 'http://pic.988aiai.com/images/20190104/4d77f560fdd6692d2xumckxuthxo.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (8, 1301, 'http://pic.988aiai.com/images/20190104/4d77f560fdd6692d2xumckxuthxo.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (9, 1301, 'http://pic.988aiai.com/images/20190104/5c091b4f2d8a49a21uclwt1dqx4c.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (10, 1301, 'http://pic.988aiai.com/images/20190104/5c091b4f2d8a49a21uclwt1dqx4c.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (11, 1301, 'http://pic.988aiai.com/images/20190104/649f29ee6d69ce819xy3vnxvfhwb.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (12, 1301, 'http://pic.988aiai.com/images/20190104/649f29ee6d69ce819xy3vnxvfhwb.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (13, 1301, 'http://pic.988aiai.com/images/20190104/7bc1518b477d1207dzlm0w1plxu0.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (14, 1301, 'http://pic.988aiai.com/images/20190104/7bc1518b477d1207dzlm0w1plxu0.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (15, 1301, 'http://pic.988aiai.com/images/20190104/870781f4ec7ad1ebc0uuzzp5em1j.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (16, 1301, 'http://pic.988aiai.com/images/20190104/870781f4ec7ad1ebc0uuzzp5em1j.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (17, 1301, 'http://pic.988aiai.com/images/20190104/9e26f41b0a7e56cf4y3wqua0mfie.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (18, 1301, 'http://pic.988aiai.com/images/20190104/14f48ae7f9450e50duwppp31iznq.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (19, 1301, 'http://pic.988aiai.com/images/20190104/9e26f41b0a7e56cf4y3wqua0mfie.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (20, 1301, 'http://pic.988aiai.com/images/20190104/2328fd1c207c6a023fkne5i1yzgl.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (21, 1301, 'http://pic.988aiai.com/images/20190104/1027e3a4077a6b39efpdknody55zm.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (22, 1301, 'http://pic.988aiai.com/images/20190104/1027e3a4077a6b39efpdknody55zm.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (23, 1301, 'http://pic.988aiai.com/images/20190104/362e92a855c999cdfjyihu4dftgi.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (24, 1301, 'http://pic.988aiai.com/images/20190104/1129ee8bce93418fa5ucmgxpwbmpx.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (25, 1301, 'http://pic.988aiai.com/images/20190104/1129ee8bce93418fa5ucmgxpwbmpx.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (26, 1301, 'http://pic.988aiai.com/images/20190104/12a0724b0aa0da2740euu4su1afoy.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (27, 1301, 'http://pic.988aiai.com/images/20190104/4d77f560fdd6692d2xumckxuthxo.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (28, 1301, 'http://pic.988aiai.com/images/20190104/13f39ab4680ca9a9c2o1i5ggtfnb1.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (29, 1301, 'http://pic.988aiai.com/images/20190104/12a0724b0aa0da2740euu4su1afoy.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (30, 1301, 'http://pic.988aiai.com/images/20190104/5c091b4f2d8a49a21uclwt1dqx4c.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (31, 1301, 'http://pic.988aiai.com/images/20190104/1431fcb4cbe4e19db53p2yoo15t1k.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (32, 1301, 'http://pic.988aiai.com/images/20190104/13f39ab4680ca9a9c2o1i5ggtfnb1.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (33, 1301, 'http://pic.988aiai.com/images/20190104/649f29ee6d69ce819xy3vnxvfhwb.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (34, 1301, 'http://pic.988aiai.com/images/20190104/1431fcb4cbe4e19db53p2yoo15t1k.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (35, 1301, 'http://pic.988aiai.com/images/20190104/7bc1518b477d1207dzlm0w1plxu0.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (36, 1301, 'http://pic.988aiai.com/images/20190104/15ee20f9748ba1f58ahm1g1vx4pln.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (37, 1301, 'http://pic.988aiai.com/images/20190104/15ee20f9748ba1f58ahm1g1vx4pln.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (38, 1301, 'http://pic.988aiai.com/images/20190104/16705d6bcf1f515af4lohux5c2ghd.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (39, 1301, 'http://pic.988aiai.com/images/20190104/870781f4ec7ad1ebc0uuzzp5em1j.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (40, 1301, 'http://pic.988aiai.com/images/20190104/16705d6bcf1f515af4lohux5c2ghd.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (41, 1301, 'http://pic.988aiai.com/images/20190104/171954eb32ef049bbbr3ffciaaski.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (42, 1301, 'http://pic.988aiai.com/images/20190104/9e26f41b0a7e56cf4y3wqua0mfie.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (43, 1301, 'http://pic.988aiai.com/images/20190104/171954eb32ef049bbbr3ffciaaski.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (44, 1301, 'http://pic.988aiai.com/images/20190104/1868c2fbbaf938feedwlkh40ljoci.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (45, 1301, 'http://pic.988aiai.com/images/20190104/1027e3a4077a6b39efpdknody55zm.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (46, 1301, 'http://pic.988aiai.com/images/20190104/1868c2fbbaf938feedwlkh40ljoci.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (47, 1301, 'http://pic.988aiai.com/images/20190104/19d5afb85a5ce4a755u5wbrxykss0.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (48, 1301, 'http://pic.988aiai.com/images/20190104/1129ee8bce93418fa5ucmgxpwbmpx.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (49, 1301, 'http://pic.988aiai.com/images/20190104/19d5afb85a5ce4a755u5wbrxykss0.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (50, 1301, 'http://pic.988aiai.com/images/20190104/20dca7c57b92351eb4wnixw4fbjbz.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (51, 1301, 'http://pic.988aiai.com/images/20190104/12a0724b0aa0da2740euu4su1afoy.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (52, 1301, 'http://pic.988aiai.com/images/20190104/20dca7c57b92351eb4wnixw4fbjbz.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (53, 1301, 'http://pic.988aiai.com/images/20190104/2161b7d9ad693c80b5tj2kjp2nstn.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (54, 1301, 'http://pic.988aiai.com/images/20190104/13f39ab4680ca9a9c2o1i5ggtfnb1.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (55, 1301, 'http://pic.988aiai.com/images/20190104/2161b7d9ad693c80b5tj2kjp2nstn.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (56, 1301, 'http://pic.988aiai.com/images/20190104/22b0c3bb9c6eaaaadad1f2xpswoor.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (57, 1301, 'http://pic.988aiai.com/images/20190104/1431fcb4cbe4e19db53p2yoo15t1k.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (58, 1301, 'http://pic.988aiai.com/images/20190104/15ee20f9748ba1f58ahm1g1vx4pln.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (59, 1301, 'http://pic.988aiai.com/images/20190104/23d43ba44bd6213105oqtdhykebke.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (60, 1301, 'http://pic.988aiai.com/images/20190104/22b0c3bb9c6eaaaadad1f2xpswoor.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (61, 1301, 'http://pic.988aiai.com/images/20190104/16705d6bcf1f515af4lohux5c2ghd.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (62, 1301, 'https://www.privacypic.com/images/2019/01/02/24de04ae4a80f8910d.jpg\' type=\'image\'></p>大黑��\r\n		\r\n		<div class=', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (63, 1301, 'http://pic.988aiai.com/images/20190104/23d43ba44bd6213105oqtdhykebke.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (64, 1301, 'http://pic.988aiai.com/images/20190104/171954eb32ef049bbbr3ffciaaski.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (65, 1301, 'https://www.privacypic.com/images/2019/01/02/24de04ae4a80f8910d.jpg\' type=\'image\'></p>大黑��\r\n		\r\n		<div class=', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (66, 1301, 'http://pic.988aiai.com/images/20190104/1868c2fbbaf938feedwlkh40ljoci.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (67, 1301, 'http://pic.988aiai.com/images/20190104/19d5afb85a5ce4a755u5wbrxykss0.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (68, 1301, 'http://pic.988aiai.com/images/20190104/20dca7c57b92351eb4wnixw4fbjbz.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (69, 1301, 'http://pic.988aiai.com/images/20190104/2161b7d9ad693c80b5tj2kjp2nstn.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (70, 1301, 'http://pic.988aiai.com/images/20190104/22b0c3bb9c6eaaaadad1f2xpswoor.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (71, 1301, 'http://pic.988aiai.com/images/20190104/23d43ba44bd6213105oqtdhykebke.jpeg', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+INSERT INTO `gallery_image` VALUES (72, 1301, 'https://www.privacypic.com/images/2019/01/02/24de04ae4a80f8910d.jpg\' type=\'image\'></p>大黑��\r\n		\r\n		<div class=', '首页  »  亚洲色图  »  依旧坚挺[24P]');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for menu
@@ -247,7 +325,7 @@ CREATE TABLE `novel_page` (
   `href` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `page` int(11) DEFAULT NULL COMMENT '页顺序',
   PRIMARY KEY (`id`,`novel_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Table structure for submenu
@@ -299,6 +377,43 @@ INSERT INTO `submenu` VALUES (29, '日本无码', 3, '/movie/ribenwuma/', '15457
 INSERT INTO `submenu` VALUES (30, '三级剧情', 3, '/movie/sanjijuqing/', '1545744483242', '电影');
 INSERT INTO `submenu` VALUES (31, '卡通动漫', 3, '/movie/katongdongman/', '1545744483242', '电影');
 INSERT INTO `submenu` VALUES (32, '欧美无码', 3, '/movie/oumeiwuma/', '1545744483242', '电影');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for video
+-- ----------------------------
+DROP TABLE IF EXISTS `video`;
+CREATE TABLE `video` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `href` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `src` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `time` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `pageNo` int(11) DEFAULT NULL,
+  `createDate` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `submenuId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of video
+-- ----------------------------
+BEGIN;
+INSERT INTO `video` VALUES (31, '/AV/toupaizipai/2018/0726/907328.html', 'Sexy lingerie stockings', 'http://ckplayer.988aiai.com/media/videos/tmb/2829/default.jpg', '2018-07-26', 1, '1546829330951', 17);
+INSERT INTO `video` VALUES (32, '/AV/toupaizipai/2018/0726/907329.html', 'SM training awesome bridesmaid', 'http://ckplayer.988aiai.com/media/videos/tmb/2830/default.jpg', '2018-07-26', 1, '1546829413667', 17);
+INSERT INTO `video` VALUES (33, '/AV/toupaizipai/2018/0726/907330.html', 'Non-condom creampie newly married married woman, fuck has to', 'http://ckplayer.988aiai.com/media/videos/tmb/2828/default.jpg', '2018-07-26', 1, '1546829416989', 17);
+INSERT INTO `video` VALUES (34, '/AV/toupaizipai/2018/0726/907331.html', 'Collection! Married woman female teacher again by SM trainin', 'http://ckplayer.988aiai.com/media/videos/tmb/2827/default.jpg', '2018-07-26', 1, '1546829416989', 17);
+INSERT INTO `video` VALUES (35, '/AV/toupaizipai/2018/0726/907332.html', 'Non-condom creampie seiyuu slut married woman (Shen Jing)', 'http://ckplayer.988aiai.com/media/videos/tmb/2825/default.jpg', '2018-07-26', 1, '1546829416990', 17);
+INSERT INTO `video` VALUES (36, '/AV/toupaizipai/2018/0726/907333.html', 'Fuck Chengdu big milk stockings beauty', 'http://ckplayer.988aiai.com/media/videos/tmb/2826/default.jpg', '2018-07-26', 1, '1546829416990', 17);
+INSERT INTO `video` VALUES (37, '/AV/toupaizipai/2018/0726/907334.html', 'Super beautiful foot foot fetishism home selfie', 'http://ckplayer.988aiai.com/media/videos/tmb/2824/default.jpg', '2018-07-26', 1, '1546829416990', 17);
+INSERT INTO `video` VALUES (38, '/AV/toupaizipai/2018/0726/907335.html', 'Developing a 2-year toilet is still so tight', 'http://ckplayer.988aiai.com/media/videos/tmb/2823/default.jpg', '2018-07-26', 1, '1546829416990', 17);
+INSERT INTO `video` VALUES (39, '/AV/toupaizipai/2018/0726/907327.html', 'Awesome little fairy', 'http://ckplayer.988aiai.com/media/videos/tmb/2831/default.jpg', '2018-07-26', 1, '1546829416990', 17);
+INSERT INTO `video` VALUES (40, '/AV/toupaizipai/2018/0726/907326.html', 'Long private room fuck long-term fuck friend (thanks to 91PO', 'http://ckplayer.988aiai.com/media/videos/tmb/2832/default.jpg', '2018-07-26', 1, '1546829416991', 17);
+INSERT INTO `video` VALUES (41, '/AV/toupaizipai/2018/0726/907325.html', 'Fuck 趴awesome young woman ending orgasm fuck from behind cl', 'http://ckplayer.988aiai.com/media/videos/tmb/2833/default.jpg', '2018-07-26', 1, '1546829416991', 17);
+INSERT INTO `video` VALUES (42, '/AV/toupaizipai/2018/0725/906533.html', 'Shenyang Johor Downstairs fruit shop whore girl show face la', 'http://ckplayer.988aiai.com/media/videos/tmb/2783/default.jpg', '2018-07-25', 1, '1546829416991', 17);
+INSERT INTO `video` VALUES (43, '/AV/toupaizipai/2018/0725/906534.html', 'Zhongjie encounters Shenda Green Tea', 'http://ckplayer.988aiai.com/media/videos/tmb/2782/default.jpg', '2018-07-25', 1, '1546829416991', 17);
+INSERT INTO `video` VALUES (44, '/AV/toupaizipai/2018/0725/906531.html', 'White tender sexy young woman carrying her husband for the f', 'http://ckplayer.988aiai.com/media/videos/tmb/2784/default.jpg', '2018-07-25', 1, '1546829416991', 17);
+INSERT INTO `video` VALUES (45, '/AV/toupaizipai/2018/0725/906532.html', 'Non-condom threesome, anal creampie', 'http://ckplayer.988aiai.com/media/videos/tmb/2785/default.jpg', '2018-07-25', 1, '1546829416992', 17);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

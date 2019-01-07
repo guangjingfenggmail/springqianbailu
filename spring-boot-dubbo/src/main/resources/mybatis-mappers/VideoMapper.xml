@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.open.springqianbailu.dao.video.VideoMapper">
+  <resultMap id="BaseResultMap" type="com.open.springqianbailu.model.table.video.Video">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="href" jdbcType="VARCHAR" property="href" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="src" jdbcType="VARCHAR" property="src" />
+    <result column="time" jdbcType="VARCHAR" property="time" />
+    <result column="pageNo" jdbcType="INTEGER" property="pageNo" />
+    <result column="createDate" jdbcType="VARCHAR" property="createDate" />
+    <result column="submenuId" jdbcType="INTEGER" property="submenuId" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+        id,href, title,src, time,pageNo,createDate,submenuId
+    </sql>
+
+  <select id="selectByMenuId" resultMap="BaseResultMap" parameterType="hashmap" >
+    select
+    <include refid="Base_Column_List" />
+    from video
+    where submenuId = #{submenuId} limit #{currentPosition},#{pageSize}
+  </select>
+
+  <select id="selectByDate" resultMap="BaseResultMap" parameterType="hashmap" >
+    select
+    <include refid="Base_Column_List" />
+    from video
+    where submenuId = #{submenuId} and createDate = #{createDate}
+  </select>
+
+  <delete id="deleteByPageNo"  parameterType="java.lang.Integer" >
+        delete from video
+        where pageNo = #{pageNo,jdbcType=INTEGER}
+    </delete>
+
+  <delete id="dropTable">
+        drop table if exists video
+    </delete>
+
+  <insert id="createTable">
+    CREATE TABLE `video` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `href` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `title` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `src` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `time` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `pageNo` int(11) DEFAULT NULL,
+    `createDate` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `submenuId` int(11) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+  </insert>
+
+  <!--批量添加-->
+  <insert id="insertBatch" parameterType="java.util.List"  useGeneratedKeys="true">
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+      SELECT
+      LAST_INSERT_ID()
+    </selectKey>
+    insert into video
+    (href, title,src, time,pageNo,createDate,submenuId)
+    values
+    <foreach collection="list" item="item" index="index"
+             separator=",">
+      (
+      #{item.href,jdbcType=VARCHAR},
+      #{item.title,jdbcType=VARCHAR},
+      #{item.src,jdbcType=VARCHAR},
+      #{item.time,jdbcType=VARCHAR},
+      #{item.pageNo,jdbcType=INTEGER},
+      #{item.createDate,jdbcType=VARCHAR},
+      #{item.submenuId,jdbcType=INTEGER}
+      )
+    </foreach>
+  </insert>
+
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.open.springqianbailu.model.table.video.Video">
+    insert into video (id, href, title, 
+      src, time, pageNo, 
+      createDate,submenuId)
+    values (#{id,jdbcType=INTEGER}, #{href,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{src,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}, #{pageNo,jdbcType=INTEGER},
+      #{createDate,jdbcType=VARCHAR},#{submenuId,jdbcType=INTEGER})
+  </insert>
+</mapper>

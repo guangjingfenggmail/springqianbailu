@@ -24,7 +24,7 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <!--生成Model类存放位置-->
-        <javaModelGenerator targetPackage="com.open.springqianbailu.model.table.gallery" targetProject="../java">
+        <javaModelGenerator targetPackage="com.open.springqianbailu.model.table.video" targetProject="../java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -33,10 +33,10 @@
             <property name="enableSubPackages" value="true"/>
          </sqlMapGenerator>
         <!--生成Dao类存放位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.open.springqianbailu.dao.gallery" targetProject="../java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.open.springqianbailu.dao.video" targetProject="../java">
             <property name="enableSubPackages" value="true"/>
          </javaClientGenerator>
         <!--生成对应表及类名-->
-       <table tableName="gallery_image" domainObjectName="GalleryImage" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+       <table tableName="video" domainObjectName="Video" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
     </context>
  </generatorConfiguration>
