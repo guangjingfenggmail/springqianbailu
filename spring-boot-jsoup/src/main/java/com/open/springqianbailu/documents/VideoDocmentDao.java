@@ -249,6 +249,14 @@ public class VideoDocmentDao extends AbsDocumentDao {
                         logger.error("VideoDocmentDao", e);
                     }
 
+                    /***
+                     *
+                     * <video id="video" class="video-js vjs-16-9 vjs-big-play-centered vjs-sublime-skin" preload="auto" controls="" poster="http://ckplayer.988aiai.com/media/videos/tmb/2829/default.jpg" data-setup="{}" style="width: 940px;height: 540px;">
+                     *  <source src="https://ckplayer.988aiai.com/mobile_src_1.php?id=2829" type="video/mp4" label="SD" res="720">
+                     *  <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+                     * </video>
+                     */
+
                     try {
                         Element spanElement = articleElement.select("video").first();
                         String img = spanElement.attr("poster");

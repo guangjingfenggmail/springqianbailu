@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 07/01/2019 10:54:27
+ Date: 07/01/2019 14:34:01
 */
 
 SET NAMES utf8mb4;
@@ -414,6 +414,27 @@ INSERT INTO `video` VALUES (42, '/AV/toupaizipai/2018/0725/906533.html', 'Shenya
 INSERT INTO `video` VALUES (43, '/AV/toupaizipai/2018/0725/906534.html', 'Zhongjie encounters Shenda Green Tea', 'http://ckplayer.988aiai.com/media/videos/tmb/2782/default.jpg', '2018-07-25', 1, '1546829416991', 17);
 INSERT INTO `video` VALUES (44, '/AV/toupaizipai/2018/0725/906531.html', 'White tender sexy young woman carrying her husband for the f', 'http://ckplayer.988aiai.com/media/videos/tmb/2784/default.jpg', '2018-07-25', 1, '1546829416991', 17);
 INSERT INTO `video` VALUES (45, '/AV/toupaizipai/2018/0725/906532.html', 'Non-condom threesome, anal creampie', 'http://ckplayer.988aiai.com/media/videos/tmb/2785/default.jpg', '2018-07-25', 1, '1546829416992', 17);
+COMMIT;
+
+-- ----------------------------
+-- Table structure for video_source
+-- ----------------------------
+DROP TABLE IF EXISTS `video_source`;
+CREATE TABLE `video_source` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `video_id` int(11) NOT NULL,
+  `title` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `img` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `src` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `type` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`,`video_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of video_source
+-- ----------------------------
+BEGIN;
+INSERT INTO `video_source` VALUES (7, 31, '首页  »  偷拍自拍  »  Sexy lingerie stockings', 'http://ckplayer.988aiai.com/media/videos/tmb/2829/default.jpg', 'https://ckplayer.988aiai.com/mobile_src_1.php?id=2829', 'video/mp4');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
