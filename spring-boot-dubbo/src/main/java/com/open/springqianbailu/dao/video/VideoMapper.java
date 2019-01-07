@@ -26,4 +26,6 @@ public interface VideoMapper {
     int insertBatch(List<Video> list);
 
     void deleteByPageNo(int pageNo);
+
+    List<Video> selectByHref(HashMap map);
 }

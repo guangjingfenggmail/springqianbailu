@@ -19,6 +19,16 @@ public class Video implements Serializable {
 
     private int submenuId;
 
+    private VideoSource source;
+
+    public VideoSource getSource() {
+        return source;
+    }
+
+    public void setSource(VideoSource source) {
+        this.source = source;
+    }
+
     public int getSubmenuId() {
         return submenuId;
     }

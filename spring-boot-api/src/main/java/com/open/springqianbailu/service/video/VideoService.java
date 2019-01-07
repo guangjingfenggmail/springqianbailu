@@ -16,4 +16,6 @@ public interface VideoService {
     public int parseVideo(NovelMessage message);
 
     List<Video> selectByDate(HashMap map);
+
+    List<Video> getVideoSource(HashMap map);
 }

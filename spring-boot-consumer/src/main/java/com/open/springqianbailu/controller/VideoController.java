@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.open.springqianbailu.RedisUtil;
 import com.open.springqianbailu.Result;
 import com.open.springqianbailu.model.rabbitmq.NovelMessage;
+import com.open.springqianbailu.model.table.gallery.GalleryImage;
 import com.open.springqianbailu.model.table.video.Video;
 import com.open.springqianbailu.service.video.VideoService;
 import io.swagger.annotations.ApiImplicitParam;
@@ -55,15 +56,15 @@ public class VideoController {
     }
 
 
-    @ApiOperation(value = "parseGallery", notes = "根据 submenuId（17-32），pageNo 获取视频信息")
+    @ApiOperation(value = "parseVideo", notes = "根据 submenuId（17-32），pageNo 获取视频信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "submenuId", value = "submenuId", required = true, paramType = "path"),
             @ApiImplicitParam(name = "pageNo", value = "pageNo", required = true, paramType = "path")
     })
-    @RequestMapping(value = "/parseGallery/{submenuId}/{pageNo}", method = RequestMethod.POST)
+    @RequestMapping(value = "/parseVideo/{submenuId}/{pageNo}", method = RequestMethod.POST)
     @ResponseBody
-    public Result parseGallery(@PathVariable String submenuId, @PathVariable String pageNo) {
-        List<Video> list = (List<Video>) redisUtil.get(TAG+"parseNovel"+submenuId+pageNo);
+    public Result parseVideo(@PathVariable String submenuId, @PathVariable String pageNo) {
+        List<Video> list = (List<Video>) redisUtil.get(TAG+"parseVideo"+submenuId+pageNo);
         if (list==null || list.size()==0){
             NovelMessage message = new NovelMessage();
             message.submenuId = submenuId;
@@ -75,5 +76,14 @@ public class VideoController {
         return Result.success(list);
     }
 
+
+    @ApiOperation(value = "getVideoSource", notes = "根据 href 获取视频信息 {\"href\":\"/AV/toupaizipai/2018/0726/907328.html\"}")
+    @ApiImplicitParam(name = "map", value = "map", required = true, paramType = "body")
+    @RequestMapping(value = "/getVideoSource", method = RequestMethod.POST)
+    @ResponseBody
+    public Result getVideoSource(@RequestBody HashMap<String,Object> map) {
+        List<Video> list = videoService.getVideoSource(map);
+        return Result.success(list);
+    }
 
 }

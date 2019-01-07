@@ -16,6 +16,29 @@
         id,href, title,src, time,pageNo,createDate,submenuId
     </sql>
 
+
+  <resultMap id="collectionResultMap" type="com.open.springqianbailu.model.table.video.Video">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="href" jdbcType="VARCHAR" property="href" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="src" jdbcType="VARCHAR" property="src" />
+    <result column="time" jdbcType="VARCHAR" property="time" />
+    <result column="pageNo" jdbcType="INTEGER" property="pageNo" />
+    <result column="createDate" jdbcType="VARCHAR" property="createDate" />
+    <result column="submenuId" jdbcType="INTEGER" property="submenuId" />
+
+    <association property="source" column="{videoId=id}"
+                select="com.open.springqianbailu.dao.video.VideoSourceMapper.selectById">
+    </association>
+  </resultMap>
+
+  <select id="selectByHref" resultMap="collectionResultMap" parameterType="hashmap">
+        select *
+        from `video`
+        where  href = #{href,jdbcType=VARCHAR}
+      </select>
+
+
   <select id="selectByMenuId" resultMap="BaseResultMap" parameterType="hashmap" >
     select
     <include refid="Base_Column_List" />
