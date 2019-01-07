@@ -1,6 +1,7 @@
 package com.open.springqianbailu.service.impl.video;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.google.gson.Gson;
 import com.open.springqianbailu.RedisUtil;
 import com.open.springqianbailu.dao.SubMenuMapper;
 import com.open.springqianbailu.dao.video.VideoMapper;
@@ -8,9 +9,13 @@ import com.open.springqianbailu.dao.video.VideoSourceMapper;
 import com.open.springqianbailu.documents.VideoDocmentDao;
 import com.open.springqianbailu.model.rabbitmq.NovelMessage;
 import com.open.springqianbailu.model.table.SubMenu;
+import com.open.springqianbailu.model.table.rabbitmq.RabbitMessage;
+import com.open.springqianbailu.model.table.rabbitmq.RabbitQueue;
 import com.open.springqianbailu.model.table.video.Video;
 import com.open.springqianbailu.model.table.video.VideoSource;
-import com.open.springqianbailu.rabbitmq.VideoSender;
+import com.open.springqianbailu.service.impl.rabbitmq.sender.VideoSender;
+import com.open.springqianbailu.service.rabbitmq.RabbitMessageService;
+import com.open.springqianbailu.service.rabbitmq.RabbitQueueService;
 import com.open.springqianbailu.service.video.VideoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +48,12 @@ public class VideoServiceImpl implements VideoService {
     @Autowired
     private VideoSourceMapper videoSourceMapper;
 
+    @Resource
+    private RabbitMessageService rabbitMessageService;
+
+    @Autowired
+    private RabbitQueueService rabbitQueueService;
+
     @Override
     public int insert(Video novel) {
         return videoMapper.insert(novel);
@@ -71,6 +82,24 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public int parseVideo(NovelMessage message) {
+
+        Gson gson = new Gson();
+        RabbitMessage msg = new RabbitMessage();
+        msg.setUuid(message.uuid);
+        msg.setRoutingKey(message.routingKey);
+        msg.setCreateTime(System.currentTimeMillis()+"");
+        msg.setMessage(gson.toJson(message));
+        msg.setStatus(0);
+        rabbitMessageService.insert(msg);
+
+        RabbitQueue queue = new RabbitQueue();
+        queue.setRabbit_mq_id(msg.getId());
+        queue.setUuid(message.uuid);
+        queue.setRoutingKey(message.routingKey);
+        queue.setStatus(0);
+        rabbitQueueService.insert(queue);
+
+        message.id = msg.getId();
         videoSender.send(message);
         return 0;
     }

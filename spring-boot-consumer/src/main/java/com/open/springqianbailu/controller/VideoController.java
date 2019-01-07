@@ -6,8 +6,8 @@ import com.google.gson.Gson;
 import com.open.springqianbailu.RedisUtil;
 import com.open.springqianbailu.Result;
 import com.open.springqianbailu.model.rabbitmq.NovelMessage;
-import com.open.springqianbailu.model.table.gallery.GalleryImage;
 import com.open.springqianbailu.model.table.video.Video;
+import com.open.springqianbailu.rabbitmq.QueueConfig;
 import com.open.springqianbailu.service.video.VideoService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 
 @RestController
@@ -69,6 +70,9 @@ public class VideoController {
             NovelMessage message = new NovelMessage();
             message.submenuId = submenuId;
             message.pageNo = pageNo;
+            message.method = TAG+"parseVideo";
+            message.uuid = UUID.randomUUID().toString();
+            message.routingKey = QueueConfig.QUEUENAME_VIDEO;
             videoService.parseVideo(message);
 
             return Result.error(0,"处理中...");

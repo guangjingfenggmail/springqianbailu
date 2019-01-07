@@ -1,15 +1,21 @@
 package com.open.springqianbailu.service.impl.gallery;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.google.gson.Gson;
 import com.open.springqianbailu.RedisUtil;
 import com.open.springqianbailu.dao.SubMenuMapper;
 import com.open.springqianbailu.dao.gallery.GalleryMapper;
+import com.open.springqianbailu.dao.rabbitmq.RabbitMessageMapper;
 import com.open.springqianbailu.documents.GalleryDocmentDao;
 import com.open.springqianbailu.model.rabbitmq.NovelMessage;
 import com.open.springqianbailu.model.table.SubMenu;
 import com.open.springqianbailu.model.table.gallery.Gallery;
-import com.open.springqianbailu.rabbitmq.GallerySender;
+import com.open.springqianbailu.model.table.rabbitmq.RabbitMessage;
+import com.open.springqianbailu.model.table.rabbitmq.RabbitQueue;
 import com.open.springqianbailu.service.gallery.GalleryService;
+import com.open.springqianbailu.service.impl.rabbitmq.sender.GallerySender;
+import com.open.springqianbailu.service.rabbitmq.RabbitMessageService;
+import com.open.springqianbailu.service.rabbitmq.RabbitQueueService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +43,12 @@ public class GalleryServiceImpl implements GalleryService {
 
     @Autowired
     private GallerySender gallerySender;
+
+    @Resource
+    private RabbitMessageService rabbitMessageService;
+
+    @Autowired
+    private RabbitQueueService rabbitQueueService;
 
     @Override
     public int insert(Gallery novel) {
@@ -71,6 +83,24 @@ public class GalleryServiceImpl implements GalleryService {
 
     @Override
     public int parseNovel(NovelMessage message) {
+
+        Gson gson = new Gson();
+        RabbitMessage msg = new RabbitMessage();
+        msg.setUuid(message.uuid);
+        msg.setRoutingKey(message.routingKey);
+        msg.setCreateTime(System.currentTimeMillis()+"");
+        msg.setMessage(gson.toJson(message));
+        msg.setStatus(0);
+        rabbitMessageService.insert(msg);
+
+        RabbitQueue queue = new RabbitQueue();
+        queue.setRabbit_mq_id(msg.getId());
+        queue.setUuid(message.uuid);
+        queue.setRoutingKey(message.routingKey);
+        queue.setStatus(0);
+        rabbitQueueService.insert(queue);
+
+        message.id = msg.getId();
         gallerySender.send(message);
         return 0;
     }

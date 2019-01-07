@@ -8,6 +8,7 @@ import com.open.springqianbailu.Result;
 import com.open.springqianbailu.model.rabbitmq.NovelMessage;
 import com.open.springqianbailu.model.table.novel.Novel;
 import com.open.springqianbailu.model.table.novel.NovelArticle;
+import com.open.springqianbailu.rabbitmq.QueueConfig;
 import com.open.springqianbailu.service.novel.NovelArticleService;
 import com.open.springqianbailu.service.novel.NovelService;
 import io.swagger.annotations.ApiImplicitParam;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
-
+import java.util.UUID;
 
 
 @RestController
@@ -73,6 +74,9 @@ public class NovelController  {
             NovelMessage message = new NovelMessage();
             message.submenuId = submenuId;
             message.pageNo = pageNo;
+            message.method = TAG+"parseNovel";
+            message.routingKey = QueueConfig.QUEUENAME_NOVEL;
+            message.uuid = UUID.randomUUID().toString();
             novelService.parseNovel(message);
 
             return Result.error(0,"处理中...");

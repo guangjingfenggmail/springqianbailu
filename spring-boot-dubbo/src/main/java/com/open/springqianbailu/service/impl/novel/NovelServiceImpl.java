@@ -1,15 +1,20 @@
 package com.open.springqianbailu.service.impl.novel;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.google.gson.Gson;
 import com.open.springqianbailu.RedisUtil;
 import com.open.springqianbailu.dao.SubMenuMapper;
 import com.open.springqianbailu.dao.novel.NovelMapper;
+import com.open.springqianbailu.dao.rabbitmq.RabbitMessageMapper;
 import com.open.springqianbailu.documents.NovelDocmentDao;
 import com.open.springqianbailu.model.rabbitmq.NovelMessage;
 import com.open.springqianbailu.model.table.SubMenu;
 import com.open.springqianbailu.model.table.novel.Novel;
-import com.open.springqianbailu.rabbitmq.NovelSender;
+import com.open.springqianbailu.model.table.rabbitmq.RabbitMessage;
+import com.open.springqianbailu.model.table.rabbitmq.RabbitQueue;
+import com.open.springqianbailu.service.impl.rabbitmq.sender.NovelSender;
 import com.open.springqianbailu.service.novel.NovelService;
+import com.open.springqianbailu.service.rabbitmq.RabbitQueueService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +42,12 @@ public class NovelServiceImpl  implements NovelService {
 
     @Autowired
     private NovelSender novelSender;
+
+    @Autowired
+    private RabbitMessageMapper rabbitMessageMapper;
+
+    @Autowired
+    private RabbitQueueService rabbitQueueService;
 
     @Override
     public int insert(Novel novel) {
@@ -71,6 +82,22 @@ public class NovelServiceImpl  implements NovelService {
 
     @Override
     public int parseNovel(NovelMessage message) {
+        Gson gson = new Gson();
+        RabbitMessage msg = new RabbitMessage();
+        msg.setUuid(message.uuid);
+        msg.setRoutingKey(message.routingKey);
+        msg.setCreateTime(System.currentTimeMillis()+"");
+        msg.setMessage(gson.toJson(message));
+        rabbitMessageMapper.insert(msg);
+
+        RabbitQueue queue = new RabbitQueue();
+        queue.setRabbit_mq_id(msg.getId());
+        queue.setUuid(message.uuid);
+        queue.setRoutingKey(message.routingKey);
+        queue.setStatus(0);
+        rabbitQueueService.insert(queue);
+
+        message.id = msg.getId();
         novelSender.send(message);
         return 0;
     }

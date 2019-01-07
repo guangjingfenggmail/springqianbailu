@@ -8,7 +8,7 @@ import com.open.springqianbailu.Result;
 import com.open.springqianbailu.model.rabbitmq.NovelMessage;
 import com.open.springqianbailu.model.table.gallery.Gallery;
 import com.open.springqianbailu.model.table.gallery.GalleryImage;
-import com.open.springqianbailu.model.table.novel.NovelArticle;
+import com.open.springqianbailu.rabbitmq.QueueConfig;
 import com.open.springqianbailu.service.gallery.GalleryImageService;
 import com.open.springqianbailu.service.gallery.GalleryService;
 import io.swagger.annotations.ApiImplicitParam;
@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 
 @RestController
@@ -73,6 +74,9 @@ public class GalleryController {
             NovelMessage message = new NovelMessage();
             message.submenuId = submenuId;
             message.pageNo = pageNo;
+            message.method = TAG+"parseNovel";
+            message.uuid = UUID.randomUUID().toString();
+            message.routingKey = QueueConfig.QUEUENAME_GALLERY;
             galleryService.parseNovel(message);
 
             return Result.error(0,"处理中...");
