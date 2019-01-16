@@ -20,7 +20,7 @@ public class MenuDocumentDao extends AbsDocumentDao {
         logger.info("parseMenus start =====");
 
         try {
-            Document doc = Jsoup.connect(DOMAIN)
+            Document doc = Jsoup.connect(DOMAIN2)
                     .header("User-Agent",
                             USER_AGENT)
                     .timeout(TIMEOUT)
@@ -43,7 +43,7 @@ public class MenuDocumentDao extends AbsDocumentDao {
                                 String href = aElement.attr("href");
                                 logger.info("i==" + i + ";href==" + href);
                                 if (href==null || href.length()==0){
-                                    href = DOMAIN;
+                                    href = DOMAIN2;
                                 }
                                 menu.setHref(href);
 
