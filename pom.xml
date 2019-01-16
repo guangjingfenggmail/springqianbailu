@@ -17,6 +17,10 @@
         <module>spring-boot-config</module>
         <module>spring-boot-jsoup</module>
         <module>spring-boot-task</module>
+        <module>spring-boot-dubbo-menu</module>
+        <module>spring-boot-dubbo-novel</module>
+        <module>spring-boot-dubbo-gallery</module>
+        <module>spring-boot-dubbo-video</module>
     </modules>
 
     <dependencies>

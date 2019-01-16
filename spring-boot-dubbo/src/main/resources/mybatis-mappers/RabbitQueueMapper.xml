@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.open.springqianbailu.dao.rabbitmq.RabbitQueueMapper">
+<mapper namespace="com.open.com.open.springqianbailu.dao.rabbitmq.RabbitQueueMapper">
   <resultMap id="BaseResultMap" type="com.open.springqianbailu.model.table.rabbitmq.RabbitQueue">
     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="rabbit_mq_id" jdbcType="INTEGER" property="rabbit_mq_id" />
