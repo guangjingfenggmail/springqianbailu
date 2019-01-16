@@ -22,7 +22,7 @@ public class MenuSchedulingConfig {
     public void updateMenu() throws Exception {
         logger.info("updateMenu 定时任务启动");
 
-//        menuAsyncTask.doTaskMenu();
+        menuAsyncTask.doTaskMenu();
 //        Thread.currentThread().join();
 
     }

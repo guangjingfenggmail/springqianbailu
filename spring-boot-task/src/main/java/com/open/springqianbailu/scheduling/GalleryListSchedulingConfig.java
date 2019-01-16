@@ -20,7 +20,7 @@ public class GalleryListSchedulingConfig {
     @Scheduled(cron = "0 0/1 * * * ?") // 每1分钟执行一次
     public void updateNovelList() {
         logger.info("updateQueue 定时任务启动");
-        galleryAsyncTask.updateList();
+//        galleryAsyncTask.updateList();
     }
 
 }

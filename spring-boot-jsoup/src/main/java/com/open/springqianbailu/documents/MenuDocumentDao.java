@@ -27,7 +27,7 @@ public class MenuDocumentDao extends AbsDocumentDao {
                     .get();
 
             if (doc != null) {
-                Elements headElements = doc.select("div.k_head-2a");
+                Elements headElements = doc.select("div.tabbar").first().select("a");
                 if (headElements != null && headElements.size() > 0) {
                     Menu menu;
                     for (int i = 0; i < headElements.size(); i++) {

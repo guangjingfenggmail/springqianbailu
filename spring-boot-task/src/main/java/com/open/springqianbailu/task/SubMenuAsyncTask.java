@@ -27,6 +27,6 @@ public class SubMenuAsyncTask {
 //        if (list!=null && list.size()>0){
 //            subMenuSevice.doTaskMenu(list);
 //        }
-        jsoupSubMenuService.updateSubMenu();
+//        jsoupSubMenuService.updateSubMenu();
     }
 }
