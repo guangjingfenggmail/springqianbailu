@@ -1,6 +1,5 @@
 package com.open.springqianbailu.impl.jobs;
 
-import com.open.springqianbailu.service.impl.jsoup.JsoupMenuServiceImpl;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -23,8 +22,8 @@ public class MenuQuartzJob implements Job{
         logger.info(TAG+"任务开始执行");
     }
 
-    @Resource
-    private JsoupMenuServiceImpl jsoupMenuService;
+//    @Resource
+//    private JsoupMenuServiceImpl jsoupMenuService;
 
     @Override
     public void execute(JobExecutionContext arg0) throws JobExecutionException {
@@ -32,7 +31,7 @@ public class MenuQuartzJob implements Job{
         logger.info(TAG+"开始："+System.currentTimeMillis());
         // TODO 业务
         try {
-            jsoupMenuService.updateMenu();
+//            jsoupMenuService.updateMenu();
         }catch (Exception e){
             e.printStackTrace();
         }
