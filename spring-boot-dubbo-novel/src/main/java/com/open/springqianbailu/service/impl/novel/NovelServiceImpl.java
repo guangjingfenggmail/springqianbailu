@@ -1,18 +1,17 @@
 package com.open.springqianbailu.service.impl.novel;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.google.gson.Gson;
 import com.open.springqianbailu.RedisUtil;
-import com.open.springqianbailu.dao.SubMenuMapper;
 import com.open.springqianbailu.dao.novel.NovelMapper;
-import com.open.springqianbailu.dao.rabbitmq.RabbitMessageMapper;
 import com.open.springqianbailu.documents.NovelDocmentDao;
 import com.open.springqianbailu.model.rabbitmq.NovelMessage;
 import com.open.springqianbailu.model.table.SubMenu;
 import com.open.springqianbailu.model.table.novel.Novel;
 import com.open.springqianbailu.model.table.rabbitmq.RabbitMessage;
 import com.open.springqianbailu.model.table.rabbitmq.RabbitQueue;
-import com.open.springqianbailu.service.impl.rabbitmq.sender.NovelSender;
+import com.open.springqianbailu.service.SubMenuSevice;
 import com.open.springqianbailu.service.novel.NovelService;
 import com.open.springqianbailu.service.rabbitmq.RabbitQueueService;
 import org.slf4j.Logger;
@@ -37,14 +36,14 @@ public class NovelServiceImpl  implements NovelService {
     public Logger logger = LoggerFactory.getLogger(getClass().getSimpleName());
     @Resource
     private NovelMapper novelMapper;
-    @Resource
-    private SubMenuMapper subMenuMapper;
+    @Reference
+    private SubMenuSevice subMenuSevice;
 
-    @Autowired
-    private NovelSender novelSender;
-
-    @Autowired
-    private RabbitMessageMapper rabbitMessageMapper;
+//    @Autowired
+//    private NovelSender novelSender;
+//
+//    @Autowired
+//    private RabbitMessageMapper rabbitMessageMapper;
 
     @Autowired
     private RabbitQueueService rabbitQueueService;
@@ -73,7 +72,7 @@ public class NovelServiceImpl  implements NovelService {
     public void updateNovelList() {
         novelMapper.dropTable();
         novelMapper.createTable();
-        List<SubMenu> subMenuList = subMenuMapper.selectByMenuId(1);
+        List<SubMenu> subMenuList = subMenuSevice.selectByMenuId(1);
         for (SubMenu menu:subMenuList){
             List<Novel> list =  NovelDocmentDao.parseNovelList(menu.getId(),menu.getHref());
             novelMapper.insertBatch(list);
@@ -88,7 +87,7 @@ public class NovelServiceImpl  implements NovelService {
         msg.setRoutingKey(message.routingKey);
         msg.setCreateTime(System.currentTimeMillis()+"");
         msg.setMessage(gson.toJson(message));
-        rabbitMessageMapper.insert(msg);
+//        rabbitMessageMapper.insert(msg);
 
         RabbitQueue queue = new RabbitQueue();
         queue.setRabbit_mq_id(msg.getId());
@@ -98,7 +97,7 @@ public class NovelServiceImpl  implements NovelService {
         rabbitQueueService.insert(queue);
 
         message.id = msg.getId();
-        novelSender.send(message);
+//        novelSender.send(message);
         return 0;
     }
 
@@ -110,5 +109,15 @@ public class NovelServiceImpl  implements NovelService {
             redisUtil.set(TAG+map.toString(),list,REDIS_EXPIRE_TIME);
         }
         return list;
+    }
+
+    @Override
+    public int insertBatch(List<Novel> menu) {
+        return novelMapper.insertBatch(menu);
+    }
+
+    @Override
+    public void deleteByPageNo(int pageNo) {
+        novelMapper.deleteByPageNo(pageNo);
     }
 }

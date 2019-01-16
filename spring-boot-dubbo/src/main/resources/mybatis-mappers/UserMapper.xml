@@ -16,6 +16,10 @@
     values ( #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR})
   </insert>
 
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from my_user
+  </select>
+
   <select id="selectByUserNamePwd" parameterType="hashmap" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

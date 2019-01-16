@@ -18,4 +18,8 @@ public interface VideoService {
     List<Video> selectByDate(HashMap map);
 
     List<Video> getVideoSource(HashMap map);
+
+    int insertBatch(List<Video> list);
+
+    void deleteByPageNo(int pageNo);
 }

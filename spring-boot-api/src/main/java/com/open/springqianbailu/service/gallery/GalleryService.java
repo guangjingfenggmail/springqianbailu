@@ -20,4 +20,8 @@ public interface GalleryService {
     public int parseNovel(NovelMessage message);
 
     List<Gallery> selectByDate(HashMap map);
+
+    void deleteByPageNo(int pageNo);
+
+    int insertBatch(List<Gallery> menu);
 }

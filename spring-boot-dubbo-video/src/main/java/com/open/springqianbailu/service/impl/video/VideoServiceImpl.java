@@ -1,9 +1,9 @@
 package com.open.springqianbailu.service.impl.video;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.google.gson.Gson;
 import com.open.springqianbailu.RedisUtil;
-import com.open.springqianbailu.dao.SubMenuMapper;
 import com.open.springqianbailu.dao.video.VideoMapper;
 import com.open.springqianbailu.dao.video.VideoSourceMapper;
 import com.open.springqianbailu.documents.VideoDocmentDao;
@@ -13,7 +13,7 @@ import com.open.springqianbailu.model.table.rabbitmq.RabbitMessage;
 import com.open.springqianbailu.model.table.rabbitmq.RabbitQueue;
 import com.open.springqianbailu.model.table.video.Video;
 import com.open.springqianbailu.model.table.video.VideoSource;
-import com.open.springqianbailu.service.impl.rabbitmq.sender.VideoSender;
+import com.open.springqianbailu.service.SubMenuSevice;
 import com.open.springqianbailu.service.rabbitmq.RabbitMessageService;
 import com.open.springqianbailu.service.rabbitmq.RabbitQueueService;
 import com.open.springqianbailu.service.video.VideoService;
@@ -39,13 +39,13 @@ public class VideoServiceImpl implements VideoService {
     public Logger logger = LoggerFactory.getLogger(getClass().getSimpleName());
     @Resource
     private VideoMapper videoMapper;
-    @Resource
-    private SubMenuMapper subMenuMapper;
+    @Reference
+    private SubMenuSevice subMenuSevice;
 
-    @Autowired
-    private VideoSender videoSender;
+//    @Autowired
+//    private VideoSender videoSender;
 
-    @Autowired
+    @Reference
     private VideoSourceMapper videoSourceMapper;
 
     @Resource
@@ -73,7 +73,7 @@ public class VideoServiceImpl implements VideoService {
     public void updateList() {
         videoMapper.dropTable();
         videoMapper.createTable();
-        List<SubMenu> subMenuList = subMenuMapper.selectByMenuId(0);
+        List<SubMenu> subMenuList = subMenuSevice.selectByMenuId(0);
         for (SubMenu menu : subMenuList) {
             List<Video> list = VideoDocmentDao.parseList(menu.getId(), menu.getHref());
             videoMapper.insertBatch(list);
@@ -100,7 +100,7 @@ public class VideoServiceImpl implements VideoService {
         rabbitQueueService.insert(queue);
 
         message.id = msg.getId();
-        videoSender.send(message);
+//        videoSender.send(message);
         return 0;
     }
 
@@ -132,5 +132,15 @@ public class VideoServiceImpl implements VideoService {
             redisUtil.set(TAG + "getVideoSource" + map.toString(), list, REDIS_EXPIRE_TIME);
         }
         return list;
+    }
+
+    @Override
+    public int insertBatch(List<Video> list) {
+        return videoMapper.insertBatch(list);
+    }
+
+    @Override
+    public void deleteByPageNo(int pageNo) {
+        videoMapper.deleteByPageNo(pageNo);
     }
 }

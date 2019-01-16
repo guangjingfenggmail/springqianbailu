@@ -1,10 +1,9 @@
 package com.open.springqianbailu.service.impl.rabbitmq.receive;
 
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.google.gson.Gson;
 import com.open.springqianbailu.RedisUtil;
-import com.open.springqianbailu.dao.SubMenuMapper;
-import com.open.springqianbailu.dao.novel.NovelMapper;
 import com.open.springqianbailu.documents.NovelDocmentDao;
 import com.open.springqianbailu.model.rabbitmq.NovelMessage;
 import com.open.springqianbailu.model.table.SubMenu;
@@ -12,6 +11,8 @@ import com.open.springqianbailu.model.table.novel.Novel;
 import com.open.springqianbailu.model.table.rabbitmq.RabbitMessage;
 import com.open.springqianbailu.model.table.rabbitmq.RabbitQueue;
 import com.open.springqianbailu.rabbitmq.QueueConfig;
+import com.open.springqianbailu.service.SubMenuSevice;
+import com.open.springqianbailu.service.novel.NovelService;
 import com.open.springqianbailu.service.rabbitmq.RabbitMessageService;
 import com.open.springqianbailu.service.rabbitmq.RabbitQueueService;
 import com.rabbitmq.client.Channel;
@@ -32,10 +33,10 @@ public class NovelReceiveImpl {
     public  String TAG = getClass().getSimpleName();
     public Logger logger = LoggerFactory.getLogger(getClass().getSimpleName());
 
-    @Resource
-    private SubMenuMapper subMenuMapper;
-    @Resource
-    private NovelMapper novelMapper;
+    @Reference
+    private SubMenuSevice subMenuSevice;
+    @Reference
+    private NovelService novelService;
     @Resource
     public RedisUtil redisUtil;
 
@@ -60,18 +61,18 @@ public class NovelReceiveImpl {
 
 
             //获取submenu信息
-            SubMenu menu = subMenuMapper.selectById(Integer.parseInt(message.submenuId));
+            SubMenu menu = subMenuSevice.selectById(Integer.parseInt(message.submenuId));
             if (menu==null)
                 return;
 
             List<Novel> list =  NovelDocmentDao.parseNovelList(menu.getId(),menu.getHref(),Integer.parseInt(message.pageNo));
             redisUtil.set(message.method+message.submenuId+message.pageNo,list);
             //删除当前记录
-            novelMapper.deleteByPageNo(Integer.parseInt(message.pageNo));
+            novelService.deleteByPageNo(Integer.parseInt(message.pageNo));
             if (list==null || list.size()==0)
                 return;
             //入库
-            novelMapper.insertBatch(list);
+            novelService.insertBatch(list);
 
             RabbitQueue rabbitMessage = new RabbitQueue();
             rabbitMessage.setStatus(3);

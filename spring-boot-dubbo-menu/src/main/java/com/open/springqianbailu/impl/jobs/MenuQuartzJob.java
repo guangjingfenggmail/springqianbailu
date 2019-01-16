@@ -1,4 +1,4 @@
-package com.open.springqianbailu.service.impl.jobs;
+package com.open.springqianbailu.impl.jobs;
 
 import com.open.springqianbailu.service.impl.jsoup.JsoupMenuServiceImpl;
 import org.quartz.Job;

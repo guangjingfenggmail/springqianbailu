@@ -20,4 +20,8 @@ public interface NovelService {
     public int parseNovel(NovelMessage message);
 
     List<Novel> selectByDate(HashMap map);
+
+    int insertBatch(List<Novel> menu);
+
+    void deleteByPageNo(int pageNo);
 }

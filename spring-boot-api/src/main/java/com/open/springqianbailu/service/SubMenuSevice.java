@@ -15,4 +15,6 @@ public interface SubMenuSevice  {
     List<SubMenu> selectByMenuId(Integer menuId);
 
     void doTaskMenu(List<SubMenu> list);
+
+    SubMenu selectById(Integer id);
 }

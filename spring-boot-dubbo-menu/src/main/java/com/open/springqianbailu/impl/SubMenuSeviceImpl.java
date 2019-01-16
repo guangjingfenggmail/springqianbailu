@@ -54,4 +54,9 @@ public class SubMenuSeviceImpl   implements SubMenuSevice {
             subMenuMapper.insertBatch(list);
         }
     }
+
+    @Override
+    public SubMenu selectById(Integer id) {
+        return subMenuMapper.selectById(id);
+    }
 }

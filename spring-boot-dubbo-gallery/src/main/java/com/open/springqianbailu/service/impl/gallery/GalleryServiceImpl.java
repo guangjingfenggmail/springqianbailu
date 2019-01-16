@@ -1,9 +1,9 @@
 package com.open.springqianbailu.service.impl.gallery;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.google.gson.Gson;
 import com.open.springqianbailu.RedisUtil;
-import com.open.springqianbailu.dao.SubMenuMapper;
 import com.open.springqianbailu.dao.gallery.GalleryMapper;
 import com.open.springqianbailu.documents.GalleryDocmentDao;
 import com.open.springqianbailu.model.rabbitmq.NovelMessage;
@@ -11,8 +11,8 @@ import com.open.springqianbailu.model.table.SubMenu;
 import com.open.springqianbailu.model.table.gallery.Gallery;
 import com.open.springqianbailu.model.table.rabbitmq.RabbitMessage;
 import com.open.springqianbailu.model.table.rabbitmq.RabbitQueue;
+import com.open.springqianbailu.service.SubMenuSevice;
 import com.open.springqianbailu.service.gallery.GalleryService;
-import com.open.springqianbailu.service.impl.rabbitmq.sender.GallerySender;
 import com.open.springqianbailu.service.rabbitmq.RabbitMessageService;
 import com.open.springqianbailu.service.rabbitmq.RabbitQueueService;
 import org.slf4j.Logger;
@@ -37,11 +37,11 @@ public class GalleryServiceImpl implements GalleryService {
     public Logger logger = LoggerFactory.getLogger(getClass().getSimpleName());
     @Resource
     private GalleryMapper galleryMapper;
-    @Resource
-    private SubMenuMapper subMenuMapper;
+    @Reference
+    private SubMenuSevice subMenuSevice;
 
-    @Autowired
-    private GallerySender gallerySender;
+//    @Autowired
+//    private GallerySender gallerySender;
 
     @Resource
     private RabbitMessageService rabbitMessageService;
@@ -73,7 +73,7 @@ public class GalleryServiceImpl implements GalleryService {
     public void updateList() {
         galleryMapper.dropTable();
         galleryMapper.createTable();
-        List<SubMenu> subMenuList = subMenuMapper.selectByMenuId(0);
+        List<SubMenu> subMenuList = subMenuSevice.selectByMenuId(0);
         for (SubMenu menu:subMenuList){
             List<Gallery> list =  GalleryDocmentDao.parseList(menu.getId(),menu.getHref());
             galleryMapper.insertBatch(list);
@@ -100,7 +100,7 @@ public class GalleryServiceImpl implements GalleryService {
         rabbitQueueService.insert(queue);
 
         message.id = msg.getId();
-        gallerySender.send(message);
+//        gallerySender.send(message);
         return 0;
     }
 
@@ -112,5 +112,15 @@ public class GalleryServiceImpl implements GalleryService {
             redisUtil.set(TAG+map.toString(),list,REDIS_EXPIRE_TIME);
         }
         return list;
+    }
+
+    @Override
+    public void deleteByPageNo(int pageNo) {
+        galleryMapper.deleteByPageNo(pageNo);
+    }
+
+    @Override
+    public int insertBatch(List<Gallery> menu) {
+        return galleryMapper.insertBatch(menu);
     }
 }

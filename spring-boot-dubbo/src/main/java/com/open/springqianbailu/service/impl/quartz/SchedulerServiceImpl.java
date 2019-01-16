@@ -2,7 +2,6 @@ package com.open.springqianbailu.service.impl.quartz;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.open.springqianbailu.quartz.QuartzScheduler2;
-import com.open.springqianbailu.service.impl.jobs.MenuQuartzJob;
 import com.open.springqianbailu.service.quartz.SchedulerService;
 import org.quartz.*;
 import org.slf4j.Logger;
@@ -30,7 +29,7 @@ public class SchedulerServiceImpl implements SchedulerService {
     @Override
     public void startJob(String name, String group) throws SchedulerException {
         logger.info(TAG+"=====startJob=========name=="+name+";group==="+group);
-        quartzScheduler2.startJob(MenuQuartzJob.class,"0/5 * * * * ?",name,group);
+//        quartzScheduler2.startJob(MenuQuartzJob.class,"0/5 * * * * ?",name,group);
     }
 
     @Override
