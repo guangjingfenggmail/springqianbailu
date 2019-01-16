@@ -13,7 +13,6 @@ import com.open.springqianbailu.model.table.rabbitmq.RabbitMessage;
 import com.open.springqianbailu.model.table.rabbitmq.RabbitQueue;
 import com.open.springqianbailu.service.SubMenuSevice;
 import com.open.springqianbailu.service.novel.NovelService;
-import com.open.springqianbailu.service.rabbitmq.RabbitQueueService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +44,8 @@ public class NovelServiceImpl  implements NovelService {
 //    @Autowired
 //    private RabbitMessageMapper rabbitMessageMapper;
 
-    @Autowired
-    private RabbitQueueService rabbitQueueService;
+//    @Autowired
+//    private RabbitQueueService rabbitQueueService;
 
     @Override
     public int insert(Novel novel) {
@@ -94,7 +93,7 @@ public class NovelServiceImpl  implements NovelService {
         queue.setUuid(message.uuid);
         queue.setRoutingKey(message.routingKey);
         queue.setStatus(0);
-        rabbitQueueService.insert(queue);
+//        rabbitQueueService.insert(queue);
 
         message.id = msg.getId();
 //        novelSender.send(message);

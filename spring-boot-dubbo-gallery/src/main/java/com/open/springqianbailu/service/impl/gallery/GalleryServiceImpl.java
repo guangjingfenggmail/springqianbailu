@@ -13,8 +13,6 @@ import com.open.springqianbailu.model.table.rabbitmq.RabbitMessage;
 import com.open.springqianbailu.model.table.rabbitmq.RabbitQueue;
 import com.open.springqianbailu.service.SubMenuSevice;
 import com.open.springqianbailu.service.gallery.GalleryService;
-import com.open.springqianbailu.service.rabbitmq.RabbitMessageService;
-import com.open.springqianbailu.service.rabbitmq.RabbitQueueService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,11 +41,11 @@ public class GalleryServiceImpl implements GalleryService {
 //    @Autowired
 //    private GallerySender gallerySender;
 
-    @Resource
-    private RabbitMessageService rabbitMessageService;
-
-    @Autowired
-    private RabbitQueueService rabbitQueueService;
+//    @Resource
+//    private RabbitMessageService rabbitMessageService;
+//
+//    @Autowired
+//    private RabbitQueueService rabbitQueueService;
 
     @Override
     public int insert(Gallery novel) {
@@ -90,14 +88,14 @@ public class GalleryServiceImpl implements GalleryService {
         msg.setCreateTime(System.currentTimeMillis()+"");
         msg.setMessage(gson.toJson(message));
         msg.setStatus(0);
-        rabbitMessageService.insert(msg);
+//        rabbitMessageService.insert(msg);
 
         RabbitQueue queue = new RabbitQueue();
         queue.setRabbit_mq_id(msg.getId());
         queue.setUuid(message.uuid);
         queue.setRoutingKey(message.routingKey);
         queue.setStatus(0);
-        rabbitQueueService.insert(queue);
+//        rabbitQueueService.insert(queue);
 
         message.id = msg.getId();
 //        gallerySender.send(message);
