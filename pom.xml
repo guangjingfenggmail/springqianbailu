@@ -21,6 +21,7 @@
         <module>spring-boot-dubbo-novel</module>
         <module>spring-boot-dubbo-gallery</module>
         <module>spring-boot-dubbo-video</module>
+        <module>spring-boot-dubbo-user</module>
     </modules>
 
     <dependencies>
