@@ -24,10 +24,10 @@ public class MenuAsyncTask {
 
     @Async("taskExecutor")
     public void doTaskMenu() throws Exception {
-        List<Menu> list = MenuDocumentDao.parseMenus();
-        if (list!=null && list.size()>0){
-            menuSevice.doTaskMenu(list);
-        }
-        jsoupMenuService.updateMenu();
+//        List<Menu> list = MenuDocumentDao.parseMenus();
+//        if (list!=null && list.size()>0){
+//            menuSevice.doTaskMenu(list);
+//        }
+//        jsoupMenuService.updateMenu();
     }
 }

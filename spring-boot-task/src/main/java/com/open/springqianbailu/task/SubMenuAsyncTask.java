@@ -16,17 +16,17 @@ import java.util.Random;
 public class SubMenuAsyncTask {
     public static Random random = new Random();
 
-//    @Reference
-//    private SubMenuSevice subMenuSevice;
+    @Reference
+    private SubMenuSevice subMenuSevice;
 
     @Reference
     private JsoupSubMenuService jsoupSubMenuService;
     @Async("taskExecutor")
     public void doTaskMenu() throws Exception {
-//        List<SubMenu> list = MenuDocumentDao.parseSubMenus();
-//        if (list!=null && list.size()>0){
-//            subMenuSevice.doTaskMenu(list);
-//        }
-//        jsoupSubMenuService.updateSubMenu();
+        List<SubMenu> list = MenuDocumentDao.parseSubMenus();
+        if (list!=null && list.size()>0){
+            subMenuSevice.doTaskMenu(list);
+        }
+        jsoupSubMenuService.updateSubMenu();
     }
 }

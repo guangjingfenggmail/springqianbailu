@@ -20,14 +20,15 @@ public class MenuDocumentDao extends AbsDocumentDao {
         logger.info("parseMenus start =====");
 
         try {
-            Document doc = Jsoup.connect(DOMAIN2)
+            Document doc = Jsoup.connect(DOMAIN)
                     .header("User-Agent",
                             USER_AGENT)
                     .timeout(TIMEOUT)
                     .get();
 
             if (doc != null) {
-                Elements headElements = doc.select("div.tabbar").first().select("a");
+                Elements headElements = doc.select("div.k_head-2a");
+//                Elements headElements = doc.select("div.tabbar").first().select("a");
                 if (headElements != null && headElements.size() > 0) {
                     Menu menu;
                     for (int i = 0; i < headElements.size(); i++) {
@@ -43,7 +44,7 @@ public class MenuDocumentDao extends AbsDocumentDao {
                                 String href = aElement.attr("href");
                                 logger.info("i==" + i + ";href==" + href);
                                 if (href==null || href.length()==0){
-                                    href = DOMAIN2;
+                                    href = DOMAIN;
                                 }
                                 menu.setHref(href);
 

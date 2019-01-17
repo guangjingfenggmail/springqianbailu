@@ -18,7 +18,7 @@ public class MenuSchedulingConfig {
     @Autowired
     private MenuAsyncTask menuAsyncTask;
 
-    @Scheduled(cron = "0 0/1 * * * ?") // 每1分钟执行一次
+    @Scheduled(cron = "0 0/2 * * * ?") // 每1分钟执行一次
     public void updateMenu() throws Exception {
         logger.info("updateMenu 定时任务启动");
 

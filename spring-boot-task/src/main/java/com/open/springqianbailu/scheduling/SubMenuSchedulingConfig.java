@@ -17,11 +17,11 @@ public class SubMenuSchedulingConfig {
     @Autowired
     private SubMenuAsyncTask subMenuAsyncTask;
 
-    @Scheduled(cron = "0 0/2 * * * ?") // 每2分钟执行一次
+    @Scheduled(cron = "0 0/1 * * * ?") // 每2分钟执行一次
     public void updateMenu()  throws Exception{
         logger.info("updateSubMenu 定时任务启动");
-//        subMenuAsyncTask.doTaskMenu();
-//        Thread.currentThread().join();
+        subMenuAsyncTask.doTaskMenu();
+        Thread.currentThread().join();
     }
 
 }
