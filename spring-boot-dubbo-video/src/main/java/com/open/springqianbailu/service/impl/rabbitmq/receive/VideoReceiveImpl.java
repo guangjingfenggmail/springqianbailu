@@ -40,10 +40,10 @@ public class VideoReceiveImpl {
     @Resource
     public RedisUtil redisUtil;
 
-    @Autowired
+    @Reference
     private RabbitMessageService rabbitMessageService;
 
-    @Autowired
+    @Reference
     private RabbitQueueService rabbitQueueService;
 
     @RabbitListener(queues = QueueConfig.QUEUENAME_VIDEO)//监听器监听指定的Queue

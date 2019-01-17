@@ -12,7 +12,10 @@ import com.open.springqianbailu.model.table.novel.Novel;
 import com.open.springqianbailu.model.table.rabbitmq.RabbitMessage;
 import com.open.springqianbailu.model.table.rabbitmq.RabbitQueue;
 import com.open.springqianbailu.service.SubMenuSevice;
+import com.open.springqianbailu.service.impl.rabbitmq.sender.NovelSender;
 import com.open.springqianbailu.service.novel.NovelService;
+import com.open.springqianbailu.service.rabbitmq.RabbitMessageService;
+import com.open.springqianbailu.service.rabbitmq.RabbitQueueService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,14 +41,14 @@ public class NovelServiceImpl  implements NovelService {
     @Reference
     private SubMenuSevice subMenuSevice;
 
-//    @Autowired
-//    private NovelSender novelSender;
-//
-//    @Autowired
-//    private RabbitMessageMapper rabbitMessageMapper;
+    @Autowired
+    private NovelSender novelSender;
 
-//    @Autowired
-//    private RabbitQueueService rabbitQueueService;
+    @Reference
+    private RabbitMessageService rabbitMessageService;
+
+    @Reference
+    private RabbitQueueService rabbitQueueService;
 
     @Override
     public int insert(Novel novel) {
@@ -86,17 +89,17 @@ public class NovelServiceImpl  implements NovelService {
         msg.setRoutingKey(message.routingKey);
         msg.setCreateTime(System.currentTimeMillis()+"");
         msg.setMessage(gson.toJson(message));
-//        rabbitMessageMapper.insert(msg);
+        rabbitMessageService.insert(msg);
 
         RabbitQueue queue = new RabbitQueue();
         queue.setRabbit_mq_id(msg.getId());
         queue.setUuid(message.uuid);
         queue.setRoutingKey(message.routingKey);
         queue.setStatus(0);
-//        rabbitQueueService.insert(queue);
+        rabbitQueueService.insert(queue);
 
         message.id = msg.getId();
-//        novelSender.send(message);
+        novelSender.send(message);
         return 0;
     }
 

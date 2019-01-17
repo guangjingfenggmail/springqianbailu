@@ -14,6 +14,9 @@ import com.open.springqianbailu.model.table.rabbitmq.RabbitQueue;
 import com.open.springqianbailu.model.table.video.Video;
 import com.open.springqianbailu.model.table.video.VideoSource;
 import com.open.springqianbailu.service.SubMenuSevice;
+import com.open.springqianbailu.service.impl.rabbitmq.sender.VideoSender;
+import com.open.springqianbailu.service.rabbitmq.RabbitMessageService;
+import com.open.springqianbailu.service.rabbitmq.RabbitQueueService;
 import com.open.springqianbailu.service.video.VideoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,17 +43,17 @@ public class VideoServiceImpl implements VideoService {
     @Reference
     private SubMenuSevice subMenuSevice;
 
-//    @Autowired
-//    private VideoSender videoSender;
+    @Autowired
+    private VideoSender videoSender;
 
     @Reference
     private VideoSourceMapper videoSourceMapper;
-//
-//    @Resource
-//    private RabbitMessageService rabbitMessageService;
-//
-//    @Autowired
-//    private RabbitQueueService rabbitQueueService;
+
+    @Reference
+    private RabbitMessageService rabbitMessageService;
+
+    @Reference
+    private RabbitQueueService rabbitQueueService;
 
     @Override
     public int insert(Video novel) {
@@ -88,17 +91,17 @@ public class VideoServiceImpl implements VideoService {
         msg.setCreateTime(System.currentTimeMillis()+"");
         msg.setMessage(gson.toJson(message));
         msg.setStatus(0);
-//        rabbitMessageService.insert(msg);
+        rabbitMessageService.insert(msg);
 
         RabbitQueue queue = new RabbitQueue();
         queue.setRabbit_mq_id(msg.getId());
         queue.setUuid(message.uuid);
         queue.setRoutingKey(message.routingKey);
         queue.setStatus(0);
-//        rabbitQueueService.insert(queue);
+        rabbitQueueService.insert(queue);
 
         message.id = msg.getId();
-//        videoSender.send(message);
+        videoSender.send(message);
         return 0;
     }
 
