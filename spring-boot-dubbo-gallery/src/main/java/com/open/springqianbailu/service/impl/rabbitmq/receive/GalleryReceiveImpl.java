@@ -40,10 +40,10 @@ public class GalleryReceiveImpl {
     @Resource
     public RedisUtil redisUtil;
 
-    @Autowired
+    @Reference
     private RabbitQueueService rabbitQueueService;
 
-    @Autowired
+    @Reference
     private RabbitMessageService rabbitMessageService;
 
     @RabbitListener(queues = QueueConfig.QUEUENAME_GALLERY)//监听器监听指定的Queue

@@ -44,10 +44,10 @@ public class GalleryServiceImpl implements GalleryService {
     @Autowired
     private GallerySender gallerySender;
 
-    @Resource
+    @Reference
     private RabbitMessageService rabbitMessageService;
 
-    @Autowired
+    @Reference
     private RabbitQueueService rabbitQueueService;
 
     @Override
@@ -91,7 +91,7 @@ public class GalleryServiceImpl implements GalleryService {
         msg.setCreateTime(System.currentTimeMillis()+"");
         msg.setMessage(gson.toJson(message));
         msg.setStatus(0);
-        rabbitMessageService.insert(msg);
+        msg =  rabbitMessageService.insert(msg);
 
         RabbitQueue queue = new RabbitQueue();
         queue.setRabbit_mq_id(msg.getId());

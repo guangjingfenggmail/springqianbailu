@@ -28,8 +28,9 @@ public class RabbitMessageServiceImpl implements RabbitMessageService {
     private RabbitMessageMapper rabbitMessageMapper;
 
     @Override
-    public int insert(RabbitMessage record) {
-        return rabbitMessageMapper.insert(record);
+    public RabbitMessage insert(RabbitMessage record) {
+          rabbitMessageMapper.insert(record);
+          return record;
     }
 
     @Override

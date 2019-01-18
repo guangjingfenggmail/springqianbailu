@@ -91,7 +91,7 @@ public class VideoServiceImpl implements VideoService {
         msg.setCreateTime(System.currentTimeMillis()+"");
         msg.setMessage(gson.toJson(message));
         msg.setStatus(0);
-        rabbitMessageService.insert(msg);
+        msg = rabbitMessageService.insert(msg);
 
         RabbitQueue queue = new RabbitQueue();
         queue.setRabbit_mq_id(msg.getId());

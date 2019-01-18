@@ -89,7 +89,7 @@ public class NovelServiceImpl  implements NovelService {
         msg.setRoutingKey(message.routingKey);
         msg.setCreateTime(System.currentTimeMillis()+"");
         msg.setMessage(gson.toJson(message));
-        rabbitMessageService.insert(msg);
+        msg = rabbitMessageService.insert(msg);
 
         RabbitQueue queue = new RabbitQueue();
         queue.setRabbit_mq_id(msg.getId());

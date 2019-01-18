@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface RabbitMessageService {
-    int insert(RabbitMessage record);
+    RabbitMessage insert(RabbitMessage record);
 
     List<RabbitMessage> selectAll();
 

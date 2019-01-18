@@ -1,6 +1,7 @@
 package com.open.springqianbailu.service.impl.rabbitmq.sender;
 
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.google.gson.Gson;
 import com.open.springqianbailu.model.rabbitmq.NovelMessage;
 import com.open.springqianbailu.model.table.rabbitmq.RabbitQueue;
@@ -18,7 +19,7 @@ public class GallerySender {
     public Logger logger = LoggerFactory.getLogger(getClass().getSimpleName());
     @Autowired
     private RabbitTemplate template;
-    @Autowired
+    @Reference
     private RabbitQueueService rabbitQueueService;
 
     public void send(NovelMessage message) {

@@ -40,10 +40,10 @@ public class NovelReceiveImpl {
     @Resource
     public RedisUtil redisUtil;
 
-    @Autowired
+    @Reference
     private RabbitMessageService rabbitMessageService;
 
-    @Autowired
+    @Reference
     private RabbitQueueService rabbitQueueService;
 
     @RabbitListener(queues = QueueConfig.QUEUENAME_NOVEL)//监听器监听指定的Queue
