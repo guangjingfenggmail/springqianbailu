@@ -141,7 +141,7 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public void deleteByPageNo(int pageNo) {
-        videoMapper.deleteByPageNo(pageNo);
+    public void deleteByPageNo(HashMap map) {
+        videoMapper.deleteByPageNo(map);
     }
 }

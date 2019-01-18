@@ -16,7 +16,7 @@ public interface GalleryMapper {
 
     int insertBatch(List<Gallery> menu);
 
-    void deleteByPageNo(int pageNo);
+    void deleteByPageNo(HashMap map);
 
     void dropTable();
 

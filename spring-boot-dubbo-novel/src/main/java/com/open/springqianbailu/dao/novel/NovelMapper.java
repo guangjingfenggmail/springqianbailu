@@ -17,7 +17,7 @@ public interface NovelMapper   {
 
     int insertBatch(List<Novel> menu);
 
-    void deleteByPageNo(int pageNo);
+    void deleteByPageNo(HashMap map);
 
     void dropTable();
 

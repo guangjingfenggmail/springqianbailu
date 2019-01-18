@@ -21,7 +21,7 @@ public interface GalleryService {
 
     List<Gallery> selectByDate(HashMap map);
 
-    void deleteByPageNo(int pageNo);
+    void deleteByPageNo(HashMap map);
 
     int insertBatch(List<Gallery> menu);
 }

@@ -119,7 +119,7 @@ public class NovelServiceImpl  implements NovelService {
     }
 
     @Override
-    public void deleteByPageNo(int pageNo) {
-        novelMapper.deleteByPageNo(pageNo);
+    public void deleteByPageNo(HashMap map) {
+        novelMapper.deleteByPageNo(map);
     }
 }

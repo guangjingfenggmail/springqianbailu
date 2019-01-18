@@ -65,7 +65,10 @@ public class GalleryReceiveImpl {
             List<Gallery> list =  GalleryDocmentDao.parseList(menu.getId(),menu.getHref(),Integer.parseInt(message.pageNo));
             redisUtil.set(message.method+message.submenuId+message.pageNo,list);
             //删除当前记录
-            galleryService.deleteByPageNo(Integer.parseInt(message.pageNo));
+            HashMap deletemap = new HashMap();
+            deletemap.put("pageNo",Integer.parseInt(message.pageNo));
+            deletemap.put("submenuId",Integer.parseInt(message.submenuId));
+            galleryService.deleteByPageNo(deletemap);
             if (list==null || list.size()==0)
                 return;
             //入库

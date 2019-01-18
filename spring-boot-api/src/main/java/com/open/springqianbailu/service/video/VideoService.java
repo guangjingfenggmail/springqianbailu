@@ -21,5 +21,5 @@ public interface VideoService {
 
     int insertBatch(List<Video> list);
 
-    void deleteByPageNo(int pageNo);
+    void deleteByPageNo(HashMap map);
 }

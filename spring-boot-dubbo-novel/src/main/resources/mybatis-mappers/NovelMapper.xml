@@ -55,9 +55,9 @@
         drop table if exists novel
     </delete>
 
-    <delete id="deleteByPageNo"  parameterType="java.lang.Integer" >
+    <delete id="deleteByPageNo"  parameterType="hashmap" >
         delete from novel
-        where pageNo = #{pageNo,jdbcType=INTEGER}
+        where pageNo = #{pageNo,jdbcType=INTEGER} and submenuId = #{submenuId,jdbcType=INTEGER}
     </delete>
 
     <insert id="createTable">

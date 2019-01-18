@@ -116,8 +116,8 @@ public class GalleryServiceImpl implements GalleryService {
     }
 
     @Override
-    public void deleteByPageNo(int pageNo) {
-        galleryMapper.deleteByPageNo(pageNo);
+    public void deleteByPageNo(HashMap map) {
+        galleryMapper.deleteByPageNo(map);
     }
 
     @Override

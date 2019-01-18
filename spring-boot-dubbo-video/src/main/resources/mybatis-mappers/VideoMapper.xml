@@ -53,9 +53,9 @@
     where submenuId = #{submenuId} and createDate = #{createDate}
   </select>
 
-  <delete id="deleteByPageNo"  parameterType="java.lang.Integer" >
+  <delete id="deleteByPageNo"  parameterType="hashmap"  >
         delete from video
-        where pageNo = #{pageNo,jdbcType=INTEGER}
+        where pageNo = #{pageNo,jdbcType=INTEGER} and submenuId = #{submenuId,jdbcType=INTEGER}
     </delete>
 
   <delete id="dropTable">
