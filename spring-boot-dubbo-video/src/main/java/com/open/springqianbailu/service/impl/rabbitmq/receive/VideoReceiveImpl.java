@@ -4,6 +4,7 @@ package com.open.springqianbailu.service.impl.rabbitmq.receive;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.google.gson.Gson;
 import com.open.springqianbailu.RedisUtil;
+import com.open.springqianbailu.dao.video.VideoMapper;
 import com.open.springqianbailu.documents.VideoDocmentDao;
 import com.open.springqianbailu.model.rabbitmq.NovelMessage;
 import com.open.springqianbailu.model.table.SubMenu;
@@ -34,8 +35,8 @@ public class VideoReceiveImpl {
 
     @Reference
     private SubMenuSevice subMenuSevice;
-    @Reference
-    private VideoService videoService;
+    @Resource
+    private VideoMapper videoMapper;
     @Resource
     public RedisUtil redisUtil;
 
@@ -70,11 +71,11 @@ public class VideoReceiveImpl {
             HashMap deletemap = new HashMap();
             deletemap.put("pageNo",Integer.parseInt(message.pageNo));
             deletemap.put("submenuId",Integer.parseInt(message.submenuId));
-            videoService.deleteByPageNo(deletemap);
+            videoMapper.deleteByPageNo(deletemap);
             if (list==null || list.size()==0)
                 return;
             //入库
-            videoService.insertBatch(list);
+            videoMapper.insertBatch(list);
 
             RabbitQueue rabbitMessage = new RabbitQueue();
             rabbitMessage.setStatus(3);

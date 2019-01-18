@@ -4,6 +4,7 @@ package com.open.springqianbailu.service.impl.rabbitmq.receive;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.google.gson.Gson;
 import com.open.springqianbailu.RedisUtil;
+import com.open.springqianbailu.dao.novel.NovelMapper;
 import com.open.springqianbailu.documents.NovelDocmentDao;
 import com.open.springqianbailu.model.rabbitmq.NovelMessage;
 import com.open.springqianbailu.model.table.SubMenu;
@@ -35,8 +36,8 @@ public class NovelReceiveImpl {
 
     @Reference
     private SubMenuSevice subMenuSevice;
-    @Reference
-    private NovelService novelService;
+    @Resource
+    private NovelMapper novelMapper;
     @Resource
     public RedisUtil redisUtil;
 
@@ -71,11 +72,11 @@ public class NovelReceiveImpl {
             HashMap deletemap = new HashMap();
             deletemap.put("pageNo",Integer.parseInt(message.pageNo));
             deletemap.put("submenuId",Integer.parseInt(message.submenuId));
-            novelService.deleteByPageNo(deletemap);
+            novelMapper.deleteByPageNo(deletemap);
             if (list==null || list.size()==0)
                 return;
             //入库
-            novelService.insertBatch(list);
+            novelMapper.insertBatch(list);
 
             RabbitQueue rabbitMessage = new RabbitQueue();
             rabbitMessage.setStatus(3);

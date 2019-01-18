@@ -4,6 +4,7 @@ package com.open.springqianbailu.service.impl.rabbitmq.receive;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.google.gson.Gson;
 import com.open.springqianbailu.RedisUtil;
+import com.open.springqianbailu.dao.gallery.GalleryMapper;
 import com.open.springqianbailu.documents.GalleryDocmentDao;
 import com.open.springqianbailu.model.rabbitmq.NovelMessage;
 import com.open.springqianbailu.model.table.SubMenu;
@@ -35,8 +36,8 @@ public class GalleryReceiveImpl {
 
     @Reference
     private SubMenuSevice subMenuSevice;
-    @Reference
-    private GalleryService galleryService;
+    @Resource
+    private GalleryMapper galleryMapper;
     @Resource
     public RedisUtil redisUtil;
 
@@ -68,11 +69,11 @@ public class GalleryReceiveImpl {
             HashMap deletemap = new HashMap();
             deletemap.put("pageNo",Integer.parseInt(message.pageNo));
             deletemap.put("submenuId",Integer.parseInt(message.submenuId));
-            galleryService.deleteByPageNo(deletemap);
+            galleryMapper.deleteByPageNo(deletemap);
             if (list==null || list.size()==0)
                 return;
             //入库
-            galleryService.insertBatch(list);
+            galleryMapper.insertBatch(list);
 
             RabbitQueue rabbitMessage = new RabbitQueue();
             rabbitMessage.setStatus(3);
