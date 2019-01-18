@@ -26,13 +26,13 @@
         <result column="pageNo" jdbcType="INTEGER" property="pageNo"/>
         <result column="page_id" property="page_id"/>
         <result column="createDate" jdbcType="VARCHAR" property="createDate"/>
-        <collection property="pageList" column="{novelId=id,pageId=page_id}"
-                     select="com.open.com.open.springqianbailu.dao.novel.NovelPageMapper.selectById">
-        </collection>
+        <!--<collection property="pageList" column="{novelId=id,pageId=page_id}"-->
+                     <!--select="com.open.com.open.springqianbailu.dao.novel.NovelPageMapper.selectById">-->
+        <!--</collection>-->
 
-        <collection property="articleList" column="{novelId=id,pageId=page_id}"
-                    select="com.open.com.open.springqianbailu.dao.novel.NovelArticleMapper.selectById">
-        </collection>
+        <!--<collection property="articleList" column="{novelId=id,pageId=page_id}"-->
+                    <!--select="com.open.com.open.springqianbailu.dao.novel.NovelArticleMapper.selectById">-->
+        <!--</collection>-->
     </resultMap>
 
     <select id="selectByHref" resultMap="collectionResultMap" parameterType="hashmap">

@@ -2,6 +2,7 @@ package com.open.springqianbailu.dao.novel;
 
 import com.open.springqianbailu.model.table.novel.NovelPage;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface NovelPageMapper {
@@ -13,5 +14,5 @@ public interface NovelPageMapper {
 
     void createTable();
 
-    List<NovelPage> selectById(Integer id);
+    List<NovelPage> selectById(HashMap map);
 }

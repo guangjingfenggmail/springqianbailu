@@ -15,4 +15,6 @@ public interface NovelArticleMapper {
     void createTable();
 
     List<NovelArticle> selectArticle(HashMap map);
+
+    List<NovelArticle> selectById(HashMap map);
 }
