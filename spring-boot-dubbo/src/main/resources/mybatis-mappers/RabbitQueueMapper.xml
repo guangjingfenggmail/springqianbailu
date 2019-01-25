@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.open.springqianbailu.dao.rabbitmq.RabbitQueueMapper">
+  <resultMap id="BaseResultMap" type="com.open.springqianbailu.model.table.rabbitmq.RabbitQueue">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="rabbit_mq_id" jdbcType="INTEGER" property="rabbit_mq_id" />
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="routingKey" jdbcType="VARCHAR" property="routingKey" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="ack" jdbcType="INTEGER" property="ack" />
+    <result column="cause" jdbcType="VARCHAR" property="cause" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+        id, rabbit_mq_id,uuid,routingKey, status,ack,cause
+   </sql>
+
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.open.springqianbailu.model.table.rabbitmq.RabbitQueue">
+    insert into rabbit_mq_queue (id, rabbit_mq_id, uuid, 
+      routingKey, status,
+      ack, cause)
+    values (#{id,jdbcType=INTEGER}, #{rabbit_mq_id,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR},
+      #{routingKey,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+      #{ack,jdbcType=INTEGER}, #{cause,jdbcType=VARCHAR})
+  </insert>
+
+
+  <update id="updateById" parameterType="com.open.springqianbailu.model.table.rabbitmq.RabbitMessage">
+    update rabbit_mq_queue set
+    status = #{status,jdbcType=INTEGER},
+    <if test="ack != null">
+      , ack = #{ack,jdbcType=INTEGER}
+    </if>
+    <if test="cause != null">
+      , cause = #{cause,jdbcType=VARCHAR}
+    </if>
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+
+  <delete id="dropTable">
+        drop table if exists rabbit_mq_queue
+  </delete>
+
+  <insert id="createTable">
+    CREATE TABLE `rabbit_mq_queue` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `rabbit_mq_id` int(11) NOT NULL,
+    `uuid` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `routingKey` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `status` int(11) DEFAULT NULL COMMENT '-2:重新发送-1:未知；0:生成；1:发送；2:confirm;3:消费；4重复消费失败',
+    `ack` int(11) DEFAULT NULL COMMENT '1:成功0:失败',
+    `cause` varchar(2550) COLLATE utf8_bin DEFAULT NULL COMMENT '失败异常',
+    PRIMARY KEY (`id`,`rabbit_mq_id`) USING BTREE
+  ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+    </insert>
+
+</mapper>

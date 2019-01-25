@@ -24,3 +24,10 @@
 /nbdist/
 /.nb-gradle/
 /logs/
+/spring-boot-dubbo/target/
+/spring-boot-consumer/target/
+/spring-boot-api/target/
+/spring-boot-model/target/
+/spring-boot-config/target/
+/spring-boot-jsoup/target/
+/spring-boot-task/target/

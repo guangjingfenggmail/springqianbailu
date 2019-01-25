@@ -17,7 +17,7 @@ public class SubMenu implements Serializable {
 
     private String src;
 
-    private String price;
+
 
 
     public Integer getId() {
@@ -76,11 +76,5 @@ public class SubMenu implements Serializable {
         this.src = src;
     }
 
-    public String getPrice() {
-        return price;
-    }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
 }

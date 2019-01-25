@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.open.springqianbailu.dao.rabbitmq.RabbitMessageMapper">
+  <resultMap id="BaseResultMap" type="com.open.springqianbailu.model.table.rabbitmq.RabbitMessage">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="routingKey" jdbcType="VARCHAR" property="routingKey" />
+    <result column="message" jdbcType="VARCHAR" property="message" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="createTime" jdbcType="VARCHAR" property="createTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+        id, uuid,routingKey, message,status,createTime
+   </sql>
+
+  <delete id="dropTable">
+        drop table if exists rabbit_mq
+    </delete>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from rabbit_mq
+  </select>
+
+  <select id="selectById" resultMap="BaseResultMap"  parameterType="hashmap">
+    select
+    <include refid="Base_Column_List" />
+    from rabbit_mq
+    where uuid = #{uuid,jdbcType=VARCHAR} and status &lt; #{status,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByUUId" resultMap="BaseResultMap"  parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from rabbit_mq
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+
+  <insert id="createTable">
+    CREATE TABLE `rabbit_mq` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `uuid` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+      `routingKey` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+      `message` varchar(2550) COLLATE utf8_bin DEFAULT NULL COMMENT 'json格式',
+      `status` int(11) DEFAULT NULL COMMENT '-2:重新发送-1:未知；0:生成；1:发送；2:confirm;3:消费；4重复消费失败',
+      `createTime` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+      PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+    </insert>
+
+  <insert id="insert"  useGeneratedKeys="true" keyProperty="id" parameterType="com.open.springqianbailu.model.table.rabbitmq.RabbitMessage">
+    insert into rabbit_mq (id, uuid, routingKey, 
+      message, status,createTime)
+    values (#{id,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{routingKey,jdbcType=VARCHAR},
+      #{message,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=VARCHAR})
+  </insert>
+</mapper>
