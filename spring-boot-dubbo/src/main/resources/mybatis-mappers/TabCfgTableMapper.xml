@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.open.springqianbailu.dao.TabCfgTableMapper">
+  <resultMap id="BaseResultMap" type="com.open.springqianbailu.model.table.TabCfgTable">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="icon_normal" jdbcType="VARCHAR" property="icon_normal" />
+    <result column="icon_selected" jdbcType="VARCHAR" property="icon_selected" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="text_color_normal" jdbcType="VARCHAR" property="text_color_normal" />
+    <result column="text_color_selected" jdbcType="VARCHAR" property="text_color_selected" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+        id, icon_normal, icon_selected,name,type,text_color_normal,text_color_selected
+    </sql>
+
+  <delete id="dropTable">
+    drop table if exists tabcfg
+  </delete>
+
+  <insert id="createTable">
+    CREATE TABLE `tabcfg` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `icon_normal` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '正常图片地址',
+      `icon_selected` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '选中的图片',
+      `name` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+      `type` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+      `text_color_normal` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+      `text_color_selected` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+      PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB  AUTO_INCREMENT=0  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+  </insert>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from tabcfg
+  </select>
+
+  <insert id="insert" parameterType="com.open.springqianbailu.model.table.TabCfgTable">
+    insert into tabcfg(icon_normal,icon_selected,name,type,text_color_normal,text_color_selected)
+    values (#{icon_normal,jdbcType=VARCHAR},#{icon_selected,jdbcType=VARCHAR},
+      #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{text_color_normal,jdbcType=VARCHAR},
+      #{text_color_selected,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.open.springqianbailu.model.table.TabCfgTable">
+    insert into tabcfg
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="icon_normal != null">
+        icon_normal,
+      </if>
+      <if test="icon_selected != null">
+        icon_selected,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="text_color_normal != null">
+        text_color_normal,
+      </if>
+      <if test="text_color_selected != null">
+        text_color_selected,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="icon_normal != null">
+        #{icon_normal,jdbcType=VARCHAR},
+      </if>
+      <if test="icon_selected != null">
+        #{icon_selected,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="text_color_normal != null">
+        #{text_color_normal,jdbcType=VARCHAR},
+      </if>
+      <if test="text_color_selected != null">
+        #{text_color_selected,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

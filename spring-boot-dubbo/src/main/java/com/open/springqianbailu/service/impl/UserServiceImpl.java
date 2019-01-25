@@ -5,6 +5,7 @@ import com.open.springqianbailu.RedisUtil;
 import com.open.springqianbailu.dao.UserMapper;
 import com.open.springqianbailu.model.table.User;
 import com.open.springqianbailu.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -17,7 +18,7 @@ import static com.open.springqianbailu.RedisUtil.REDIS_EXPIRE_TIME;
 @Service(interfaceClass = UserService.class) //dubbo的service，注入接口
 public class UserServiceImpl implements UserService {
 
-    @Resource
+    @Autowired
     private UserMapper userMapper;
 
     @Resource

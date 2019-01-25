@@ -12,5 +12,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.CLASS)
 @Target({ElementType.TYPE})
 public @interface DataSource {
-    String value() default "937xe";
+    String value() default "xiaomi";
 }

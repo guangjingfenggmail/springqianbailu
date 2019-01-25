@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.open.springqianbailu.dao.SplashMapper">
+  <resultMap id="BaseResultMap" type="com.open.springqianbailu.model.table.Splash">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="start" jdbcType="VARCHAR" property="start" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="full_display_img_url" jdbcType="VARCHAR" property="full_display_img_url" />
+    <result column="end" jdbcType="VARCHAR" property="end" />
+    <result column="skip_url" jdbcType="VARCHAR" property="skip_url" />
+    <result column="duration" jdbcType="VARCHAR" property="duration" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+        id, start, url,full_display_img_url,end,skip_url,duration
+    </sql>
+
+  <delete id="dropTable">
+    drop table if exists splash
+  </delete>
+
+  <insert id="createTable">
+    CREATE TABLE `splash` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `start` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '开始时间',
+    `url` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '图片地址启动',
+    `full_display_img_url` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '全屏图片',
+    `end` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '结束时间',
+    `skip_url` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '目标地址',
+    `duration` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '停留时间',
+    PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='启动图片';
+
+  </insert>
+
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from splash
+  </select>
+
+
+  <insert id="insert" parameterType="com.open.springqianbailu.model.table.Splash">
+    insert into splash (id, start, url, 
+      full_display_img_url, end, skip_url, 
+      duration)
+    values (#{id,jdbcType=INTEGER}, #{start,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{full_display_img_url,jdbcType=VARCHAR}, #{end,jdbcType=VARCHAR}, #{skip_url,jdbcType=VARCHAR},
+      #{duration,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.open.springqianbailu.model.table.Splash">
+    insert into splash
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="start != null">
+        start,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="full_display_img_url != null">
+        full_display_img_url,
+      </if>
+      <if test="end != null">
+        end,
+      </if>
+      <if test="skip_url != null">
+        skip_url,
+      </if>
+      <if test="duration != null">
+        duration,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="start != null">
+        #{start,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="full_display_img_url != null">
+        #{full_display_img_url,jdbcType=VARCHAR},
+      </if>
+      <if test="end != null">
+        #{end,jdbcType=VARCHAR},
+      </if>
+      <if test="skip_url != null">
+        #{skip_url,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null">
+        #{duration,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

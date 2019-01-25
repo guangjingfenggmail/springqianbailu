@@ -1,9 +1,17 @@
 package com.open.springqianbailu.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.google.gson.Gson;
 import com.open.springqianbailu.RedisUtil;
 import com.open.springqianbailu.dao.MenuMapper;
+import com.open.springqianbailu.dao.SplashMapper;
+import com.open.springqianbailu.dao.TabCfgTableMapper;
+import com.open.springqianbailu.model.bean.AppStart;
+import com.open.springqianbailu.model.bean.AppTabcfg;
 import com.open.springqianbailu.model.table.Menu;
+import com.open.springqianbailu.model.table.Splash;
+import com.open.springqianbailu.model.table.TabCfgTable;
+import com.open.springqianbailu.rest.XiaomiRestService;
 import com.open.springqianbailu.service.MenuSevice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,9 +20,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 
 import static com.open.springqianbailu.RedisUtil.REDIS_EXPIRE_TIME;
+import static com.open.springqianbailu.rest.HomeTabRestService.APP_START;
+import static com.open.springqianbailu.rest.HomeTabRestService.APP_TABCFG;
 
 
 @Component
@@ -33,7 +44,11 @@ public class MenuSeviceImpl  implements MenuSevice {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private SplashMapper splashMapper;
 
+    @Autowired
+    private TabCfgTableMapper tabCfgTableMapper;
 
     @Override
     public int insert(Menu menu) {
@@ -76,5 +91,42 @@ public class MenuSeviceImpl  implements MenuSevice {
         }
     }
 
+    @Override
+    public AppStart appStart(HashMap<String, Object> map) {
+        String resultStr = (String) redisUtil.get("appStart" + map.toString());
+        Gson gson = new Gson();
+        AppStart result = gson.fromJson(resultStr, AppStart.class);
+        if (resultStr == null || resultStr.length() == 0) {
+            resultStr = XiaomiRestService.responseEntity(map, restTemplate, APP_START).getBody();
+            logger.info("appStart=====" + resultStr);
+            redisUtil.set("appStart" + map.toString(), resultStr);
+            result = gson.fromJson(resultStr, AppStart.class);
 
+            Splash splash = result.data.splash;
+            splashMapper.insert(splash);
+        }
+        return result;
+    }
+
+
+    @Override
+    public AppTabcfg appTabcfg(HashMap<String, Object> map) {
+        String resultStr = (String) redisUtil.get("appTabcfg" + map.toString());
+        Gson gson = new Gson();
+        AppTabcfg result = gson.fromJson(resultStr, AppTabcfg.class);
+        if (resultStr == null || resultStr.length() == 0) {
+            resultStr = XiaomiRestService.responseEntity(map, restTemplate, APP_TABCFG).getBody();
+            logger.info("appTabcfg=====" + resultStr);
+            redisUtil.set("appTabcfg" + map.toString(), resultStr);
+            result = gson.fromJson(resultStr, AppTabcfg.class);
+
+            List<TabCfgTable> list = result.data.getTab_config();
+            tabCfgTableMapper.dropTable();
+            tabCfgTableMapper.createTable();
+            for (TabCfgTable bean : list) {
+                tabCfgTableMapper.insert(bean);
+            }
+        }
+        return result;
+    }
 }
