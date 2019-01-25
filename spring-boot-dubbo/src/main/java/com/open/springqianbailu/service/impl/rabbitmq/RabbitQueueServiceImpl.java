@@ -22,7 +22,7 @@ public class RabbitQueueServiceImpl implements RabbitQueueService {
     public String TAG = getClass().getSimpleName();
     public Logger logger = LoggerFactory.getLogger(getClass().getSimpleName());
 
-    @Autowired
+    @Resource
     private RabbitQueueMapper rabbitQueueMapper;
 
     @Override

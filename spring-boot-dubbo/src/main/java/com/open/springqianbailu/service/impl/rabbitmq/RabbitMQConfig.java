@@ -22,9 +22,7 @@ import org.springframework.context.annotation.Scope;
 
 import java.util.List;
 
-import static com.open.springqianbailu.rabbitmq.QueueConfig.QUEUENAME_GALLERY;
-import static com.open.springqianbailu.rabbitmq.QueueConfig.QUEUENAME_NOVEL;
-import static com.open.springqianbailu.rabbitmq.QueueConfig.QUEUENAME_VIDEO;
+import static com.open.springqianbailu.rabbitmq.QueueConfig.*;
 
 
 @Configuration
@@ -39,17 +37,14 @@ public class RabbitMQConfig {
 
     @Bean
     Queue queue() {
-        return new Queue(QUEUENAME_NOVEL, false);
+        return new Queue(QUEUENAME_APPINFO, false);
     }
 
     @Bean
-    Queue queueg() {
-        return new Queue(QUEUENAME_GALLERY, false);
+    Queue queuet() {
+        return new Queue(QUEUENAME_VIEWTYPE_ITEM, false);
     }
-    @Bean
-    Queue queuev() {
-        return new Queue(QUEUENAME_VIDEO, false);
-    }
+
 
     @Value("${spring.rabbitmq.host}")
     private String addresses;

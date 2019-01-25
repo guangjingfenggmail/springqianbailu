@@ -4,8 +4,8 @@ import com.open.springqianbailu.RedisUtil;
 import com.open.springqianbailu.dao.viewtype.ViewTypeTableMapper;
 import com.open.springqianbailu.model.rabbitmq.Message;
 import com.open.springqianbailu.model.table.viewtype.ViewTypeTable;
-import com.open.springqianbailu.rabbitmq.HomeSender;
 import com.open.springqianbailu.rest.HomeTabRestService;
+import com.open.springqianbailu.service.impl.rabbitmq.HomeSender;
 import com.open.springqianbailu.service.viewtype.ViewTypeTableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,10 +25,10 @@ public class ViewTypeTableServiceImpl implements ViewTypeTableService {
     @Resource
     public RedisUtil redisUtil;
 
-    @Autowired
+    @Resource
     private RestTemplate restTemplate;
 
-    @Autowired
+    @Resource
     private HomeSender homeSender;
 
     @Override

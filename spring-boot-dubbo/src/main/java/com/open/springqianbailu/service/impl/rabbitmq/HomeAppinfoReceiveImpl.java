@@ -6,7 +6,6 @@ import com.open.springqianbailu.RedisUtil;
 import com.open.springqianbailu.dao.HomeAppinfoTableMapper;
 import com.open.springqianbailu.model.rabbitmq.Message;
 import com.open.springqianbailu.model.table.HomeAppinfoTable;
-import com.open.springqianbailu.rabbitmq.RabbitMQConfig;
 import com.open.springqianbailu.rest.HomeTabRestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +16,8 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import java.util.List;
+
+import static com.open.springqianbailu.rabbitmq.QueueConfig.QUEUENAME_APPINFO;
 
 @Component
 public class HomeAppinfoReceiveImpl   {
@@ -32,7 +33,7 @@ public class HomeAppinfoReceiveImpl   {
     @Autowired
     public RestTemplate restTemplate;
 
-    @RabbitListener(queues = RabbitMQConfig.QUEUENAME_APPINFO)//监听器监听指定的Queue
+    @RabbitListener(queues =  QUEUENAME_APPINFO)//监听器监听指定的Queue
     public void processC(Message message) {
         Gson gson = new Gson();
         logger.info(TAG+"======start handle message ===="+ gson.toJson(message));

@@ -1,4 +1,4 @@
-package com.open.springqianbailu.rabbitmq;
+package com.open.springqianbailu.service.impl.rabbitmq;
 
 import com.google.gson.Gson;
 import com.open.springqianbailu.model.rabbitmq.Message;
@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
+
+import static com.open.springqianbailu.rabbitmq.QueueConfig.QUEUENAME_APPINFO;
+import static com.open.springqianbailu.rabbitmq.QueueConfig.QUEUENAME_VIEWTYPE_ITEM;
 
 
 @Component
@@ -26,7 +29,7 @@ public class HomeSender implements RabbitTemplate.ConfirmCallback {
         logger.info(TAG+"send========");
         CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
         logger.info(TAG+"callbackSender UUID: " + correlationData.getId());
-        template.convertAndSend(RabbitMQConfig.QUEUENAME_APPINFO ,message,correlationData);
+        template.convertAndSend(QUEUENAME_APPINFO ,message,correlationData);
     }
 
     public void sendViewType(Message message) {
@@ -34,7 +37,7 @@ public class HomeSender implements RabbitTemplate.ConfirmCallback {
         logger.info(TAG+"send========");
         CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
         logger.info(TAG+"callbackSender UUID: " + correlationData.getId());
-        template.convertAndSend(RabbitMQConfig.QUEUENAME_VIEWTYPE_ITEM ,message,correlationData);
+        template.convertAndSend(QUEUENAME_VIEWTYPE_ITEM ,message,correlationData);
     }
 
     @Override

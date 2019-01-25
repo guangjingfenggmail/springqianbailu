@@ -1,7 +1,7 @@
 package com.open.springqianbailu.rabbitmq;
 
 public class QueueConfig {
-    public final static String QUEUENAME_NOVEL = "queue-novel";
-    public final static String QUEUENAME_GALLERY = "queue-gallery";
-    public final static String QUEUENAME_VIDEO = "queue-video";
+    public final static String QUEUENAME_APPINFO = "queue-appinfo";
+
+    public final static String QUEUENAME_VIEWTYPE_ITEM = "queue-view-type-item";
 }

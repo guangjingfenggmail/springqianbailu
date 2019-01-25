@@ -5,9 +5,9 @@ import com.open.springqianbailu.RedisUtil;
 import com.open.springqianbailu.dao.HomeAppinfoTableMapper;
 import com.open.springqianbailu.model.rabbitmq.Message;
 import com.open.springqianbailu.model.table.HomeAppinfoTable;
-import com.open.springqianbailu.rabbitmq.HomeSender;
 import com.open.springqianbailu.rest.HomeTabRestService;
 import com.open.springqianbailu.service.HomeAppinfoService;
+import com.open.springqianbailu.service.impl.rabbitmq.HomeSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
 

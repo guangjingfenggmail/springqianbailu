@@ -13,9 +13,7 @@ import com.open.springqianbailu.model.table.viewtype.Action;
 import com.open.springqianbailu.model.table.viewtype.Item;
 import com.open.springqianbailu.model.table.viewtype.ViewTypeBodyTable;
 import com.open.springqianbailu.model.table.viewtype.ViewTypeTable;
-import com.open.springqianbailu.rabbitmq.RabbitMQConfig;
 
-import com.open.springqianbailu.rest.HomeTabRestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -25,6 +23,8 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import java.util.List;
+
+import static com.open.springqianbailu.rabbitmq.QueueConfig.QUEUENAME_VIEWTYPE_ITEM;
 
 @Component
 public class ViewTypeReceiveImpl   {
@@ -52,7 +52,7 @@ public class ViewTypeReceiveImpl   {
     private ViewTypeBodyTableMapper viewTypeBodyTableMapper;
 
 
-    @RabbitListener(queues = RabbitMQConfig.QUEUENAME_VIEWTYPE_ITEM)//监听器监听指定的Queue
+    @RabbitListener(queues = QUEUENAME_VIEWTYPE_ITEM)//监听器监听指定的Queue
     public void processV(Message message) {
         logger.info(TAG+"======start handle message ====");
         List<ViewTypeTable>  list = (List<ViewTypeTable>) redisUtil.get(message.getParam());

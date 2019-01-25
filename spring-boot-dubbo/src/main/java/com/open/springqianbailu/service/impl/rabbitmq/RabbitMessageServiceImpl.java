@@ -24,7 +24,7 @@ public class RabbitMessageServiceImpl implements RabbitMessageService {
     public String TAG = getClass().getSimpleName();
     public Logger logger = LoggerFactory.getLogger(getClass().getSimpleName());
 
-    @Autowired
+    @Resource
     private RabbitMessageMapper rabbitMessageMapper;
 
     @Override
