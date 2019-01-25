@@ -1,4 +1,4 @@
-package com.jaycekon.mybatis.multi;
+package com.open.springqianbailu;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SpringBootConsumerApplicationTests {
+public class SpringBootDubboApplicationTests {
 
 	@Test
 	public void contextLoads() {
