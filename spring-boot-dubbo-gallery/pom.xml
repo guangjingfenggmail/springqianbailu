@@ -7,7 +7,7 @@
     <groupId>com.open.springqianbailu</groupId>
     <artifactId>spring-boot-dubbo-gallery</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <!--<packaging>war</packaging>-->
 
     <parent>
         <groupId>org.springframework.boot</groupId>
