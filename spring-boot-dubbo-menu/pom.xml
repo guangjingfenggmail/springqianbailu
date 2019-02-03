@@ -6,7 +6,7 @@
     <groupId>com.open.springqianbailu</groupId>
     <artifactId>spring-boot-dubbo-menu</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <!--<packaging>war</packaging>-->
 
     <name>spring-boot-dubbo-menu</name>
     <description>Demo project for Spring Boot</description>

@@ -1,14 +1,17 @@
 package com.open.springqianbailu.service.impl.gallery;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.google.gson.Gson;
 import com.open.springqianbailu.RedisUtil;
 import com.open.springqianbailu.dao.gallery.GalleryImageMapper;
 import com.open.springqianbailu.dao.gallery.GalleryMapper;
 import com.open.springqianbailu.documents.GalleryDocmentDao;
+import com.open.springqianbailu.model.bean.mail.MailMessageBean;
 import com.open.springqianbailu.model.table.gallery.Gallery;
 import com.open.springqianbailu.model.table.gallery.GalleryImage;
 import com.open.springqianbailu.service.gallery.GalleryImageService;
+import com.open.springqianbailu.service.mail.MailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -30,6 +33,10 @@ public class GalleryImageServiceImpl implements GalleryImageService {
 
     @Resource
     private GalleryMapper galleryMapper;
+
+
+    @Reference
+    private MailService mailService;
 
     @Override
     public int insert(GalleryImage record) {
@@ -60,6 +67,18 @@ public class GalleryImageServiceImpl implements GalleryImageService {
                                 galleryImageMapper.insert(article);
                             }
                         }
+
+                        try {
+                            MailMessageBean mailMessageBean = new MailMessageBean();
+                            mailMessageBean.setFrom("624926379@qq.com");
+                            mailMessageBean.setTo("624926379@qq.com");
+                            mailMessageBean.setSubject("gallery---selectImage---解析数据");
+                            mailMessageBean.setText(gson.toJson(list));
+                            mailService.sendSimpleMail(mailMessageBean);
+                        } catch (Exception e){
+                            logger.error(TAG,e.toString());
+                        }
+
                     }
                 }
             }

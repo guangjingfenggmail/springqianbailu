@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.open.springqianbailu.RedisUtil;
 import com.open.springqianbailu.dao.gallery.GalleryMapper;
 import com.open.springqianbailu.documents.GalleryDocmentDao;
+import com.open.springqianbailu.model.bean.mail.MailMessageBean;
 import com.open.springqianbailu.model.rabbitmq.NovelMessage;
 import com.open.springqianbailu.model.table.SubMenu;
 import com.open.springqianbailu.model.table.gallery.Gallery;
@@ -14,6 +15,7 @@ import com.open.springqianbailu.model.table.rabbitmq.RabbitQueue;
 import com.open.springqianbailu.rabbitmq.QueueConfig;
 import com.open.springqianbailu.service.SubMenuSevice;
 import com.open.springqianbailu.service.gallery.GalleryService;
+import com.open.springqianbailu.service.mail.MailService;
 import com.open.springqianbailu.service.rabbitmq.RabbitMessageService;
 import com.open.springqianbailu.service.rabbitmq.RabbitQueueService;
 import com.rabbitmq.client.Channel;
@@ -46,6 +48,9 @@ public class GalleryReceiveImpl {
 
     @Reference
     private RabbitMessageService rabbitMessageService;
+
+    @Reference
+    private MailService mailService;
 
     @RabbitListener(queues = QueueConfig.QUEUENAME_GALLERY)//监听器监听指定的Queue
     public void processC(NovelMessage message, Channel channel, Message msg) throws Exception{
@@ -81,6 +86,14 @@ public class GalleryReceiveImpl {
             rabbitMessage.setRabbit_mq_id(message.id);
             rabbitMessage.setRoutingKey(message.routingKey);
             rabbitQueueService.insert(rabbitMessage);
+
+            //发送mail
+            MailMessageBean mailMessageBean = new MailMessageBean();
+            mailMessageBean.setFrom("624926379@qq.com");
+            mailMessageBean.setTo("624926379@qq.com");
+            mailMessageBean.setSubject("gallery:解析数据");
+            mailMessageBean.setText(gson.toJson(list));
+            mailService.sendSimpleMail(mailMessageBean);
 
             channel.basicAck(msg.getMessageProperties().getDeliveryTag(), false);
         } catch (Exception e){
