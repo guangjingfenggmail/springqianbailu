@@ -30,7 +30,7 @@
         <result column="createDate" jdbcType="VARCHAR" property="createDate"/>
 
         <collection property="imageList" column="{galleryId=id,pageId=page_id}"
-                    select="com.open.com.open.springqianbailu.dao.gallery.GalleryImageMapper.selectById">
+                    select="com.open.springqianbailu.dao.gallery.GalleryImageMapper.selectById">
         </collection>
     </resultMap>
 

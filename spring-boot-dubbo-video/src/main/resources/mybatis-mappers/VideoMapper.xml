@@ -28,7 +28,7 @@
     <result column="submenuId" jdbcType="INTEGER" property="submenuId" />
 
     <association property="source" column="{videoId=id}"
-                select="com.open.com.open.springqianbailu.dao.video.VideoSourceMapper.selectById">
+                select="com.open.springqianbailu.dao.video.VideoSourceMapper.selectById">
     </association>
   </resultMap>
 
