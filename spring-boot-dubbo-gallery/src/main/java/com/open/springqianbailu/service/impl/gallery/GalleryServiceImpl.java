@@ -77,7 +77,8 @@ public class GalleryServiceImpl implements GalleryService {
         ExcelBean excelBean = new ExcelBean();
         excelBean.setFileName("selectByMenuId.xls");
         excelBean.setSheetName("selectByMenuId");
-        excelBean.setFilePath("/Users/guangjing.feng/github/springqianbailu/spring-boot-dubbo-gallery/src/main/resources");
+        excelBean.setFilePath("D:\\code\\springqianbailu\\springqianbail-dubbo\\spring-boot-dubbo-gallery\\src\\main\\resources");
+//        excelBean.setFilePath("/Users/guangjing.feng/github/springqianbailu/spring-boot-dubbo-gallery/src/main/resources");
         String[] titles = {"id","title","content","href","updateTime","submenuId","pageNo","createDate"};
         excelBean.setExcelTitle(titles);
         ArrayList<ArrayList<String>> excelList = new ArrayList<>();
