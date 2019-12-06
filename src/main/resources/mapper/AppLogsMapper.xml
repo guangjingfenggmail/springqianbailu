@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.open.springqianbailu.dao.app.AppLogsMapper">
+  <resultMap id="BaseResultMap" type="com.open.springqianbailu.model.app.AppLogs">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="className" jdbcType="VARCHAR" property="className" />
+    <result column="classSimpleName" jdbcType="VARCHAR" property="classSimpleName" />
+    <result column="createdAtTimemillis" jdbcType="TIMESTAMP" property="createdAtTimemillis" />
+    <result column="dbVersion" jdbcType="INTEGER" property="dbVersion" />
+    <result column="groupDescription" jdbcType="VARCHAR" property="groupDescription" />
+    <result column="groupHash" jdbcType="VARCHAR" property="groupHash" />
+    <result column="heapAnalysisId" jdbcType="INTEGER" property="heapAnalysisId" />
+    <result column="isLibraryLeak" jdbcType="INTEGER" property="isLibraryLeak" />
+    <result column="retainedHeapByteSize" jdbcType="INTEGER" property="retainedHeapByteSize" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="version" jdbcType="VARCHAR" property="version" />
+    <result column="os" jdbcType="VARCHAR" property="os" />
+    <result column="platform" jdbcType="VARCHAR" property="platform" />
+    <result column="screen" jdbcType="VARCHAR" property="screen" />
+    <result column="channel" jdbcType="VARCHAR" property="channel" />
+    <result column="net" jdbcType="VARCHAR" property="net" />
+    <result column="nation" jdbcType="VARCHAR" property="nation" />
+    <result column="appId" jdbcType="VARCHAR" property="appId" />
+    <result column="deviceId" jdbcType="VARCHAR" property="deviceId" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="advertisingId" jdbcType="VARCHAR" property="advertisingId" />
+    <result column="locationLongitude" jdbcType="VARCHAR" property="locationLongitude" />
+    <result column="locationLatitude" jdbcType="VARCHAR" property="locationLatitude" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.open.springqianbailu.model.app.AppLogs">
+    <result column="leakTrace" jdbcType="LONGVARCHAR" property="leakTrace" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id,className,classSimpleName,createdAtTimemillis,dbVersion,groupDescription,
+    groupHash,heapAnalysisId,isLibraryLeak,retainedHeapByteSize,state,version,os,platform,
+    screen,channel,net,nation,appId,deviceId,model,advertisingId,locationLongitude,locationLatitude
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from app_leak_logs
+  </select>
+
+  <delete id="dropTable">
+        drop table if exists app_leak_logs
+    </delete>
+
+  <insert id="createTable">
+       CREATE TABLE `app_leak_logs` (
+        `id` int(11) NOT NULL AUTO_INCREMENT,
+        `className` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+        `classSimpleName` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+        `createdAtTimemillis` timestamp NULL DEFAULT NULL,
+        `dbVersion` int(10) DEFAULT 0,
+        `groupDescription` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+        `groupHash` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+        `heapAnalysisId` int(11) DEFAULT 0,
+        `isLibraryLeak` int(11) DEFAULT 0,
+        `leakTrace` text CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+        `retainedHeapByteSize` int(11) DEFAULT 0,
+        `state` int(11) DEFAULT 0,
+        `version` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+        `os` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+        `platform` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+        `screen` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+        `channel` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+        `net` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+        `nation` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+        `appId` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+        `deviceId` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+        `model` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+        `advertisingId` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+        `locationLongitude` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+        `locationLatitude` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+        PRIMARY KEY (`id`)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    </insert>
+
+  <insert id="insert" parameterType="com.open.springqianbailu.model.app.AppLogs">
+    insert into app_leak_logs (className, classSimpleName,
+      createdAtTimemillis, dbVersion, groupDescription, 
+      groupHash, heapAnalysisId, isLibraryLeak, 
+      retainedHeapByteSize, state, version, 
+      os, platform, screen, 
+      channel, net, nation, 
+      appId, deviceId, model, 
+      advertisingId, locationLongitude, locationLatitude,
+      leakTrace)
+    values (#{className,jdbcType=VARCHAR}, #{classSimpleName,jdbcType=VARCHAR},
+      #{createdAtTimemillis,jdbcType=TIMESTAMP}, #{dbVersion,jdbcType=INTEGER}, #{groupDescription,jdbcType=VARCHAR},
+      #{groupHash,jdbcType=VARCHAR}, #{heapAnalysisId,jdbcType=INTEGER}, #{isLibraryLeak,jdbcType=INTEGER},
+      #{retainedHeapByteSize,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{version,jdbcType=VARCHAR},
+      #{os,jdbcType=VARCHAR}, #{platform,jdbcType=VARCHAR}, #{screen,jdbcType=VARCHAR}, 
+      #{channel,jdbcType=VARCHAR}, #{net,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, 
+      #{appId,jdbcType=VARCHAR}, #{deviceId,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR},
+      #{advertisingId,jdbcType=VARCHAR}, #{locationLongitude,jdbcType=VARCHAR}, #{locationLatitude,jdbcType=VARCHAR},
+      #{leakTrace,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.open.springqianbailu.model.app.AppLogs">
+    insert into app_leak_logs
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="className != null">
+        className,
+      </if>
+      <if test="classsimplename != null">
+        classSimpleName,
+      </if>
+      <if test="createdattimemillis != null">
+        createdAtTimemillis,
+      </if>
+      <if test="dbVersion != null">
+        dbVersion,
+      </if>
+      <if test="groupDescription != null">
+        groupDescription,
+      </if>
+      <if test="groupHash != null">
+        groupHash,
+      </if>
+      <if test="heapAnalysisId != null">
+        heapAnalysisId,
+      </if>
+      <if test="isLibraryLeak != null">
+        isLibraryLeak,
+      </if>
+      <if test="retainedHeapByteSize != null">
+        retainedHeapByteSize,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="os != null">
+        os,
+      </if>
+      <if test="platform != null">
+        platform,
+      </if>
+      <if test="screen != null">
+        screen,
+      </if>
+      <if test="channel != null">
+        channel,
+      </if>
+      <if test="net != null">
+        net,
+      </if>
+      <if test="nation != null">
+        nation,
+      </if>
+      <if test="appId != null">
+        appId,
+      </if>
+      <if test="deviceId != null">
+        deviceId,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="advertisingId != null">
+        advertisingId,
+      </if>
+      <if test="locationLongitude != null">
+        locationLongitude,
+      </if>
+      <if test="locationLatitude != null">
+        locationLatitude,
+      </if>
+      <if test="leakTrace != null">
+        leakTrace,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="className != null">
+        #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="classSimpleName != null">
+        #{classSimpleName,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAtTimemillis != null">
+        #{createdAtTimemillis,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dbVersion != null">
+        #{dbVersion,jdbcType=INTEGER},
+      </if>
+      <if test="groupDescription != null">
+        #{groupDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="groupHash != null">
+        #{groupHash,jdbcType=VARCHAR},
+      </if>
+      <if test="isLibraryLeak != null">
+        #{isLibraryLeak,jdbcType=INTEGER},
+      </if>
+      <if test="islibraryleak != null">
+        #{islibraryleak,jdbcType=INTEGER},
+      </if>
+      <if test="retainedHeapByteSize != null">
+        #{retainedHeapByteSize,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="os != null">
+        #{os,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null">
+        #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="screen != null">
+        #{screen,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="net != null">
+        #{net,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null">
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="advertisingId != null">
+        #{advertisingId,jdbcType=VARCHAR},
+      </if>
+      <if test="locationLongitude != null">
+        #{locationLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="locationLatitude != null">
+        #{locationLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="leakTrace != null">
+        #{leakTrace,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,29 @@
+1.mybatis-generator-core
+
+java -jar src/main/resources/mybatis-generator-core-1.3.7.jar -configfile src/main/resources/generatorConfig.xml -overwrite
+
+2.mysql conntect
+connectionURL="jdbc:mysql://127.0.0.1:3306/qianbailu" userId="root" password="cT;sEw#-w49f"
+
+3.generator
+
+model
+
+ <javaModelGenerator targetPackage="com.open.springqianbailu.model.app" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        mapper
+        <!--生成映射文件存放位置-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+         </sqlMapGenerator>
+        <!--生成Dao类存放位置-->
+
+        dao
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.open.springqianbailu.dao.app" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+         </javaClientGenerator>
+        <!--生成对应表及类名-->
+       <table tableName="app_leak_logs" domainObjectName="AppLogs" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
